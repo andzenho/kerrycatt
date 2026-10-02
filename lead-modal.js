@@ -17,12 +17,12 @@ const GK_HOST = "https://kerrycatt1.getcourse.ru";
 const RUBLE_CFG = {
   widgetId: "1632055", uniqName: "32505d6440058a3adaf8e327e50b3d7045e93618",
   openerName: "__openLeadModal", prewarm: true,
-  title: "Занять место на Разминке", subtitle: "29 июля · 4 дня · 990 ₽"
+  title: "Занять место на Разминке", subtitle: "4 ноября · 4 дня · 990 ₽"
 };
 const FOREIGN_CFG = {
   widgetId: "1634983", uniqName: "28ba78ae65137e386fbc6d89aefd35d44b751249",
   openerName: "__openForeignModal", warmerName: "__warmForeignModal", prewarm: false,
-  title: "Оплата зарубежной картой", subtitle: "29 июля · 4 дня · $15 · €13"
+  title: "Оплата зарубежной картой", subtitle: "4 ноября · 4 дня · $15 · €13"
 };
 
 function LeadModal(cfg) {

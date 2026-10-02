@@ -48,7 +48,7 @@
     '<div class="bgl-box">' +
       '<button class="bgl-close" type="button" aria-label="Закрыть">✕</button>' +
       '<h2 class="bgl-title"></h2>' +
-      '<p class="bgl-sub">старт 17 августа · 40 дней</p>' +
+      '<p class="bgl-sub">старт 16 ноября · 40 дней</p>' +
       '<div class="bgl-scroller">' + panes + '</div>' +
       '<div class="bgl-fade" aria-hidden="true"><span>↓</span></div>' +
     '</div>';
