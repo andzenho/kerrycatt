@@ -1,4 +1,4 @@
-/* Лид-форма «Пройти отбор» для лендинга «Большой Игры».
+/* Лид-форма «Принять участие» для лендинга «Большой Игры».
    Открывается по кнопкам в карточках тарифов (тариф уже выбран) и по кнопке в блоке «Как попасть в игру?».
    Заявка уходит в Google Таблицу теста «Какой ты блогер» (лист «Анкета») через Apps Script.
    Если отправка не прошла, заявка сохраняется в браузере и уходит при следующем заходе. Не зависит от бандла. */
@@ -71,7 +71,7 @@
       return '<button type="button" class="bgl-chip' + (S.tariff === t.key ? " on" : "") + '" data-tariff="' + t.key + '">' + esc(t.name) + "</button>";
     }).join("");
     body.innerHTML =
-      '<h2 class="bgl-title">Пройти отбор</h2>' +
+      '<h2 class="bgl-title">Принять участие</h2>' +
       '<p class="bgl-sub">старт 16 ноября · 40 дней</p>' +
       '<p class="bgl-lead">Оставь контакты. Моя команда свяжется с тобой, ответит на вопросы и поможет выбрать формат.</p>' +
       '<form class="bgl-form" novalidate>' +
@@ -195,7 +195,7 @@
   overlay.addEventListener("change", function (e) { if (e.target.name === "consent_pd") unmark(e.target.closest(".bgl-field")); });
   overlay.addEventListener("submit", function (e) { e.preventDefault(); submit(e.target); });
 
-  /* — привязка кнопок: «Пройти отбор» в карточках тарифов и в финальном блоке — */
+  /* — привязка кнопок: «Принять участие» в карточках тарифов и в финальном блоке — */
   function tagCtas() {
     var els = [].slice.call(document.querySelectorAll("*"));
     for (var i = 0; i < els.length; i++) {
@@ -212,12 +212,12 @@
       for (var k = 0; k < T.length; k++) if (m && T[k].num === m[1]) t = T[k];
       if (!t) continue;
       var links = [].slice.call(card.querySelectorAll("a"));
-      var cta = links.filter(function (a) { return /отбор/i.test(a.textContent || ""); })[0] || links[links.length - 1];
+      var cta = links.filter(function (a) { return /участие|отбор/i.test(a.textContent || ""); })[0] || links[links.length - 1];
       if (cta && !cta.getAttribute("data-bg-tariff")) cta.setAttribute("data-bg-tariff", t.key);
     }
     var fin = document.getElementById("finish");
     if (fin) [].forEach.call(fin.querySelectorAll("a"), function (a) {
-      if (/отбор/i.test(a.textContent || "") && !a.getAttribute("data-bg-tariff")) a.setAttribute("data-bg-tariff", "none");
+      if (/участие|отбор/i.test(a.textContent || "") && !a.getAttribute("data-bg-tariff")) a.setAttribute("data-bg-tariff", "none");
     });
     return document.querySelectorAll("[data-bg-tariff]").length;
   }
