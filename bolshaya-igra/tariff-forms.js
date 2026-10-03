@@ -1,7 +1,9 @@
 /* Лид-форма «Принять участие» для лендинга «Большой Игры».
    Открывается по кнопкам в карточках тарифов (тариф уже выбран) и по кнопке в блоке «Как попасть в игру?».
-   Заявка уходит в Google Таблицу теста «Какой ты блогер» (лист «Анкета») через Apps Script.
-   Если отправка не прошла, заявка сохраняется в браузере и уходит при следующем заходе. Не зависит от бандла. */
+   Заявка уходит в Google Таблицу лидов (лист «Заявки Большая Игра») через Apps Script.
+   Если отправка не прошла, заявка сохраняется в браузере и уходит при следующем заходе.
+   После заявки на тариф со ссылками оплаты (CONFIG.pay) показываем экран оплаты: галка оферты и две кнопки.
+   Не зависит от бандла. */
 (function () {
   if (window.__bgTariffForms) return; window.__bgTariffForms = true;
 
@@ -10,7 +12,15 @@
     endpoint: "https://script.google.com/macros/s/AKfycbyHbXYMZMWX1belQqULpMz84rfmhP2LXmcIMzroqhr4PKjvNOxIR4lump3OfY04ZC4x/exec",
     docs: "../",
     docsRev: "2026-10-02",
-    helper: "https://t.me/kerryhelper"
+    helper: "https://t.me/kerryhelper",
+    // Ссылки оплаты по тарифам: rub — GetPlatinum (вся сумма или рассрочка), intl — Lava (карты не из РФ).
+    // Тариф без ссылок остаётся на экране «команда свяжется».
+    pay: {
+      team: {
+        rub: "https://anny-nizh.getplatinum.ru/payment/50m8VOq",
+        intl: "https://app.lava.top/products/852fcd5c-464e-426b-848d-62c227f8b55c"
+      }
+    }
   };
   var STORE = "bg_lead_q";
 
@@ -50,7 +60,12 @@
   ".bgl-btn:hover{background:#A44A2E}.bgl-btn[disabled]{opacity:.6;cursor:default}" +
   ".bgl-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}" +
   ".bgl-done{text-align:left}.bgl-done p{margin:0 0 14px;font-size:15px;line-height:1.5}" +
-  ".bgl-done a{color:#1F1F1F;font-weight:700}";
+  ".bgl-done a{color:#1F1F1F;font-weight:700}" +
+  "a.bgl-btn{box-sizing:border-box;text-align:center;text-decoration:none;color:#F6EEE2}" +
+  ".bgl-btn2{background:#1F1F1F}.bgl-btn2:hover{background:#000}" +
+  ".bgl-pay.off{opacity:.45}" +
+  ".bgl-done .bgl-hint{margin:6px 0 0;font-size:12px;text-align:center}" +
+  ".bgl-done .bgl-note{margin:18px 0 0;font-size:13px;line-height:1.45;color:rgba(31,31,31,.65)}";
   // стиль добавляем в <body> (не <head>) — бандл при рендере переписывает head.
   var st = document.createElement("style"); st.textContent = css;
   function ensureStyle() { if (!st.isConnected) document.body.appendChild(st); }
@@ -62,7 +77,7 @@
   overlay.innerHTML = '<div class="bgl-box"><button class="bgl-close" type="button" aria-label="Закрыть">✕</button><div class="bgl-body"></div></div>';
   var body = overlay.querySelector(".bgl-body");
 
-  var S = { tariff: "", openedAt: 0, sending: false };
+  var S = { tariff: "", openedAt: 0, sending: false, row: 0, phone: "" };
 
   function doc(path, text) { return '<a href="' + CONFIG.docs + path + '/" target="_blank" rel="noopener">' + text + "</a>"; }
 
@@ -99,6 +114,40 @@
         '<button class="bgl-btn" type="button" data-act="close">Закрыть</button></div>';
   }
 
+  // Экран оплаты после заявки: оферту принимают до денег, выбранную кнопку дописываем в строку заявки.
+  function renderPay(saved) {
+    var links = CONFIG.pay[S.tariff], t = byKey(S.tariff);
+    body.innerHTML =
+      '<div class="bgl-done"><h2 class="bgl-title">' + (saved ? "Заявка у нас" : "Остался один шаг") + "</h2>" +
+      '<p class="bgl-sub">тариф «' + esc(t.name) + "»</p>" +
+      "<p>Место можно занять сразу. Выбери, как удобнее оплатить.</p>" +
+      '<div class="bgl-field" data-f="offer"><label class="bgl-chk"><input type="checkbox" name="offer"><span>Принимаю ' +
+        doc("offer", "оферту") + " и " + doc("offer-prilozhenie-1", "Приложение № 1") + ", мне есть 18 лет</span></label></div>" +
+      '<a class="bgl-btn bgl-pay off" data-pay="rub" href="' + links.rub + '" target="_blank" rel="noopener">Оплатить в рублях</a>' +
+      '<p class="bgl-hint">Вся сумма или рассрочка</p>' +
+      '<a class="bgl-btn bgl-btn2 bgl-pay off" data-pay="intl" href="' + links.intl + '" target="_blank" rel="noopener">Оплатить зарубежными методами</a>' +
+      '<p class="bgl-hint">Карты зарубежных банков</p>' +
+      '<p class="bgl-note">Оплатить можно и позже. Моя команда свяжется с тобой и ответит на вопросы. Написать самой: ' +
+        '<a href="' + CONFIG.helper + '" target="_blank" rel="noopener">@kerryhelper</a>.</p></div>';
+    overlay.querySelector(".bgl-box").scrollTop = 0;
+  }
+
+  function payClick(a, e) {
+    var chk = body.querySelector('input[name="offer"]');
+    if (!chk || !chk.checked) {
+      e.preventDefault();
+      var box = mark("offer", "Отметь, что принимаешь оферту");
+      if (box) box.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+    var method = a.getAttribute("data-pay");
+    if (S.row) {
+      var b = JSON.stringify({ kind: "bi_pay", row: S.row, phone: S.phone, method: method, offer_ts: new Date().toISOString(), offer_rev: CONFIG.docsRev });
+      try { if (!(navigator.sendBeacon && navigator.sendBeacon(CONFIG.endpoint, b))) fetch(CONFIG.endpoint, { method: "POST", body: b, keepalive: true }); } catch (err) {}
+    }
+    try { if (window.ym) window.ym("reachGoal", "bi_pay_" + method); } catch (err) {}
+  }
+
   function utm() {
     var p = new URLSearchParams(location.search), out = [];
     ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"].forEach(function (k) {
@@ -111,8 +160,8 @@
   function post(body) {
     return fetch(CONFIG.endpoint, { method: "POST", body: body })
       .then(function (r) { return r.json(); })
-      .then(function (j) { return !!(j && j.ok); })
-      .catch(function () { return false; });
+      .then(function (j) { return { ok: !!(j && j.ok), row: j && j.row }; })
+      .catch(function () { return { ok: false }; });
   }
   function queue(body) {
     try { var q = JSON.parse(localStorage.getItem(STORE) || "[]"); q.push(body); localStorage.setItem(STORE, JSON.stringify(q.slice(-5))); } catch (e) {}
@@ -121,7 +170,7 @@
     var q; try { q = JSON.parse(localStorage.getItem(STORE) || "[]"); } catch (e) { return; }
     if (!q.length) return;
     try { localStorage.removeItem(STORE); } catch (e) {}
-    q.forEach(function (b) { post(b).then(function (ok) { if (!ok) queue(b); }); });
+    q.forEach(function (b) { post(b).then(function (r) { if (!r.ok) queue(b); }); });
   }
 
   function mark(f, msg) {
@@ -162,11 +211,12 @@
     });
     S.sending = true;
     var btn = form.querySelector(".bgl-btn"); btn.disabled = true; btn.textContent = "Отправляю…";
-    post(payload).then(function (ok) {
+    post(payload).then(function (r) {
       S.sending = false;
-      if (!ok) queue(payload);
-      renderDone(ok);
-      try { if (ok && window.ym) window.ym("reachGoal", "bi_lead"); } catch (e) {}
+      if (!r.ok) queue(payload);
+      S.row = r.row || 0; S.phone = phone;
+      if (CONFIG.pay[S.tariff]) renderPay(r.ok); else renderDone(r.ok);
+      try { if (r.ok && window.ym) window.ym("reachGoal", "bi_lead"); } catch (e) {}
     });
   }
 
@@ -184,6 +234,8 @@
 
   overlay.addEventListener("click", function (e) {
     if (e.target === overlay || e.target.closest(".bgl-close") || e.target.closest('[data-act="close"]')) { close(); return; }
+    var pay = e.target.closest(".bgl-pay");
+    if (pay) { payClick(pay, e); return; }
     var chip = e.target.closest(".bgl-chip");
     if (chip) {
       S.tariff = chip.getAttribute("data-tariff");
@@ -192,7 +244,13 @@
     }
   });
   overlay.addEventListener("input", function (e) { unmark(e.target.closest(".bgl-field")); });
-  overlay.addEventListener("change", function (e) { if (e.target.name === "consent_pd") unmark(e.target.closest(".bgl-field")); });
+  overlay.addEventListener("change", function (e) {
+    if (e.target.name === "consent_pd") unmark(e.target.closest(".bgl-field"));
+    if (e.target.name === "offer") {
+      unmark(e.target.closest(".bgl-field"));
+      [].forEach.call(body.querySelectorAll(".bgl-pay"), function (a) { a.classList.toggle("off", !e.target.checked); });
+    }
+  });
   overlay.addEventListener("submit", function (e) { e.preventDefault(); submit(e.target); });
 
   /* — привязка кнопок: «Принять участие» в карточках тарифов и в финальном блоке — */
