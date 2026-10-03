@@ -8,7 +8,7 @@
   var CONFIG = {
     // URL веб-приложения Apps Script (yapping-test/backend/Code.js), тот же, что у мини-аппа теста.
     endpoint: "https://script.google.com/macros/s/AKfycbyHbXYMZMWX1belQqULpMz84rfmhP2LXmcIMzroqhr4PKjvNOxIR4lump3OfY04ZC4x/exec",
-    docs: "https://andzenho.github.io/razminka-landing/",
+    docs: "../",
     docsRev: "2026-10-02",
     helper: "https://t.me/kerryhelper"
   };
