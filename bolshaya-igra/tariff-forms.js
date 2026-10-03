@@ -1,5 +1,5 @@
 /* Лид-форма «Принять участие» для лендинга «Большой Игры».
-   Открывается по кнопкам в карточках тарифов (тариф уже выбран) и по кнопке в блоке «Как попасть в игру?».
+   На лендинге один тариф «В команде». Форма открывается по кнопке в карточке тарифа и в блоке «Как попасть в игру?».
    Заявка уходит в Google Таблицу лидов (лист «Заявки Большая Игра») через Apps Script.
    Если отправка не прошла, заявка сохраняется в браузере и уходит при следующем заходе.
    После заявки на тариф со ссылками оплаты (CONFIG.pay) показываем экран оплаты: галка оферты и две кнопки.
@@ -24,12 +24,9 @@
   };
   var STORE = "bg_lead_q";
 
-  // num — номер тарифа на карточке («ТАРИФ 01»)
+  // С 03.10 на лендинге один тариф. Чтобы вернуть выбор, добавь тарифы сюда и ссылки в CONFIG.pay.
   var T = [
-    { key: "team", name: "В команде",     num: "1" },
-    { key: "self", name: "В своём темпе", num: "2" },
-    { key: "solo", name: "Со мной лично", num: "3" },
-    { key: "none", name: "Пока не решила", num: "" }
+    { key: "team", name: "В команде" }
   ];
   function byKey(k) { for (var i = 0; i < T.length; i++) if (T[i].key === k) return T[i]; return null; }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
@@ -82,15 +79,11 @@
   function doc(path, text) { return '<a href="' + CONFIG.docs + path + '/" target="_blank" rel="noopener">' + text + "</a>"; }
 
   function renderForm() {
-    var chips = T.map(function (t) {
-      return '<button type="button" class="bgl-chip' + (S.tariff === t.key ? " on" : "") + '" data-tariff="' + t.key + '">' + esc(t.name) + "</button>";
-    }).join("");
     body.innerHTML =
       '<h2 class="bgl-title">Принять участие</h2>' +
       '<p class="bgl-sub">старт 16 ноября · 40 дней</p>' +
-      '<p class="bgl-lead">Оставь контакты. Моя команда свяжется с тобой, ответит на вопросы и поможет выбрать формат.</p>' +
+      '<p class="bgl-lead">Оставь контакты, и сразу откроется оплата. Если будут вопросы, моя команда ответит.</p>' +
       '<form class="bgl-form" novalidate>' +
-        '<div class="bgl-field" data-f="tariff"><span class="bgl-label">Формат</span><div class="bgl-chips">' + chips + "</div></div>" +
         '<div class="bgl-field" data-f="name"><label class="bgl-label" for="bgl-name">Имя</label><input class="bgl-input" id="bgl-name" name="name" autocomplete="given-name" maxlength="80"></div>' +
         '<div class="bgl-field" data-f="phone"><label class="bgl-label" for="bgl-phone">Телефон</label><input class="bgl-input" id="bgl-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00" maxlength="30"><p class="bgl-hint">С кодом страны</p></div>' +
         '<div class="bgl-field" data-f="tg"><label class="bgl-label" for="bgl-tg">Ник в Телеграме</label><input class="bgl-input" id="bgl-tg" name="tg" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="@nickname" maxlength="60"></div>' +
@@ -106,7 +99,7 @@
   function renderDone(ok) {
     body.innerHTML = ok
       ? '<div class="bgl-done"><h2 class="bgl-title">Заявка у нас</h2><p class="bgl-sub">старт 16 ноября · 40 дней</p>' +
-        "<p>Моя команда свяжется с тобой, ответит на вопросы и поможет выбрать формат.</p>" +
+        "<p>Моя команда свяжется с тобой и ответит на вопросы.</p>" +
         '<button class="bgl-btn" type="button" data-act="close">Хорошо</button></div>'
       : '<div class="bgl-done"><h2 class="bgl-title">Не получилось отправить</h2><p class="bgl-sub">мы сохранили заявку</p>' +
         "<p>Что-то со связью. Заявку отправим сами, как только получится. Чтобы не ждать, напиши команде в Телеграм: " +
@@ -119,14 +112,14 @@
     var links = CONFIG.pay[S.tariff], t = byKey(S.tariff);
     body.innerHTML =
       '<div class="bgl-done"><h2 class="bgl-title">' + (saved ? "Заявка у нас" : "Остался один шаг") + "</h2>" +
-      '<p class="bgl-sub">тариф «' + esc(t.name) + "»</p>" +
+      '<p class="bgl-sub">Большая игра · старт 16 ноября</p>' +
       "<p>Место можно занять сразу. Выбери, как удобнее оплатить.</p>" +
       '<div class="bgl-field" data-f="offer"><label class="bgl-chk"><input type="checkbox" name="offer"><span>Принимаю ' +
         doc("offer", "оферту") + " и " + doc("offer-prilozhenie-1", "Приложение № 1") + ", мне есть 18 лет</span></label></div>" +
       '<a class="bgl-btn bgl-pay off" data-pay="rub" href="' + links.rub + '" target="_blank" rel="noopener">Оплатить в рублях</a>' +
-      '<p class="bgl-hint">Вся сумма или рассрочка</p>' +
+      '<p class="bgl-hint">24 990 ₽ · вся сумма или рассрочка</p>' +
       '<a class="bgl-btn bgl-btn2 bgl-pay off" data-pay="intl" href="' + links.intl + '" target="_blank" rel="noopener">Оплатить зарубежными методами</a>' +
-      '<p class="bgl-hint">Карты зарубежных банков</p>' +
+      '<p class="bgl-hint">$299 или €269 · карты зарубежных банков</p>' +
       '<p class="bgl-note">Оплатить можно и позже. Моя команда свяжется с тобой и ответит на вопросы. Написать самой: ' +
         '<a href="' + CONFIG.helper + '" target="_blank" rel="noopener">@kerryhelper</a>.</p></div>';
     overlay.querySelector(".bgl-box").scrollTop = 0;
@@ -189,7 +182,6 @@
     if (S.sending) return;
     var name = form.name.value.trim(), phone = form.phone.value.trim(), tg = form.tg.value.trim();
     var bad = [];
-    if (!S.tariff) bad.push(mark("tariff", "Выбери формат или «Пока не решила»"));
     if (name.length < 2) bad.push(mark("name", "Напиши, как тебя зовут"));
     if (phone.replace(/\D/g, "").length < 10) bad.push(mark("phone", "Похоже, в номере не хватает цифр"));
     if (!form.consent_pd.checked) bad.push(mark("consent", "Без согласия на обработку данных заявку не отправить"));
@@ -221,7 +213,7 @@
   }
 
   function open(key) {
-    S.tariff = byKey(key) && key !== "none" ? key : "";
+    S.tariff = byKey(key) ? key : T[0].key;
     S.openedAt = Date.now();
     renderForm();
     overlay.classList.add("open");
@@ -255,27 +247,11 @@
 
   /* — привязка кнопок: «Принять участие» в карточках тарифов и в финальном блоке — */
   function tagCtas() {
-    var els = [].slice.call(document.querySelectorAll("*"));
-    for (var i = 0; i < els.length; i++) {
-      var el = els[i];
-      if (el.children.length !== 0 || !/ТАРИФ\s*0[123]/i.test(el.textContent || "")) continue;
-      var card = el;
-      for (var j = 0; j < 8; j++) {
-        if (!card.parentElement) break;
-        if (/что входит/i.test(card.textContent) && card.textContent.length > 120) break;
-        card = card.parentElement;
-      }
-      var m = (el.textContent || "").match(/ТАРИФ\s*0*([123])/i);
-      var t = null;
-      for (var k = 0; k < T.length; k++) if (m && T[k].num === m[1]) t = T[k];
-      if (!t) continue;
-      var links = [].slice.call(card.querySelectorAll("a"));
-      var cta = links.filter(function (a) { return /участие|отбор/i.test(a.textContent || ""); })[0] || links[links.length - 1];
-      if (cta && !cta.getAttribute("data-bg-tariff")) cta.setAttribute("data-bg-tariff", t.key);
-    }
-    var fin = document.getElementById("finish");
-    if (fin) [].forEach.call(fin.querySelectorAll("a"), function (a) {
-      if (/участие|отбор/i.test(a.textContent || "") && !a.getAttribute("data-bg-tariff")) a.setAttribute("data-bg-tariff", "none");
+    ["tariffs", "finish"].forEach(function (id) {
+      var sec = document.getElementById(id);
+      if (sec) [].forEach.call(sec.querySelectorAll("a"), function (a) {
+        if (/участие|отбор/i.test(a.textContent || "") && !a.getAttribute("data-bg-tariff")) a.setAttribute("data-bg-tariff", T[0].key);
+      });
     });
     return document.querySelectorAll("[data-bg-tariff]").length;
   }
@@ -299,7 +275,7 @@
     flush();
     // бандл рендерится асинхронно — ждём появления карточек тарифов
     var tries = 0;
-    var iv = setInterval(function () { tries++; if (tagCtas() >= 4 || tries > 40) clearInterval(iv); }, 400);
+    var iv = setInterval(function () { tries++; if (tagCtas() >= 2 || tries > 40) clearInterval(iv); }, 400);
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();
