@@ -172,9 +172,7 @@
       '<a class="bgl-btn bgl-pay off" data-pay="rub" href="' + links.rub + '" target="_blank" rel="noopener">Оплатить в рублях</a>' +
       '<p class="bgl-hint">' + V.rubHint + "</p>" +
       '<a class="bgl-btn bgl-btn2 bgl-pay off" data-pay="intl" href="' + links.intl + '" target="_blank" rel="noopener">Оплатить зарубежными методами</a>' +
-      '<p class="bgl-hint">' + V.intlHint + "</p>" +
-      '<p class="bgl-note">Оплатить можно и позже. Моя команда свяжется с тобой и ответит на вопросы. Написать самой: ' +
-        '<a href="' + CONFIG.helper + '" target="_blank" rel="noopener">@kerryhelper</a>.</p></div>';
+      '<p class="bgl-hint">' + V.intlHint + "</p></div>";
     overlay.querySelector(".bgl-box").scrollTop = 0;
   }
 
