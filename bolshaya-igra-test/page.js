@@ -35,6 +35,7 @@
     $$("[data-rise-a]").forEach(function (el) { el.textContent = last ? "Запись закроется " : "После "; });
     $$("[data-rise-date]").forEach(function (el) { el.textContent = step.date; });
     $$("[data-rise-b]").forEach(function (el) { el.textContent = last ? "" : " цена вырастет"; });
+    $$("[data-bonus]").forEach(function (el) { el.hidden = step !== LADDER[0]; });  // бонус только в первом окне цены
     $$("[data-rise-label]").forEach(function (el) { el.textContent = last ? "до закрытия записи" : "до повышения цены"; });
     $$("[data-bar-label]").forEach(function (el) { el.textContent = last ? "До закрытия записи" : "До повышения цены"; });
     $$("[data-bar-timer]").forEach(function (el) { el.textContent = d + "д " + pad(h) + ":" + pad(m) + ":" + pad(s); });

@@ -261,7 +261,10 @@ h1 {
 .price b { font: 900 clamp(40px, 12vw, 64px)/1 var(--f-display); letter-spacing: -.05em; white-space: nowrap; }
 .price s { font-weight: 700; font-size: clamp(16px, 4.4vw, 20px); color: rgba(31,31,31,.5); white-space: nowrap; }
 .price__alt { margin: 8px 0 18px; font: 500 11.5px/1.4 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: rgba(31,31,31,.62); }
-.ticks { margin-bottom: 24px; }
+.ticks { margin-bottom: 18px; }
+.bonus { margin-bottom: 22px; padding: 12px 14px; border-radius: 10px; background: var(--pink); font-weight: 700; font-size: 15px; line-height: 1.4; }
+.bonus[hidden] { display: none; }
+.bonus span { white-space: nowrap; }
 .ticks li { display: flex; gap: 12px; padding: 10px 0; border-top: 1px solid rgba(31,31,31,.14); font-weight: 700; }
 .ticks li::before { content: "✓"; flex: none; color: var(--rose); font-weight: 800; }
 .tariff__side h3 { margin: clamp(30px, 7vw, 44px) 0 10px; font-size: clamp(20px, 5.4vw, 28px); }
