@@ -121,8 +121,19 @@ ITEM = ('<span style=\\"display:flex;gap:12px;align-items:flex-start;font-size:1
         'color:rgba(246,238,226,.9);\\"><span style=\\"flex:0 0 auto;width:20px;height:20px;background:#F6EEE2;'
         'color:#1F1F1F;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;'
         'margin-top:2px;\\">✓' + END + '%s' + END + '\\n')
-CARD_FIRST = ITEM % 'Неделя погружения до&nbsp;старта: как дойти до&nbsp;30&nbsp;роликов и&nbsp;не&nbsp;слиться'
-CARD_LAST = ITEM % 'Розыгрыш: три самых активных получают личный разбор блога от&nbsp;Карины'
+BADGE = ('<span style=\\"padding:2px 8px;border-radius:999px;background:#E3768B;color:#1F1F1F;'
+         "font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.12em;"
+         'line-height:1.5;text-transform:uppercase;\\">новинка' + END)
+NEW_OPEN = '<span style=\\"display:flex;flex-direction:column;align-items:flex-start;gap:5px;\\">' + BADGE
+
+
+def new_item(text):
+    """Пункт карточки с плашкой «новинка» над ним."""
+    return NEW_OPEN + (ITEM % text)[:-2] + END + '\\n'
+
+
+CARD_FIRST = new_item('Неделя погружения до&nbsp;старта: как дойти до&nbsp;30&nbsp;роликов и&nbsp;не&nbsp;слиться')
+CARD_LAST = new_item('Розыгрыш: три самых активных получают личный разбор блога от&nbsp;Карины')
 
 
 def drop_bonus(p):
@@ -206,7 +217,7 @@ def build(name, v):
     p.once(ALT_MAIN + END + '\\n', v['alt'] + END + '\\n' + note)
     p.once(FAQ_MAIN, v['faq'])
 
-    for bad in (['куратор', 'Куратор', 'групп', 'Zoom', 'зум', '50 мест', 'В команде', 'ИИ-ассистент', 'планёрк', 'кружок', 'погружени', 'Розыгрыш', 'Чат участниц', 'урокам навсегда', '45&nbsp;дней']
+    for bad in (['куратор', 'Куратор', 'групп', 'Zoom', 'зум', '50 мест', 'В команде', 'ИИ-ассистент', 'планёрк', 'кружок', 'погружени', 'Розыгрыш', 'Чат участниц', 'урокам навсегда', '45&nbsp;дней', 'новинка']
                 if v.get('self') else []):
         # в коде страницы остаются служебные упоминания; проверяем только шаблон и тексты
         a = p.s.find('<x-dc'); b = p.s.find('<\\u002Fx-dc>')
