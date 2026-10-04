@@ -200,8 +200,6 @@ def to_self(p):
     assert 0 < a < b, (p.name, 'список тарифа')
     p.s = (p.s[:a] + ITEM % '30 заданий, что и&nbsp;как снять' + ITEM % 'Уроки и&nbsp;инструменты'
            + '<span style=\\"' + NOTE + '\\">Без куратора и&nbsp;группы.' + END + '\\n' + p.s[b + len(CARD_LAST):])
-    p.once('Сорок дней рядом с&nbsp;тобой задание, <span', 'Сорок дней рядом с&nbsp;тобой <span')
-    p.once('>куратор и&nbsp;ИИ-ассистент' + END, '>задания и уроки' + END)
 
 
 def build(name, v):

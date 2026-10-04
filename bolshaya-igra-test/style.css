@@ -274,6 +274,7 @@ h1 {
 .tariff__side h3 { margin: clamp(30px, 7vw, 44px) 0 10px; font-size: clamp(20px, 5.4vw, 28px); }
 .tariff__side > p:not(.meta):not(.deadline__rise):not(.aside) { color: var(--muted); }
 .tariff__side .meta { margin: 14px 0 0; }
+.tariff__side .aside { margin-top: clamp(26px, 6vw, 36px); }
 .tariff__side .deadline__rise { margin-top: 0; font: 800 clamp(20px, 5.4vw, 28px)/1.15 var(--f-display); letter-spacing: -.03em; }
 
 /* ───────── Автор ───────── */
