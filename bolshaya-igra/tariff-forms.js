@@ -2,7 +2,8 @@
    На лендинге один тариф «В команде». Форма открывается по кнопке в карточке тарифа и в блоке «Как попасть в игру?».
    Заявка уходит в Google Таблицу лидов (лист «Заявки Большая Игра») через Apps Script.
    Если отправка не прошла, заявка сохраняется в браузере и уходит при следующем заходе.
-   После заявки на тариф со ссылками оплаты (CONFIG.pay) показываем экран оплаты: галка оферты и две кнопки.
+   После заявки показываем экран оплаты: галка оферты и две кнопки (рубли и зарубежные методы).
+   Один файл на три страницы: основную, страницу брони и страницу внутренней рассрочки (см. VARIANTS).
    Не зависит от бандла. */
 (function () {
   if (window.__bgTariffForms) return; window.__bgTariffForms = true;
@@ -13,15 +14,42 @@
     docs: "../",
     docsRev: "2026-10-02",
     helper: "https://t.me/kerryhelper",
-    // Ссылки оплаты по тарифам: rub — GetPlatinum (вся сумма или рассрочка), intl — Lava (карты не из РФ).
-    // Тариф без ссылок остаётся на экране «команда свяжется».
-    pay: {
-      team: {
-        rub: "https://anny-nizh.getplatinum.ru/payment/50m8VOq",
-        intl: "https://app.lava.top/products/852fcd5c-464e-426b-848d-62c227f8b55c"
-      }
+    pay: { team: true }
+  };
+
+  // Условия оплаты по страницам. rub — GetPlatinum, intl — Lava (карты не из РФ).
+  // type уходит в таблицу в колонку «Тип заявки». Страницы-копии собирает _src/build_variants.py.
+  var VARIANTS = {
+    full: {
+      type: "полная оплата",
+      rub: "https://anny-nizh.getplatinum.ru/payment/50m8VOq",
+      intl: "https://app.lava.top/products/852fcd5c-464e-426b-848d-62c227f8b55c",
+      rubHint: "24 990 ₽ · вся сумма или рассрочка",
+      intlHint: "$299 или €269 · карты зарубежных банков",
+      lead: "Оставь контакты, и сразу откроется оплата. Если будут вопросы, моя команда ответит.",
+      pay: "Место можно занять сразу. Выбери, как удобнее оплатить."
+    },
+    bron: {
+      type: "бронь",
+      rub: "https://anny-nizh.getplatinum.ru/payment/a2EJYy5",
+      intl: "https://app.lava.top/products/ea6fc160-07f7-48f1-8c0d-53a2d76294d9",
+      rubHint: "2 000 ₽ · бронь места",
+      intlHint: "$24 или €22 · карты зарубежных банков",
+      lead: "Оставь контакты, и сразу откроется оплата брони. Если будут вопросы, моя команда ответит.",
+      pay: "Бронь закрепляет за тобой место и входит в стоимость участия. Выбери, как удобнее оплатить."
+    },
+    half: {
+      type: "внутренняя рассрочка",
+      rub: "https://anny-nizh.getplatinum.ru/payment/oD8EO8r",
+      intl: "https://app.lava.top/products/cd82525d-e5bd-4aa7-a17c-fd85600187ed",
+      rubHint: "12 485 ₽ · первый платёж",
+      intlHint: "$150 или €135 · карты зарубежных банков",
+      lead: "Оставь контакты, и сразу откроется оплата первого платежа. Если будут вопросы, моя команда ответит.",
+      pay: "Оплата делится на два платежа. Сейчас первый. Выбери, как удобнее оплатить."
     }
   };
+  var VKEY = /bolshaya-igra-bron/.test(location.pathname) ? "bron" : /bolshaya-igra-rassrochka/.test(location.pathname) ? "half" : "full";
+  var V = VARIANTS[VKEY];
   var STORE = "bg_lead_q";
 
   // С 03.10 на лендинге один тариф. Чтобы вернуть выбор, добавь тарифы сюда и ссылки в CONFIG.pay.
@@ -82,7 +110,7 @@
     body.innerHTML =
       '<h2 class="bgl-title">Принять участие</h2>' +
       '<p class="bgl-sub">старт 16 ноября · 40 дней</p>' +
-      '<p class="bgl-lead">Оставь контакты, и сразу откроется оплата. Если будут вопросы, моя команда ответит.</p>' +
+      '<p class="bgl-lead">' + V.lead + "</p>" +
       '<form class="bgl-form" novalidate>' +
         '<div class="bgl-field" data-f="name"><label class="bgl-label" for="bgl-name">Имя</label><input class="bgl-input" id="bgl-name" name="name" autocomplete="given-name" maxlength="80"></div>' +
         '<div class="bgl-field" data-f="phone"><label class="bgl-label" for="bgl-phone">Телефон</label><input class="bgl-input" id="bgl-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00" maxlength="30"><p class="bgl-hint">С кодом страны</p></div>' +
@@ -109,17 +137,17 @@
 
   // Экран оплаты после заявки: оферту принимают до денег, выбранную кнопку дописываем в строку заявки.
   function renderPay(saved) {
-    var links = CONFIG.pay[S.tariff], t = byKey(S.tariff);
+    var links = V;
     body.innerHTML =
       '<div class="bgl-done"><h2 class="bgl-title">' + (saved ? "Заявка у нас" : "Остался один шаг") + "</h2>" +
       '<p class="bgl-sub">Большая игра · старт 16 ноября</p>' +
-      "<p>Место можно занять сразу. Выбери, как удобнее оплатить.</p>" +
+      "<p>" + V.pay + "</p>" +
       '<div class="bgl-field" data-f="offer"><label class="bgl-chk"><input type="checkbox" name="offer"><span>Принимаю ' +
         doc("offer", "оферту") + " и " + doc("offer-prilozhenie-1", "Приложение № 1") + ", мне есть 18 лет</span></label></div>" +
       '<a class="bgl-btn bgl-pay off" data-pay="rub" href="' + links.rub + '" target="_blank" rel="noopener">Оплатить в рублях</a>' +
-      '<p class="bgl-hint">24 990 ₽ · вся сумма или рассрочка</p>' +
+      '<p class="bgl-hint">' + V.rubHint + "</p>" +
       '<a class="bgl-btn bgl-btn2 bgl-pay off" data-pay="intl" href="' + links.intl + '" target="_blank" rel="noopener">Оплатить зарубежными методами</a>' +
-      '<p class="bgl-hint">$299 или €269 · карты зарубежных банков</p>' +
+      '<p class="bgl-hint">' + V.intlHint + "</p>" +
       '<p class="bgl-note">Оплатить можно и позже. Моя команда свяжется с тобой и ответит на вопросы. Написать самой: ' +
         '<a href="' + CONFIG.helper + '" target="_blank" rel="noopener">@kerryhelper</a>.</p></div>';
     overlay.querySelector(".bgl-box").scrollTop = 0;
@@ -138,7 +166,7 @@
       var b = JSON.stringify({ kind: "bi_pay", row: S.row, phone: S.phone, method: method, offer_ts: new Date().toISOString(), offer_rev: CONFIG.docsRev });
       try { if (!(navigator.sendBeacon && navigator.sendBeacon(CONFIG.endpoint, b))) fetch(CONFIG.endpoint, { method: "POST", body: b, keepalive: true }); } catch (err) {}
     }
-    try { if (window.ym) window.ym("reachGoal", "bi_pay_" + method); } catch (err) {}
+    try { if (window.ym) window.ym("reachGoal", "bi_pay_" + VKEY + "_" + method); } catch (err) {}
   }
 
   function utm() {
@@ -190,7 +218,7 @@
 
     if (tg && !/^@/.test(tg) && !/t\.me\//.test(tg)) tg = "@" + tg;
     var lead = {
-      tariff: byKey(S.tariff).name, name: name, phone: phone, tgNick: tg,
+      tariff: byKey(S.tariff).name, type: V.type, name: name, phone: phone, tgNick: tg,
       consent_pd: true, consent_ads: form.consent_ads.checked,
       consent_ts: new Date().toISOString(), consent_rev: CONFIG.docsRev,
       utm: utm()
