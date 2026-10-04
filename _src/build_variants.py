@@ -121,8 +121,8 @@ ITEM = ('<span style=\\"display:flex;gap:12px;align-items:flex-start;font-size:1
         'color:rgba(246,238,226,.9);\\"><span style=\\"flex:0 0 auto;width:20px;height:20px;background:#F6EEE2;'
         'color:#1F1F1F;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;'
         'margin-top:2px;\\">✓' + END + '%s' + END + '\\n')
-CARD_FIRST = ITEM % '30 заданий: что и&nbsp;как снять'
-CARD_LAST = ITEM % 'Доступ к&nbsp;урокам 45&nbsp;дней после игры'
+CARD_FIRST = ITEM % 'Неделя погружения до&nbsp;старта: как дойти до&nbsp;30&nbsp;роликов и&nbsp;не&nbsp;слиться'
+CARD_LAST = ITEM % 'Розыгрыш: три самых активных получают личный разбор блога от&nbsp;Карины'
 
 
 def drop_bonus(p):
@@ -131,7 +131,7 @@ def drop_bonus(p):
     tail = '<\\u002Fsc-if>\\n'
     b = p.s.find(tail, a) + len(tail)
     assert a > 0, (p.name, 'бонус')
-    p.cut(a, b, ('Бонус при&nbsp;полной оплате',))
+    p.cut(a, b, ('Доступ к&nbsp;урокам навсегда',))
 
 
 def to_self(p):
@@ -179,12 +179,12 @@ def to_self(p):
     # Карточка тарифа
     p.drop_wrapped('50 мест', 1, END + '\\n')
     p.once('>В команде' + END, '>В своём темпе' + END)
-    p.once('Куратор смотрит каждый твой рилс и&nbsp;говорит, что усилить. Каждый понедельник я&nbsp;даю план недели.',
+    p.once('Проходишь Игру с&nbsp;куратором и&nbsp;потоком, без&nbsp;шанса слиться',
            'Все задания и&nbsp;уроки приходят в&nbsp;закрытый канал игры. Проходишь сама, когда удобно.')
     a = p.s.find(CARD_FIRST)
     b = p.s.find(CARD_LAST)
     assert 0 < a < b, (p.name, 'список тарифа')
-    p.s = (p.s[:a] + ITEM % '30 заданий: что и&nbsp;как снять' + ITEM % 'Уроки и&nbsp;инструменты'
+    p.s = (p.s[:a] + ITEM % '30 заданий, что и&nbsp;как снять' + ITEM % 'Уроки и&nbsp;инструменты'
            + '<span style=\\"' + NOTE + '\\">Без куратора и&nbsp;группы.' + END + '\\n' + p.s[b + len(CARD_LAST):])
     p.once('Сорок дней рядом с&nbsp;тобой задание, <span', 'Сорок дней рядом с&nbsp;тобой <span')
     p.once('>куратор и&nbsp;ИИ-ассистент' + END, '>задания и уроки' + END)
@@ -201,12 +201,12 @@ def build(name, v):
     if v['label']:
         p.once(PRICE_ROW, '<span style=\\"margin-bottom:-10px;' + MONO + '\\">' + v['label'] + END + '\\n' + PRICE_ROW)
     p.once('{{ price }}&nbsp;₽' + END, v['price'] + END)
-    p.once('>44&nbsp;990&nbsp;₽' + END, '>' + v['old'] + END)
+    p.once('>{{ oldPrice }}' + END, '>' + v['old'] + END)
     note = ('<span style=\\"' + NOTE + '\\">' + v['note'] + END + '\\n') if v['note'] else ''
     p.once(ALT_MAIN + END + '\\n', v['alt'] + END + '\\n' + note)
     p.once(FAQ_MAIN, v['faq'])
 
-    for bad in (['куратор', 'Куратор', 'групп', 'Zoom', 'зум', '50 мест', 'В команде', 'ИИ-ассистент', 'планёрк', 'кружок', 'погружени', 'Розыгрыш', 'Бонус', '45&nbsp;дней']
+    for bad in (['куратор', 'Куратор', 'групп', 'Zoom', 'зум', '50 мест', 'В команде', 'ИИ-ассистент', 'планёрк', 'кружок', 'погружени', 'Розыгрыш', 'Чат участниц', 'урокам навсегда', '45&nbsp;дней']
                 if v.get('self') else []):
         # в коде страницы остаются служебные упоминания; проверяем только шаблон и тексты
         a = p.s.find('<x-dc'); b = p.s.find('<\\u002Fx-dc>')

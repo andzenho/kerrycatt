@@ -265,6 +265,8 @@ h1 {
 .bonus { margin-bottom: 22px; padding: 12px 14px; border-radius: 10px; background: var(--pink); font-weight: 700; font-size: 15px; line-height: 1.4; }
 .bonus[hidden] { display: none; }
 .bonus span { white-space: nowrap; }
+.bonus small { display: block; margin-top: 2px; font-size: 13px; font-weight: 600; color: rgba(31,31,31,.72); }
+.price s[hidden] { display: none; }
 .ticks li { display: flex; gap: 12px; padding: 10px 0; border-top: 1px solid rgba(31,31,31,.14); font-weight: 700; }
 .ticks li::before { content: "✓"; flex: none; color: var(--rose); font-weight: 800; }
 .tariff__side h3 { margin: clamp(30px, 7vw, 44px) 0 10px; font-size: clamp(20px, 5.4vw, 28px); }
