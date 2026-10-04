@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Большая Игра — Карина · тест дизайна</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Manrope:wght@500;600;700;800&family=Unbounded:wght@600;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=1">
+</head>
+<body>
+
+<!-- ───────── 01 Первый экран ───────── -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero__bar">
+      <span class="rec"><i></i>REC <b data-rec>00:00:00</b></span>
+      <span class="hero__me"><img src="../assets/karina-avatar.webp" alt="" width="28" height="28">kerry.catt</span>
+    </div>
+
+    <div class="hero__grid">
+      <div class="hero__text">
+        <p class="meta">старт 16 ноября · 40 дней</p>
+        <h1>Большая<br>игра</h1>
+        <p class="hero__lead">За 40 дней ты снимешь и выложишь 30 роликов по методу яппинга и создашь блог, который приносит возможности.</p>
+      </div>
+
+      <figure class="finder">
+        <img src="../assets/karina.webp" alt="Карина снимает себя на телефон у витрины в Нью-Йорке" width="800" height="1067">
+        <span class="finder__c finder__c--tl"></span><span class="finder__c finder__c--tr"></span>
+        <span class="finder__c finder__c--bl"></span><span class="finder__c finder__c--br"></span>
+        <figcaption><i></i>карина · автор игры</figcaption>
+      </figure>
+
+      <ul class="facts">
+        <li><span>☀️</span>Каждое утро получаешь задание от меня, что снять сегодня</li>
+        <li><span>🎬</span>Куратор разбирает каждый твой выложенный рилс и говорит, что усилить</li>
+        <li><span>👥</span>Идёшь в группе из 50 человек, которые снимают вместе с тобой</li>
+      </ul>
+
+      <div class="deadline">
+        <p class="deadline__title">Набор идёт <em>по отбору</em></p>
+        <p class="deadline__rise"><span data-rise-a></span><b data-rise-date></b><span data-rise-b></span></p>
+        <div class="timer" data-timer aria-live="off">
+          <span><b data-t="d">0</b><i data-w="d">дней</i></span>
+          <span><b data-t="h">00</b><i data-w="h">часов</i></span>
+          <span><b data-t="m">00</b><i data-w="m">минут</i></span>
+          <span><b data-t="s">00</b><i data-w="s">секунд</i></span>
+        </div>
+        <a class="btn" href="#tariffs">Принять участие →</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ───────── 02 Главная задача ───────── -->
+<section class="band band--paper">
+  <div class="wrap narrow">
+    <h2>Моя главная задача <em>на Большой игре</em></h2>
+    <p class="lead">Дать тебе навык, с которым создание контента станет понятной и интересной игрой, которая приводит сотни тысяч просмотров, твою аудиторию и возможности.</p>
+    <ol class="chain">
+      <li>Но чтобы к этому прийти, контент должен стать частью твоей жизни.</li>
+      <li>Чтобы он стал частью жизни, надо начать снимать.</li>
+      <li>А чтобы начать снимать, нужна среда, в которой не снимать не получится.</li>
+    </ol>
+    <p class="slap"><span>Это и есть</span> <span>Большая игра!</span></p>
+  </div>
+</section>
+
+<!-- ───────── 03 Знакомо ───────── -->
+<section class="band band--white">
+  <div class="wrap">
+    <div class="head-row">
+      <h2>Каждый раз, когда берёшься <em>за блог,</em> ты чувствуешь это</h2>
+      <img class="sticker" src="../assets/stickers/sticker-06.webp" alt="" width="210" height="235" loading="lazy">
+    </div>
+    <ul class="pains">
+      <li><span>🫥</span>Кажется, что твой контент никому не нужен.</li>
+      <li><span>😬</span>Смотришь себя в записи и кринжуешь.</li>
+      <li><span>🔁</span>Переснимаешь по десять раз, а потом удаляешь.</li>
+      <li><span>🌀</span>Тем много, а выбрать одну не получается.</li>
+      <li><span>🤷‍♀️</span>Или кажется, что рассказывать вообще не о чем.</li>
+      <li><span>👀</span>Страшно, что увидят знакомые и коллеги.</li>
+      <li><span>📅</span>Каждую неделю обещаешь себе начать.</li>
+      <li><span>📉</span>Снимаешь, а просмотров нет.</li>
+    </ul>
+    <div class="verdict">
+      <div>
+        <h3>Каждый из этих пунктов <em>не про лень</em></h3>
+        <p>Просто у тебя нет метода, как снимать. Нет конкретного понимания, о чём снимать. И нет ответа на главное: как начать и не слиться через неделю.</p>
+      </div>
+      <a class="btn" href="#tariffs">Принять участие →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── 04 Для кого ───────── -->
+<section class="band band--ink niches">
+  <div class="wrap">
+    <h2>Для кого <em>Большая игра?</em></h2>
+    <p class="meta">если это про тебя</p>
+  </div>
+  <div class="marquee" data-marquee aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="sr-only" data-niches-text></p>
+    <p class="lead">Или просто хочешь показывать свою жизнь и говорить то, что думаешь.</p>
+    <p class="slap slap--light"><span>Разница только в теме.</span> <span>Путь одинаковый для всех</span></p>
+  </div>
+</section>
+
+<!-- ───────── 05 Метод яппинга ───────── -->
+<section class="band band--paper">
+  <div class="wrap">
+    <p class="meta">основа игры</p>
+    <h2>Метод <em>ЯППИНГА</em></h2>
+    <p class="lead narrow-text">Если ты узнала себя выше, то лучшим методом для блогинга будет мой метод яппинга.</p>
+
+    <p class="label">Всё, что нужно для ролика</p>
+    <p class="formula">
+      <span>💡 Тема</span><b>+</b><span>🗣️ Рот</span><b>+</b><span>📱 Камера</span><b>+</b><span>✂️ Монтаж на 5 минут</span>
+    </p>
+    <p class="formula__note">вырезать «ааа», «эээ», добавить субтитры</p>
+
+    <p class="label">Что тебе даёт этот метод</p>
+    <div class="gives">
+      <div><h3>Говоришь на камеру свободно</h3><p>Про что угодно и интересно, без сценария и без десяти дублей.</p></div>
+      <div><h3>Твои рилсы начинают смотреть</h3><p>Сотни тысяч просмотров и столько же новых подписчиков.</p></div>
+      <div><h3>Освоила один раз — дальше снимаешь легко и быстро</h3><p>Навык остаётся с тобой навсегда, даже когда игра закончится.</p></div>
+    </div>
+  </div>
+
+  <div class="reels" aria-label="Рилсы Карины">
+    <img src="../assets/reel2.webp" alt="Рилс Карины, 2,4 млн просмотров" width="570" height="886" loading="lazy">
+    <img src="../assets/reel8.webp" alt="Рилс Карины, 1,8 млн просмотров" width="570" height="886" loading="lazy">
+    <img src="../assets/reel6.webp" alt="Рилс Карины, 1,5 млн просмотров" width="570" height="886" loading="lazy">
+    <img src="../assets/reel7.webp" alt="Рилс Карины, 1,5 млн просмотров" width="570" height="886" loading="lazy">
+    <img src="../assets/reel1.webp" alt="Рилс Карины, 1,2 млн просмотров" width="570" height="886" loading="lazy">
+    <img src="../assets/reel3.webp" alt="Рилс Карины, 1,1 млн просмотров" width="570" height="886" loading="lazy">
+    <img src="../assets/reel4.webp" alt="Рилс Карины, 1 млн просмотров" width="570" height="886" loading="lazy">
+    <img src="../assets/reel5.webp" alt="Рилс Карины, 1 млн просмотров" width="570" height="886" loading="lazy">
+  </div>
+
+  <div class="wrap">
+    <blockquote class="quote">
+      <img src="../assets/karina-avatar.webp" alt="" width="56" height="56" loading="lazy">
+      <div>
+        <p>«По этому методу набрала свою аудиторию я и сотни других блогеров на всех языках мира. В Америке у блогеров сейчас это огромный тренд»</p>
+        <cite>карина · @kerry.catt</cite>
+      </div>
+    </blockquote>
+    <a class="btn" href="#tariffs">Принять участие →</a>
+  </div>
+</section>
+
+<!-- ───────── 06 Задания ───────── -->
+<section class="band band--white">
+  <div class="wrap split">
+    <div>
+      <h2>Тебе больше не надо думать, <em>о чём снимать</em></h2>
+      <blockquote class="quote">
+        <img src="../assets/karina-avatar.webp" alt="" width="56" height="56" loading="lazy">
+        <div>
+          <p>«Вы мне постоянно говорили, что не понимаете, что снимать. Даже когда тема есть, непонятно, как снять по ней ролик. Именно поэтому за 40 дней ты получишь 30 заданий: что и как нужно снять. Каждое задание можно адаптировать под свою тему»</p>
+          <cite>карина · @kerry.catt</cite>
+        </div>
+      </blockquote>
+    </div>
+    <div class="chat">
+      <div class="chat__msg"><span class="chat__tag">💬 пример задания 1</span>Ответь на вопрос, который тебе задают чаще всего</div>
+      <div class="chat__msg"><span class="chat__tag">🌤️ пример задания 2</span>Покажи момент из своего обычного дня и скажи, что ты о нём думаешь</div>
+      <div class="chat__msg"><span class="chat__tag">🧩 пример задания 3</span>Расскажи про свою ошибку, которую больше не повторяешь</div>
+      <p class="chat__after">После финиша все задания остаются у тебя. И ты можешь использовать их в будущем, когда не знаешь, про что снять.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── 07 Не курс ───────── -->
+<section class="band band--ink">
+  <div class="wrap narrow">
+    <h2>Все курсы построены на просмотре уроков. <em>Это не работает</em></h2>
+    <ul class="checks">
+      <li>Купила курс</li>
+      <li>Посмотрела уроки</li>
+      <li>Законспектировала</li>
+      <li class="checks__miss">Сняла и выложила</li>
+    </ul>
+    <p class="meta">как в игре</p>
+    <p class="lead">На Большой игре мы делаем весь фокус на съёмку и публикацию рилсов</p>
+    <p class="slap slap--light"><span>По-другому блогером</span> <span>стать невозможно</span></p>
+  </div>
+</section>
+
+<!-- ───────── 08 Куратор и зумы ───────── -->
+<section class="band band--paper">
+  <div class="wrap">
+    <p class="meta">поддержка внутри игры</p>
+    <h2>Ты идёшь <em>не одна</em></h2>
+    <div class="pair">
+      <div>
+        <h3>Куратор разбирает каждый твой рилс</h3>
+        <ul class="dots">
+          <li>Группа из 50 человек и свой куратор</li>
+          <li>Смотрит выложенное и говорит, что усилить</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Два живых зума <em>со мной</em></h3>
+        <ul class="dots">
+          <li>Любой вопрос и разбор блога лично со мной</li>
+          <li>Записи остаются, если не сможешь прийти</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 11 Группы -->
+    <h3 class="sub">Группы делятся по типу блога, чтобы рядом с тобой были люди с такими же задачами</h3>
+    <div class="pair pair--types">
+      <div>
+        <h4>🌿 Лайфстайл</h4>
+        <p>Ведёшь блог про свою жизнь и свои темы.</p>
+        <p class="goal"><span>цель</span>Просмотры, подписчики и свои люди вокруг</p>
+      </div>
+      <div>
+        <h4>🎯 Экспертный</h4>
+        <p>У тебя есть услуги или продукт.</p>
+        <p class="goal"><span>цель</span>Заявки и клиенты из блога</p>
+      </div>
+    </div>
+    <p class="aside"><span>выбор группы</span>Группу выбираешь при оплате. Если ещё не решила, определимся в первые пять дней.</p>
+  </div>
+</section>
+
+<!-- ───────── 09 40 дней ───────── -->
+<section class="band band--pink days">
+  <div class="wrap">
+    <h2>Как пройдут <em>40 дней в игре?</em></h2>
+    <div class="days__grid">
+      <div class="cal" data-cal aria-label="Календарь потока: 16 ноября — 25 декабря"></div>
+      <div class="days__text">
+        <div class="phase">
+          <p class="phase__name"><i class="k k--base"></i>дни 1–5 · фундамент</p>
+          <p>Находишь свою тему и полностью осваиваешь метод яппинга.</p>
+        </div>
+        <div class="phase">
+          <p class="phase__name"><i class="k k--task"></i>дни 6–40 · практика</p>
+          <ol class="steps">
+            <li>Утром приходит задание, что снять</li>
+            <li>Снимаешь и выкладываешь к себе в профиль</li>
+            <li>Куратор разбирает и говорит, что усилить</li>
+            <li>К нужной неделе открывается урок</li>
+          </ol>
+        </div>
+        <ul class="notes">
+          <li><i class="k k--off"></i>По воскресеньям заданий нет</li>
+          <li>Задания не сгорают</li>
+          <li>Идёшь в своём темпе, гонки тут нет</li>
+        </ul>
+      </div>
+    </div>
+    <p class="outcome"><span>Через 40 дней</span>30 новых рилсов в профиле, которые ты снимаешь вместе со мной и моей командой</p>
+  </div>
+</section>
+
+<!-- ───────── 10 Что внутри ───────── -->
+<section class="band band--paper">
+  <div class="wrap">
+    <h2>Что ещё внутри?</h2>
+    <div class="inside">
+      <div>
+        <h3>🎓 20+ уроков <em>от меня</em></h3>
+        <p>Открываются по ходу игры, каждый к той неделе, когда он тебе нужен.</p>
+        <ul class="topics">
+          <li>Продвижение и алгоритмы</li><li>Как усилить яппинг</li><li>Как раскрыть себя на камеру</li>
+          <li>Съёмка на телефон</li><li>Простой монтаж</li><li>Где брать идеи каждый день</li>
+          <li>Упаковка профиля</li><li>Телеграм-канал</li><li>Монетизация</li>
+          <li>Когда охваты просели и снимать перехотелось</li>
+        </ul>
+      </div>
+      <div>
+        <h3>🎒 Инструменты</h3>
+        <ul class="dots">
+          <li>Шаблоны и таблицы</li>
+          <li>Промты для нейросетей</li>
+          <li>30+ идей для личного блога</li>
+          <li>100+ идей для экспертного</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── 12 Что заберёшь ───────── -->
+<section class="band band--white">
+  <div class="wrap">
+    <div class="head-row">
+      <h2>Что заберёшь <em>за 40 дней?</em></h2>
+      <img class="sticker" src="../assets/stickers/sticker-05.webp" alt="" width="210" height="235" loading="lazy">
+    </div>
+    <ul class="results">
+      <li><span>🎬</span>30 новых рилсов в профиле</li>
+      <li><span>🗣️</span>Освоенный метод ЯППИНГА</li>
+      <li><span>🎯</span>Понятную тему и форматы, в которых тебе снимать</li>
+      <li><span>📈</span>Научишься получать просмотры и новых подписчиков</li>
+      <li><span>💡</span>Понимание, что и как снимать каждый день</li>
+      <li><span>😌</span>Спокойствие перед камерой, без десяти дублей и удалённых видео</li>
+      <li><span>🔥</span>Привычку снимать регулярно</li>
+      <li><span>👥</span>Своих людей вокруг, близких по духу</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ───────── 13 Тариф ───────── -->
+<section class="band band--ink tariff" id="tariffs">
+  <div class="wrap">
+    <p class="meta">старт 16 ноября</p>
+    <h2>Участие в <em>Большой игре</em></h2>
+
+    <div class="tariff__grid">
+      <div class="tariff__card">
+        <div class="tariff__top"><span>В команде</span><span class="meta">50 мест</span></div>
+        <p class="price"><b><span data-price>24 990</span> ₽</b><s>44 990 ₽</s></p>
+        <p class="price__alt">или $299 / €269 картой не из России</p>
+        <p>Куратор смотрит каждый твой рилс и говорит, что усилить. Рядом группа из 50 человек, которые снимают вместе с тобой.</p>
+        <p class="label label--light">что входит</p>
+        <ul class="ticks">
+          <li>30 заданий: что и как снять</li>
+          <li>Группа из 50 человек со своим чатом</li>
+          <li>Куратор разбирает каждый твой выложенный рилс</li>
+          <li>2 живых разбора в Zoom со мной</li>
+          <li>20+ уроков и инструменты</li>
+        </ul>
+        <a class="btn btn--wide" href="#finish">Принять участие</a>
+      </div>
+
+      <div class="tariff__side">
+        <p class="deadline__rise"><span data-rise-a></span><b data-rise-date></b><span data-rise-b></span></p>
+        <p class="meta" data-rise-label>до повышения цены</p>
+        <div class="timer timer--dark" data-timer aria-live="off">
+          <span><b data-t="d">0</b><i data-w="d">дней</i></span>
+          <span><b data-t="h">00</b><i data-w="h">часов</i></span>
+          <span><b data-t="m">00</b><i data-w="m">минут</i></span>
+          <span><b data-t="s">00</b><i data-w="s">секунд</i></span>
+        </div>
+        <h3>Сорок дней рядом с тобой задание, <em>куратор и группа</em></h3>
+        <p>Условия участия и варианты оплаты команда расскажет после заявки.</p>
+        <p class="aside aside--light"><span>рассрочка</span>Есть рассрочка до 12 месяцев для России и СНГ</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── 14 Автор ───────── -->
+<section class="band band--paper">
+  <div class="wrap author">
+    <img src="../assets/karina.webp" alt="Карина" width="800" height="1067" loading="lazy">
+    <div>
+      <h2>Кто ведёт игру?</h2>
+      <p class="lead">Меня зовут Карина. Шесть лет в блогинге, <em>2,5 млн подписчиков</em> в Instagram, YouTube и TikTok. Без сценаристов и продюсеров, сама, на телефон.</p>
+      <p>Скорее всего ты это и так знаешь, поэтому коротко: всё, что я показываю в игре, я делала своими руками. Метод не придуман под продажу, я по нему живу.</p>
+      <a class="btn" href="#tariffs">Принять участие →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── 15 Не для тебя ───────── -->
+<section class="band band--white">
+  <div class="wrap">
+    <h2>Игра не для тебя, если</h2>
+    <ul class="notfor">
+      <li><span>🙈</span>Не готова снимать себя. Мы разбираем только выложенные рилсы, снимать в стол тут не получится.</li>
+      <li><span>🎭</span>Хочешь вести блог без своего лица. Яппинг это разговор на камеру, по-другому он не работает.</li>
+      <li><span>📺</span>Ждёшь, что достаточно купить и посмотреть уроки. Снимать всё равно будешь ты.</li>
+      <li><span>🗯️</span>Не готова слышать, что в ролике поправить. Обратная связь тут каждую неделю.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ───────── 16 FAQ ───────── -->
+<section class="band band--paper">
+  <div class="wrap narrow">
+    <h2>Частые вопросы</h2>
+    <div class="faq">
+      <details><summary>Сколько стоит участие?</summary><p>Сейчас участие стоит 24 990 ₽, а если карта не из России, то $299 или €269. Оплатить можно сразу после заявки: всю сумму или в рассрочку до 12 месяцев. Если остались вопросы, моя команда ответит.</p></details>
+      <details><summary>Я уже пробовала курсы, не сработало. Почему тут будет по-другому?</summary><p>На курсе ты одна с уроками. Посмотрела, законспектировала, закрыла вкладку. Здесь каждое утро приходит задание, что снять сегодня, а твой выложенный рилс смотрит куратор. Разница не в уроках, а в том, доводят они тебя до опубликованного видео или нет.</p></details>
+      <details><summary>Нужно снимать каждый день?</summary><p>Нет. Задание приходит каждое утро, кроме воскресений, а снимаешь ты в своём темпе. Задания не сгорают и остаются у тебя после игры.</p></details>
+      <details><summary>Страшно выкладывать свой рилс в чат на 50 человек.</summary><p>Мы разбираем ролик, который ты уже выложила к себе в профиль. Его и так видят все твои подписчики, а 50 человек в чате это меньше. Критиковать друг друга в чате нельзя, это правило. Разбирает только куратор, и всегда в формате «что усилить».</p></details>
+      <details><summary>Боюсь, что увидят знакомые и коллеги.</summary><p>Так и будет, если ты снимаешь для той же площадки, где они есть. Врать не буду: кто-то напишет гадость. Вопрос в том, чьё мнение для тебя весит больше.</p></details>
+      <details><summary>Боюсь снимать яппингом. Все эти паузы, ааа, эээ, мысли путаются.</summary><p>Так у всех первое время, и у меня было так же. Ааа и эээ вырезаются за две минуты, поэтому записывать можно прямо с ними. Думать о них во время съёмки не надо.</p></details>
+      <details><summary>Про мою тему уже всё сняли.</summary><p>Про любую тему уже всё сняли. Смотрят не тему, а человека. Поэтому мы и не ищем тему, которую никто не занял, такой не существует.</p></details>
+      <details><summary>Надо ли выбирать одну тему?</summary><p>Нет. Я сама снимаю про еду, семью, свой день и мнение по любым поводам. В игре мы ищем не одну тему, а то, что связывает твои интересы, и форматы под это.</p></details>
+      <details><summary>У меня блог уже приносит клиентов. Боюсь сломать то, что работает.</summary><p>Ломать не надо. В игре разбираем оба пути: добавить себя живую в текущий блог или завести отдельный под личное. Выбираешь ты.</p></details>
+      <details><summary>Я подключусь позже старта, сильно отстану?</summary><p>Нет. Задания и уроки никуда не деваются, догнать реально за пару вечеров.</p></details>
+      <details><summary>Гарантированно ли я заработаю на блоге?</summary><p>Нет, и никто честно такого не пообещает. Игра про то, чтобы ты начала снимать регулярно и тебя начали смотреть. Что будет дальше, зависит от того, что ты будешь делать после сорока дней.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── 17 Финал ───────── -->
+<section class="band band--pink finish" id="finish">
+  <div class="wrap narrow">
+    <div class="head-row">
+      <h2>Как попасть <em>в игру?</em></h2>
+      <img class="sticker" src="../assets/stickers/sticker-10.webp" alt="" width="210" height="235" loading="lazy">
+    </div>
+    <ol class="steps steps--big">
+      <li>Нажимаешь кнопку «Принять участие»</li>
+      <li>Заполняешь свои данные, чтобы мы тебя не потеряли</li>
+      <li>С тобой связывается моя команда: отвечает на все вопросы, помогает определиться с группой, безопасно оплатить и влиться в игру</li>
+    </ol>
+    <p class="slap"><span>Нормально бояться.</span> <span>Ненормально годами из-за этого не начать</span></p>
+    <a class="btn btn--ink" href="#tariffs">Принять участие →</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot__brand">Большая игра <span>© карина каталеева</span></p>
+    <nav>
+      <a href="../offer/" target="_blank" rel="noopener">Оферта</a>
+      <a href="../offer-prilozhenie-1/" target="_blank" rel="noopener">Приложение № 1. Большая Игра</a>
+      <a href="../privacy/" target="_blank" rel="noopener">Политика обработки персональных данных</a>
+      <a href="../consent/" target="_blank" rel="noopener">Согласие на обработку персональных данных</a>
+      <a href="../consent-ads/" target="_blank" rel="noopener">Согласие на рассылки</a>
+      <a href="../terms/" target="_blank" rel="noopener">Пользовательское соглашение</a>
+    </nav>
+    <p class="meta">большая игра · @kerry.catt · старт 16 ноября</p>
+  </div>
+</footer>
+
+<div class="bar">
+  <span class="bar__info"><b data-bar-label>До повышения цены</b><i data-bar-timer>0д 00:00:00</i></span>
+  <a class="btn btn--small" href="#tariffs">Принять участие</a>
+</div>
+
+<script src="page.js?v=1"></script>
+<script src="../bolshaya-igra/tariff-forms.js?v=20261004c"></script>
+</body>
+</html>
