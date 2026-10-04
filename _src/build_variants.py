@@ -121,19 +121,22 @@ ITEM = ('<span style=\\"display:flex;gap:12px;align-items:flex-start;font-size:1
         'color:rgba(246,238,226,.9);\\"><span style=\\"flex:0 0 auto;width:20px;height:20px;background:#F6EEE2;'
         'color:#1F1F1F;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;'
         'margin-top:2px;\\">✓' + END + '%s' + END + '\\n')
-BADGE = ('<span style=\\"padding:2px 8px;border-radius:999px;background:#E3768B;color:#1F1F1F;'
-         "font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.12em;"
-         'line-height:1.5;text-transform:uppercase;\\">новинка' + END)
-NEW_OPEN = '<span style=\\"display:flex;flex-direction:column;align-items:flex-start;gap:5px;\\">' + BADGE
+BADGE = ('<span style=\\"display:inline-block;margin-left:4px;padding:1px 6px;border:1px solid rgba(227,118,139,.55);'
+         "border-radius:999px;color:#E3768B;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;"
+         'letter-spacing:.1em;line-height:1.4;text-transform:uppercase;white-space:nowrap;vertical-align:middle;'
+         'position:relative;top:-1px;\\">новинка' + END)
 
 
 def new_item(text):
-    """Пункт карточки с плашкой «новинка» над ним."""
-    return NEW_OPEN + (ITEM % text)[:-2] + END + '\\n'
+    """Пункт карточки с маленькой меткой «новинка» справа от текста; метка держится за последнее слово."""
+    nb = '&nbsp;'
+    i = max(text.rfind(' '), text.rfind(nb))
+    j = i + (len(nb) if text.startswith(nb, i) else 1)
+    return ITEM % ('<span>' + text[:j] + '<span style=\\"white-space:nowrap;\\">' + text[j:] + ' ' + BADGE + END + END)
 
 
 CARD_FIRST = new_item('Неделя погружения до&nbsp;старта: как дойти до&nbsp;30&nbsp;роликов и&nbsp;не&nbsp;слиться')
-CARD_LAST = new_item('Розыгрыш: три самых активных получают личный разбор блога от&nbsp;Карины')
+CARD_LAST = ITEM % 'Чат участниц: лайфстайл и&nbsp;экспертный блог отдельно'
 
 
 def drop_bonus(p):

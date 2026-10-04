@@ -269,10 +269,8 @@ h1 {
 .price s[hidden] { display: none; }
 .ticks li { display: flex; gap: 12px; padding: 10px 0; border-top: 1px solid rgba(31,31,31,.14); font-weight: 700; }
 .ticks li::before { content: "✓"; flex: none; color: var(--rose); font-weight: 800; }
-.ticks li.is-new { flex-wrap: wrap; row-gap: 5px; }
-.ticks .new { order: -1; flex: 0 0 100%; line-height: 1; }
-.ticks .new b { display: inline-block; padding: 2px 8px; border-radius: 999px; background: var(--pink); font: 700 10px/1.5 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; }
-.ticks .txt { flex: 1 1 0; min-width: 0; }
+.ticks .nw { white-space: nowrap; }
+.ticks .new { display: inline-block; margin-left: 4px; padding: 1px 6px; border: 1px solid rgba(201,79,106,.5); border-radius: 999px; color: var(--rose); font: 700 9px/1.4 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; vertical-align: middle; position: relative; top: -1px; }
 .tariff__side h3 { margin: clamp(30px, 7vw, 44px) 0 10px; font-size: clamp(20px, 5.4vw, 28px); }
 .tariff__side > p:not(.meta):not(.deadline__rise):not(.aside) { color: var(--muted); }
 .tariff__side .meta { margin: 14px 0 0; }
