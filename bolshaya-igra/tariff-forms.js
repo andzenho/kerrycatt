@@ -3,7 +3,7 @@
    Заявка уходит в Google Таблицу лидов (лист «Заявки Большая Игра») через Apps Script.
    Если отправка не прошла, заявка сохраняется в браузере и уходит при следующем заходе.
    После заявки показываем экран оплаты: галка оферты и две кнопки (рубли и зарубежные методы).
-   Один файл на три страницы: основную, страницу брони и страницу внутренней рассрочки (см. VARIANTS).
+   Один файл на пять страниц: основную, бронь, внутреннюю рассрочку и две страницы тарифа «В своём темпе» (см. VARIANTS).
    Не зависит от бандла. */
 (function () {
   if (window.__bgTariffForms) return; window.__bgTariffForms = true;
@@ -21,6 +21,7 @@
   // type уходит в таблицу в колонку «Тип заявки». Страницы-копии собирает _src/build_variants.py.
   var VARIANTS = {
     full: {
+      tariff: "В команде",
       type: "полная оплата",
       rub: "https://anny-nizh.getplatinum.ru/payment/50m8VOq",
       intl: "https://app.lava.top/products/852fcd5c-464e-426b-848d-62c227f8b55c",
@@ -30,6 +31,7 @@
       pay: "Место можно занять сразу. Выбери, как удобнее оплатить."
     },
     bron: {
+      tariff: "В команде",
       type: "бронь",
       rub: "https://anny-nizh.getplatinum.ru/payment/a2EJYy5",
       intl: "https://app.lava.top/products/ea6fc160-07f7-48f1-8c0d-53a2d76294d9",
@@ -39,6 +41,7 @@
       pay: "Бронь закрепляет за тобой место и входит в стоимость участия. Выбери, как удобнее оплатить."
     },
     half: {
+      tariff: "В команде",
       type: "внутренняя рассрочка",
       rub: "https://anny-nizh.getplatinum.ru/payment/oD8EO8r",
       intl: "https://app.lava.top/products/cd82525d-e5bd-4aa7-a17c-fd85600187ed",
@@ -46,9 +49,31 @@
       intlHint: "$150 или €135 · карты зарубежных банков",
       lead: "Оставь контакты, и сразу откроется оплата первого платежа. Если будут вопросы, моя команда ответит.",
       pay: "Оплата делится на два платежа. Сейчас первый. Выбери, как удобнее оплатить."
+    },
+    self: {
+      tariff: "В своём темпе",
+      type: "полная оплата",
+      rub: "https://anny-nizh.getplatinum.ru/payment/3F8i6ce",
+      intl: "https://app.lava.top/products/cf9d060e-c6b1-496d-a683-b0bd3f0db20f",
+      rubHint: "14 990 ₽",
+      intlHint: "$180 или €160 · карты зарубежных банков",
+      lead: "Оставь контакты, и сразу откроется оплата. Если будут вопросы, моя команда ответит.",
+      pay: "Оплатить можно сразу. Выбери, как удобнее."
+    },
+    selfhalf: {
+      tariff: "В своём темпе",
+      type: "внутренняя рассрочка",
+      rub: "https://anny-nizh.getplatinum.ru/payment/jSYrQvS",
+      intl: "https://app.lava.top/products/5d269282-a1ce-4e90-ad7e-b98611dabfac",
+      rubHint: "7 495 ₽ · первый платёж",
+      intlHint: "$90 или €80 · карты зарубежных банков",
+      lead: "Оставь контакты, и сразу откроется оплата первого платежа. Если будут вопросы, моя команда ответит.",
+      pay: "Оплата делится на два платежа. Сейчас первый. Выбери, как удобнее оплатить."
     }
   };
-  var VKEY = /bolshaya-igra-bron/.test(location.pathname) ? "bron" : /bolshaya-igra-rassrochka/.test(location.pathname) ? "half" : "full";
+  var PATH = location.pathname;
+  var VKEY = /bolshaya-igra-sam-rassrochka/.test(PATH) ? "selfhalf" : /bolshaya-igra-sam/.test(PATH) ? "self" :
+    /bolshaya-igra-bron/.test(PATH) ? "bron" : /bolshaya-igra-rassrochka/.test(PATH) ? "half" : "full";
   var V = VARIANTS[VKEY];
   var STORE = "bg_lead_q";
 
@@ -218,7 +243,7 @@
 
     if (tg && !/^@/.test(tg) && !/t\.me\//.test(tg)) tg = "@" + tg;
     var lead = {
-      tariff: byKey(S.tariff).name, type: V.type, name: name, phone: phone, tgNick: tg,
+      tariff: V.tariff, type: V.type, name: name, phone: phone, tgNick: tg,
       consent_pd: true, consent_ads: form.consent_ads.checked,
       consent_ts: new Date().toISOString(), consent_rev: CONFIG.docsRev,
       utm: utm()
