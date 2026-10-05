@@ -314,6 +314,7 @@ h2 em, h3 em { font-style: normal; white-space: nowrap; color: var(--red-d); }
 .case__reels img { width: 100%; aspect-ratio: 377 / 587; object-fit: cover; object-position: 50% 100%; border-radius: 14px; border: 1px solid rgba(240, 231, 219, .2); }
 .case__chat { display: grid; gap: 10px; margin-top: 14px; }
 .case__chat img { width: 100%; border-radius: 14px; }
+.case__chat .case__shot { max-width: 420px; }
 
 /* ───────── 6. Игра изнутри ───────── */
 .shots {
