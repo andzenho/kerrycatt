@@ -127,7 +127,7 @@ h2 em, h3 em { font-style: normal; white-space: nowrap; color: var(--red-d); }
 /* оффер: обещание и плашка, ниже цели для каждой участницы */
 /* строки заполняются подряд, без выравнивания по длине: иначе «станешь» повисает одно на строке */
 .offer h2 { font: 800 clamp(18px, 5.6vw, 30px)/1.24 var(--f-body); letter-spacing: -.01em; text-transform: none; text-align: left; text-wrap: wrap; }
-.offer .lead { margin-top: 16px; }
+.offer .lead { margin-top: 14px; font: 500 16.5px/1.5 var(--f-body); }
 .offer .badge--plate { position: static; display: inline-block; max-width: none; margin-top: 18px; padding: 12px 16px 11px; }
 .offer__goals { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line-l); }
 .offer__goals .checks { margin-top: 16px; }
