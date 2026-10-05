@@ -123,16 +123,16 @@ h2 em, h3 em { font-style: normal; white-space: nowrap; color: var(--red-d); }
 .sheet { position: relative; padding: 28px 22px 30px; border-radius: 28px; background: var(--cream); color: var(--ink); }
 .after-hero .sheet { padding-bottom: 48px; }
 .label--box { display: inline-block; padding: 8px 12px 7px; border: 1.5px solid var(--cta); border-radius: 6px; color: var(--cta) !important; }
-/* круглая стрелка вниз на нижней кромке листа */
-.down { position: absolute; left: 50%; bottom: -26px; width: 52px; height: 52px; margin-left: -26px; border: 5px solid var(--ink); border-radius: 50%; background: linear-gradient(180deg, #B8243A 0%, #7A1425 100%); box-shadow: 0 10px 22px -8px rgba(184, 36, 58, .9); }
-.down::before, .down::after { content: ""; position: absolute; left: 50%; width: 10px; height: 10px; margin-left: -5px; border-right: 2px solid #FFF8EE; border-bottom: 2px solid #FFF8EE; transform: rotate(45deg); }
-.down::before { top: 9px; }
-.down::after { top: 16px; }
-.sheet p + p { margin-top: 14px; }
-.sheet .label { color: var(--on-l); }
-.due { margin-top: 24px; padding-top: 22px; border-top: 1px solid var(--line-l); }
-.due__line { font: 800 18px/1.35 var(--f-body); }
-.due .label { margin-top: 16px; }
+/* стрелка вниз: плавная выемка в нижней кромке листа, круглая кнопка по центру кромки */
+.down {
+  position: absolute; left: 50%; bottom: -24px; width: 132px; height: 58px; margin-left: -66px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 132 34'%3E%3Cpath d='M0 34C28 34 34 0 66 0s38 34 66 34Z' fill='%230E0A0B'/%3E%3C/svg%3E") top center / 132px 34px no-repeat;
+}
+.down::before {
+  content: ""; position: absolute; left: 50%; top: 10px; width: 48px; height: 48px; margin-left: -24px; border-radius: 50%;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFF8EE' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 6.5l5 5 5-5M7 12.5l5 5 5-5'/%3E%3C/svg%3E") center / 24px 24px no-repeat, linear-gradient(180deg, #B8243A 0%, #7A1425 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3), 0 10px 22px -8px rgba(184, 36, 58, .9);
+}
 .timer { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 10px; }
 .timer span { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 14px 4px 12px; border-radius: 14px; background: var(--ink); color: var(--cream); }
 .timer b { font: 400 40px/1 var(--f-display); }
