@@ -210,6 +210,10 @@ h2 em, h3 em { font-style: normal; white-space: nowrap; color: var(--red-d); }
 .reel__views { position: absolute; z-index: 1; left: 14px; bottom: 13px; display: flex; flex-direction: column; align-items: flex-start; gap: 3px; text-align: left; }
 .reel__views b { font: 400 36px/.95 var(--f-display); color: #FFF8EE; }
 .reel__views span { font: 700 10.5px/1.2 var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: rgba(240, 231, 219, .82); }
+/* пустое место под скрин рилса */
+.reel--slot { display: flex; align-items: center; justify-content: center; padding: 16px; border: 1px dashed rgba(240, 231, 219, .36); background: rgba(240, 231, 219, .04); box-shadow: none; }
+.reel--slot::after { display: none; }
+.reel--slot span { font: 700 10.5px/1.6 var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: rgba(240, 231, 219, .6); }
 .reels__nav { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
 .arrow {
   width: 46px; height: 46px; padding: 0; border: 1.5px solid rgba(240, 231, 219, .5); border-radius: 13px; cursor: pointer;
