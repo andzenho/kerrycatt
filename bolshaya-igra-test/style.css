@@ -309,10 +309,9 @@ h2 em, h3 em { font-style: normal; white-space: nowrap; color: var(--red-d); }
 .case__list li::before { content: "—"; position: absolute; left: 0; color: rgba(240, 231, 219, .5); }
 .case__text b, .case__list b { color: #FFF8EE; font-weight: 800; }
 .case__sub { margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--line-d); font: 700 11.5px/1.4 var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: rgba(240, 231, 219, .7); }
-.case__reels { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 12px; margin-top: 14px; }
-.case__reels img { width: 100%; aspect-ratio: 9 / 14; object-fit: cover; object-position: 50% 0; border-radius: 16px; border: 1px solid rgba(240, 231, 219, .2); }
-.case__reels p { margin-top: 9px; font: 700 10.5px/1.3 var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: rgba(240, 231, 219, .75); }
-.case__reels b { display: block; margin-bottom: 3px; font: 400 28px/1 var(--f-display); letter-spacing: 0; color: #FFF8EE; }
+.case__reels { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 14px -6px 0; }
+/* скрины из её профиля: счётчик просмотров стоит на самом кадре, поэтому кадр не обрезаем снизу */
+.case__reels img { width: 100%; aspect-ratio: 377 / 587; object-fit: cover; object-position: 50% 100%; border-radius: 14px; border: 1px solid rgba(240, 231, 219, .2); }
 .case__chat { display: grid; gap: 10px; margin-top: 14px; }
 .case__chat img { width: 100%; border-radius: 14px; }
 
@@ -452,8 +451,7 @@ details p { padding: 0 16px 18px; font-size: 16.5px; color: var(--on-d); }
   .cases__row { grid-auto-columns: 100%; gap: 20px; margin-inline: 0; padding-inline: 0; scroll-padding-inline: 0; }
   .case { padding: 30px 30px 28px; }
   .case__ava { width: 104px; height: 104px; }
-  .case__reels { grid-template-columns: repeat(4, 1fr); }
-  .case__reels b { font-size: 26px; }
+  .case__reels { gap: 12px; margin-inline: 0; }
   .why__answer { max-width: 860px; margin-inline: auto; padding: 32px 36px; }
   .pair { grid-template-columns: 1fr 1fr; gap: 16px; max-width: 860px; margin-inline: auto; }
   .reels { margin-top: 64px; }
