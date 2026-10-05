@@ -138,12 +138,11 @@ h2 em, h3 em { font-style: normal; white-space: nowrap; color: var(--red-d); }
 .after-hero .sheet { padding-bottom: 48px; }
 .after-hero .btn--big { margin-top: 54px; }
 /* оффер: обещание и плашка, ниже цели для каждой участницы */
-/* обещание в три яруса: крупно срок и результат, между ними мелкой строкой, кто ведёт */
-.offer h2 { font-size: clamp(36px, 11.6vw, 60px); line-height: .96; text-align: left; }
-.offer h2 > span, .offer h2 em, .offer h2 em span { display: block; }
-.offer h2 em { white-space: normal; color: var(--red); }
-.offer__with { margin: 14px 0 16px; padding: 2px 0 2px 14px; border-left: 2px solid var(--cta); font: 600 clamp(14.5px, 4.1vw, 17px)/1.4 var(--f-body); letter-spacing: 0; text-transform: none; color: var(--on-l); }
-.offer .lead { margin-top: 20px; font: 500 16.5px/1.5 var(--f-body); }
+/* обещание одним текстом в четыре ровные строки; разбивка задана в разметке, чтобы слово не повисало одно */
+.offer h2 { font: 800 clamp(18px, 6vw, 34px)/1.2 var(--f-body); letter-spacing: -.015em; text-transform: none; text-align: left; }
+.offer h2 > span, .offer h2 > em { display: block; white-space: nowrap; }
+.offer h2 em { color: var(--red); }
+.offer .lead { margin-top: 16px; font: 500 16.5px/1.5 var(--f-body); }
 .offer .badge--plate { position: static; display: inline-block; max-width: none; margin-top: 18px; padding: 12px 16px 11px; }
 .offer__goals { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line-l); }
 .offer__goals .checks { margin-top: 16px; }
@@ -430,8 +429,7 @@ details p { padding: 0 16px 18px; font-size: 16.5px; color: var(--on-d); }
   }
   .after-hero { margin-top: -44px; }
   .after-hero .sheet { display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; column-gap: 56px; padding: 48px 52px 60px; border-radius: 40px; }
-  .offer h2 { font-size: 62px; }
-  .offer__with { max-width: 400px; margin: 18px 0 20px; font-size: 17px; }
+  .offer h2 { font-size: min(36px, 3.2vw); }
   .offer__goals { margin-top: 0; padding-top: 0; border-top: 0; }
   .cases__grid { grid-template-columns: 1fr 1fr; gap: 24px; }
   .why__answer { max-width: 860px; margin-inline: auto; padding: 32px 36px; }
