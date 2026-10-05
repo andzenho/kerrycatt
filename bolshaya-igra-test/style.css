@@ -110,7 +110,6 @@ h2 em, h3 em { font-style: normal; white-space: nowrap; color: var(--red-d); }
 }
 .hero h1 span { display: block; }
 .hero__sign { order: 3; margin-top: 4px; font-size: 70px; color: var(--cream); transform: rotate(-5deg); }
-.hero__lead { order: 4; max-width: 19em; margin: 16px auto 0; font: 700 clamp(19px, 5.2vw, 24px)/1.34 var(--f-body); }
 .hero .btn--big { order: 5; margin-top: 26px; }
 .hero__photo {
   order: 6; align-self: stretch; height: min(112vw, 540px); margin: 36px calc(var(--gutter) * -1) 0;
@@ -121,7 +120,24 @@ h2 em, h3 em { font-style: normal; white-space: nowrap; color: var(--red-d); }
 /* Светлый лист */
 .after-hero { position: relative; z-index: 2; margin-top: -72px; }
 .sheet { position: relative; padding: 28px 22px 30px; border-radius: 28px; background: var(--cream); color: var(--ink); }
+.sheet p + p { margin-top: 14px; }
+.sheet .label { color: var(--on-l); }
 .after-hero .sheet { padding-bottom: 48px; }
+.after-hero .btn--big { margin-top: 54px; }
+/* оффер: обещание и плашка, ниже цели для каждой участницы */
+.offer h2 { font-size: clamp(28px, 7.6vw, 42px); line-height: 1.05; text-align: left; }
+.offer h2 em { white-space: normal; }
+.offer .lead { margin-top: 16px; }
+.offer .badge--plate { position: static; display: inline-block; max-width: none; margin-top: 18px; padding: 12px 16px 11px; }
+.offer__goals { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line-l); }
+.offer__goals .checks { margin-top: 16px; }
+.sheet .checks li { color: var(--on-l); }
+.sheet .checks li b { color: var(--ink); }
+/* срок и таймер над тарифами */
+.due__line { font: 700 18px/1.35 var(--f-body); }
+.tdue { max-width: 440px; margin: 24px auto 0; text-align: center; }
+.tdue .label--box { margin-top: 14px; border-color: var(--red-d); color: var(--red-d) !important; }
+.tdue .timer span { border: 1px solid var(--line-d); background: rgba(240, 231, 219, .07); }
 .label--box { display: inline-block; padding: 8px 12px 7px; border: 1.5px solid var(--cta); border-radius: 6px; color: var(--cta) !important; }
 /* стрелка вниз: полукруглая выемка в нижней кромке листа, кнопка по центру кромки с ровным зазором */
 .down {
@@ -206,6 +222,12 @@ h2 em, h3 em { font-style: normal; white-space: nowrap; color: var(--red-d); }
 .pill { padding: 7px 11px 6px; border-radius: 8px; background: var(--cream); color: var(--ink); font: 800 10px/1 var(--f-body); letter-spacing: .14em; text-transform: uppercase; }
 .case__text { margin-top: 12px; font-size: 16.5px; color: var(--on-d); }
 .case__text b { color: var(--red-d); }
+.cases h2 em { white-space: normal; }
+.cases__grid { display: grid; gap: 18px; margin-top: 34px; }
+.cases .case { margin-top: 0; }
+.case .pill { display: inline-block; margin-top: 16px; }
+.pill--red { background: linear-gradient(180deg, #B8243A 0%, #7A1425 100%); color: #FFF8EE; }
+.case .case__text { margin-top: 10px; }
 .case__shot { aspect-ratio: 16 / 8; margin-top: 16px; border-radius: 14px; background: linear-gradient(155deg, #1B1416 0%, #0B0708 100%); border: 1px dashed rgba(240, 231, 219, .25); }
 
 /* ───────── 6. Игра изнутри ───────── */
@@ -279,6 +301,8 @@ details p { padding: 0 16px 18px; font-size: 16.5px; color: var(--on-d); }
 .foot__brand { font: 400 26px/1 var(--f-display); text-transform: uppercase; color: var(--cream); }
 .foot__brand .hand { margin-left: 10px; font-size: 40px; text-transform: none; }
 .foot nav { display: grid; gap: 10px; margin: 22px 0 26px; font-size: 14px; }
+.foot__note { font-size: 12px; line-height: 1.5; opacity: .6; }
+.foot .label + .foot__note { margin-top: 18px; }
 .foot nav a { text-decoration: underline; text-decoration-color: rgba(240, 231, 219, .3); text-underline-offset: 3px; }
 .bar {
   position: fixed; z-index: 50; left: 0; right: 0; bottom: 0;
@@ -310,6 +334,7 @@ details p { padding: 0 16px 18px; font-size: 16.5px; color: var(--on-d); }
   .pills { justify-content: space-between; max-width: 900px; margin-inline: auto; }
   .pills li { flex: 0 0 160px; }
   .pills li + li::before { left: -24px; }
+  .pills li:first-child::after { content: ""; position: absolute; right: -24px; top: 50%; width: 8px; height: 8px; margin-top: -4px; border-radius: 50%; background: var(--red-d); box-shadow: 0 0 10px 2px rgba(221, 59, 80, .8); }
   .pills span { font-size: 12px; }
   .pills b { font-size: 15px; }
   /* заголовок во всю ширину, фото по центру поверх него, роспись поверх фото */
@@ -327,12 +352,12 @@ details p { padding: 0 16px 18px; font-size: 16.5px; color: var(--on-d); }
     content: ""; position: absolute; z-index: 3; left: -10%; right: -10%; bottom: 0; height: 250px; pointer-events: none;
     background: linear-gradient(180deg, rgba(14, 10, 11, 0) 0%, var(--ink) 80%);
   }
-  .hero__lead { position: relative; z-index: 4; max-width: 23em; margin: -156px auto 0; font-size: 26px; }
-  .hero .btn--big { position: relative; z-index: 4; margin: 26px auto 0; }
+  .hero .btn--big { position: relative; z-index: 4; margin: -118px auto 0; }
   .after-hero { margin-top: -34px; }
-  .after-hero .sheet { display: grid; grid-template-columns: 1.15fr 1fr; align-items: center; padding: 40px 48px 56px; border-radius: 40px; }
-  .after-hero .lead { font-size: 23px; }
-  .due { margin: 0 0 0 56px; padding: 0; border-top: 0; }
+  .after-hero .sheet { display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; column-gap: 56px; padding: 48px 52px 60px; border-radius: 40px; }
+  .offer h2 { font-size: 40px; }
+  .offer__goals { margin-top: 0; padding-top: 0; border-top: 0; }
+  .cases__grid { grid-template-columns: 1fr 1fr; gap: 24px; }
   .sheet--lg { border-radius: 40px; }
 
   .nums, .sheet--note, .faq { max-width: 680px; margin-inline: auto; }
