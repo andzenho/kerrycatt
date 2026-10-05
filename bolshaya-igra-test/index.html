@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Manrope:wght@400;500;600;700;800&family=Oranienbaum&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=24">
+<link rel="stylesheet" href="style.css?v=30">
 </head>
 <body>
 
@@ -19,15 +19,17 @@
 <header class="hero" id="top">
   <div class="wrap">
     <ul class="pills">
-      <li>Старт 16 ноября</li>
-      <li>40 дней</li>
-      <li>50 мест с куратором</li>
+      <li><span>Старт</span><b>16 ноября</b></li>
+      <li><span>Длительность</span><b>40 дней</b></li>
+      <li><span>С куратором</span><b>50 мест</b></li>
     </ul>
-    <h1>Большая <span>Игра</span></h1>
-    <p class="hand hero__sign">Kerry Catt</p>
+    <div class="hero__stage">
+      <h1>Большая <span>Игра</span></h1>
+      <div class="hero__photo slot" data-slot="hero" data-label="фото Карины без фона"></div>
+      <p class="hand hero__sign">Kerry Catt</p>
+    </div>
     <p class="hero__lead">За 40 дней под наставничеством Карины и кураторов станешь настоящим блогером</p>
     <a class="btn btn--big" href="#tariffs">Принять участие</a>
-    <div class="hero__photo slot" data-slot="hero" data-label="фото Карины"></div>
   </div>
 </header>
 
@@ -37,7 +39,7 @@
       <p class="lead">Снимешь и выложишь <b>30 новых роликов</b> и найдёшь свои темы, которые набирают просмотры и приводят подписчиков в твой блог.</p>
       <div class="due">
         <p class="due__line" data-hero-line>До 19 октября действует самая низкая цена на Игру.</p>
-        <p class="label" data-timer-label>До повышения цены</p>
+        <p class="label label--box" data-timer-label>До повышения цены</p>
         <div class="timer" data-timer aria-live="off">
           <span><b data-t="d">0</b><i data-w="d">дней</i></span>
           <span><b data-t="h">00</b><i data-w="h">часов</i></span>
@@ -45,12 +47,13 @@
           <span><b data-t="s">00</b><i data-w="s">секунд</i></span>
         </div>
       </div>
+      <a class="down" href="#pains" aria-label="Листать дальше"></a>
     </div>
   </div>
 </div>
 
 <!-- ───────── 2. Узнаёшь себя ───────── -->
-<section class="sec">
+<section class="sec" id="pains">
   <div class="wrap col">
     <h2>Узнаёшь <em>себя?</em></h2>
     <ol class="nums">
