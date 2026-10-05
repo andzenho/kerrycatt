@@ -190,10 +190,14 @@ h2 em, h3 em { font-style: normal; white-space: nowrap; color: var(--red-d); }
 .checks { display: grid; gap: 14px; text-align: left; }
 .checks li { position: relative; padding-left: 36px; font: 500 17px/1.45 var(--f-body); color: var(--on-d); }
 .checks li b { color: var(--cream); }
-.checks li::before { content: ""; position: absolute; left: 0; top: 2px; width: 22px; height: 22px; border-radius: 7px; background: linear-gradient(180deg, #C02841 0%, #8C1829 100%); box-shadow: 0 6px 14px -6px rgba(184, 36, 58, .9); }
-.checks li::after { content: ""; position: absolute; left: 6px; top: 9px; width: 10px; height: 5px; border-left: 2px solid #FFF8EE; border-bottom: 2px solid #FFF8EE; transform: rotate(-45deg); }
-.checks .clock::before { border-radius: 50%; background: rgba(14, 10, 11, .3); box-shadow: none; }
-.checks .clock::after { left: 10px; top: 7px; width: 5px; height: 6px; transform: none; }
+/* рамка и значок одного размера; значок рисуется маской, поэтому всегда по центру и в нужном цвете */
+.checks li::before, .checks li::after { content: ""; position: absolute; left: 0; top: 1px; width: 22px; height: 22px; }
+.checks li::before { border-radius: 7px; background: linear-gradient(180deg, #C02841 0%, #8C1829 100%); }
+.checks li::after { background: #FFF8EE; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.6 7.5l2.9 2.9 5.9-6.6'/%3E%3C/svg%3E") center / 14px 14px no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.6 7.5l2.9 2.9 5.9-6.6'/%3E%3C/svg%3E") center / 14px 14px no-repeat; }
+.tc--wine .checks li::before { background: linear-gradient(180deg, #FFFFFF 0%, #E6DACA 100%); }
+.tc--wine .checks li::after { background: var(--cta); }
+.tc .checks li.off::before { background: none; box-shadow: inset 0 0 0 1.5px currentColor; }
+.tc .checks li.off::after { background: currentColor; -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round'%3E%3Cpath d='M3.6 3.6l6.8 6.8M10.4 3.6l-6.8 6.8'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round'%3E%3Cpath d='M3.6 3.6l6.8 6.8M10.4 3.6l-6.8 6.8'/%3E%3C/svg%3E"); }
 
 /* Кейс */
 .case { margin-top: 26px; padding: 20px 18px 18px; border-radius: 24px; background: rgba(240, 231, 219, .055); border: 1px solid var(--line-d); text-align: left; }
@@ -234,18 +238,17 @@ h2 em, h3 em { font-style: normal; white-space: nowrap; color: var(--red-d); }
 .price b { font-weight: 400; }
 .rub { margin-left: -.02em; font: 600 .5em/1 var(--f-body); }
 .price s { font: 600 20px/1 var(--f-body); opacity: .55; }
-.price__alt { margin-top: 10px; font: 700 11px/1.5 var(--f-body); letter-spacing: .1em; text-transform: uppercase; opacity: .78; }
+/* цена в валюте: суммы в плашках, подпись рядом */
+.alt { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 14px; font: 600 13.5px/1.2 var(--f-body); }
+.alt span { opacity: .75; }
+.alt b { padding: 7px 13px 5px; border: 1px solid rgba(240, 231, 219, .42); border-radius: 999px; font: 400 23px/1 var(--f-display); }
+.tc--cream .alt b { border-color: rgba(14, 10, 11, .32); }
 .tc__desc { margin-top: 14px; padding-bottom: 18px; border-bottom: 1px solid var(--line-d); font: 600 17px/1.45 var(--f-body); }
 .tc--cream .tc__desc { border-color: var(--line-l); }
 .tc .checks { margin: 18px 0 26px; gap: 12px; }
 .tc .checks li { font-size: 16px; line-height: 1.42; color: inherit; }
-.tc--wine .checks li::before { background: linear-gradient(180deg, #FFFFFF 0%, #E6DACA 100%); box-shadow: none; }
-.tc--wine .checks li::after { border-color: var(--cta); }
 /* чего в тарифе нет */
 .tc .checks li.off { text-decoration: line-through; opacity: .42; }
-.tc .checks li.off::before { background: none; border: 1.5px solid currentColor; box-shadow: none; }
-.tc .checks li.off::after { left: 6px; top: 8px; width: 10px; height: 10px; border: 0; transform: none;
-  background: linear-gradient(45deg, transparent 44%, currentColor 44%, currentColor 56%, transparent 56%), linear-gradient(-45deg, transparent 44%, currentColor 44%, currentColor 56%, transparent 56%); }
 .new {
   position: relative; top: -1px; display: inline-block; margin-left: 4px; padding: 1px 6px 2px;
   border: 1px solid currentColor; border-radius: 999px;
