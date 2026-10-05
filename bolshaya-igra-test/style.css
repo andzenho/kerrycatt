@@ -285,19 +285,36 @@ h2 em, h3 em { font-style: normal; white-space: nowrap; color: var(--red-d); }
 .tc .checks li.off::after { background: currentColor; -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round'%3E%3Cpath d='M3.6 3.6l6.8 6.8M10.4 3.6l-6.8 6.8'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round'%3E%3Cpath d='M3.6 3.6l6.8 6.8M10.4 3.6l-6.8 6.8'/%3E%3C/svg%3E"); }
 
 /* Кейс */
-.case { margin-top: 26px; padding: 20px 18px 18px; border-radius: 24px; background: rgba(240, 231, 219, .055); border: 1px solid var(--line-d); text-align: left; }
-.case__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.case__name { font: 400 32px/1 var(--f-display); text-transform: uppercase; color: var(--red-d); }
-.pill { padding: 7px 11px 6px; border-radius: 8px; background: var(--cream); color: var(--ink); font: 800 10px/1 var(--f-body); letter-spacing: .14em; text-transform: uppercase; }
-.case__text { margin-top: 12px; font-size: 16.5px; color: var(--on-d); }
-.case__text b { color: var(--red-d); }
+/* карусель кейсов: в карточке шапка с именем и фото, «Было» и «Стало», рилсы с просмотрами, сообщения из чата */
 .cases h2 em { white-space: normal; }
-.cases__grid { display: grid; gap: 18px; margin-top: 34px; }
-.cases .case { margin-top: 0; }
-.case .pill { display: inline-block; margin-top: 16px; }
+.cases__nav { display: flex; justify-content: center; gap: 10px; margin-top: 24px; }
+.cases__row {
+  display: grid; grid-auto-flow: column; grid-auto-columns: 92%; gap: 12px; align-items: start;
+  margin: 20px calc(var(--gutter) * -1) 0; padding: 0 var(--gutter) 10px;
+  overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); scrollbar-width: none;
+}
+.cases__row::-webkit-scrollbar { display: none; }
+.case { scroll-snap-align: start; min-width: 0; padding: 22px 18px 20px; border-radius: 26px; background: rgba(240, 231, 219, .055); border: 1px solid var(--line-d); text-align: left; }
+.case__head { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+.case__name { font: 400 40px/1 var(--f-display); text-transform: uppercase; color: var(--red-d); }
+.case__handle { display: inline-block; margin-top: 9px; font: 700 14.5px/1.2 var(--f-body); color: var(--cream); text-decoration: underline; text-underline-offset: 3px; }
+.case__who { margin-top: 6px; font-size: 14.5px; color: rgba(240, 231, 219, .62); }
+.case__ava { flex: none; width: 88px; height: 88px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(240, 231, 219, .3); }
+.pill { padding: 7px 11px 6px; border-radius: 8px; background: var(--cream); color: var(--ink); font: 800 10px/1 var(--f-body); letter-spacing: .14em; text-transform: uppercase; }
 .pill--red { background: linear-gradient(180deg, #B8243A 0%, #7A1425 100%); color: #FFF8EE; }
-.case .case__text { margin-top: 10px; }
-.case__shot { aspect-ratio: 16 / 8; margin-top: 16px; border-radius: 14px; background: linear-gradient(155deg, #1B1416 0%, #0B0708 100%); border: 1px dashed rgba(240, 231, 219, .25); }
+.case .pill { display: inline-block; margin-top: 20px; }
+.case__text { margin-top: 10px; font-size: 16.5px; color: var(--on-d); }
+.case__list { display: grid; gap: 8px; margin-top: 10px; }
+.case__list li { position: relative; padding-left: 24px; font-size: 16.5px; line-height: 1.45; color: var(--on-d); }
+.case__list li::before { content: "—"; position: absolute; left: 0; color: rgba(240, 231, 219, .5); }
+.case__text b, .case__list b { color: #FFF8EE; font-weight: 800; }
+.case__sub { margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--line-d); font: 700 11.5px/1.4 var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: rgba(240, 231, 219, .7); }
+.case__reels { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 12px; margin-top: 14px; }
+.case__reels img { width: 100%; aspect-ratio: 9 / 14; object-fit: cover; object-position: 50% 0; border-radius: 16px; border: 1px solid rgba(240, 231, 219, .2); }
+.case__reels p { margin-top: 9px; font: 700 10.5px/1.3 var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: rgba(240, 231, 219, .75); }
+.case__reels b { display: block; margin-bottom: 3px; font: 400 28px/1 var(--f-display); letter-spacing: 0; color: #FFF8EE; }
+.case__chat { display: grid; gap: 10px; margin-top: 14px; }
+.case__chat img { width: 100%; border-radius: 14px; }
 
 /* ───────── 6. Игра изнутри ───────── */
 .shots {
@@ -432,7 +449,11 @@ details p { padding: 0 16px 18px; font-size: 16.5px; color: var(--on-d); }
   .after-hero .sheet { display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; column-gap: 56px; padding: 48px 52px 60px; border-radius: 40px; }
   .offer h2 { font-size: min(36px, 3.2vw); }
   .offer__goals { margin-top: 0; padding-top: 0; border-top: 0; }
-  .cases__grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .cases__row { grid-auto-columns: 100%; gap: 20px; margin-inline: 0; padding-inline: 0; scroll-padding-inline: 0; }
+  .case { padding: 30px 30px 28px; }
+  .case__ava { width: 104px; height: 104px; }
+  .case__reels { grid-template-columns: repeat(4, 1fr); }
+  .case__reels b { font-size: 26px; }
   .why__answer { max-width: 860px; margin-inline: auto; padding: 32px 36px; }
   .pair { grid-template-columns: 1fr 1fr; gap: 16px; max-width: 860px; margin-inline: auto; }
   .reels { margin-top: 64px; }

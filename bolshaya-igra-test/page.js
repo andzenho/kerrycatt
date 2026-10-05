@@ -78,9 +78,25 @@
     });
   }
 
+  /* — Карусель кейсов: стрелки листают на одну карточку — */
+  function carousels() {
+    $$("[data-car]").forEach(function (car) {
+      var row = car.querySelector("[data-car-row]");
+      if (!row) return;
+      $$("[data-car-go]", car).forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var card = row.firstElementChild; if (!card) return;
+          var gap = parseFloat(getComputedStyle(row).columnGap) || 12;
+          row.scrollBy({ left: (card.getBoundingClientRect().width + gap) * Number(btn.getAttribute("data-car-go")), behavior: "smooth" });
+        });
+      });
+    });
+  }
+
   function init() {
     nbsp(document.body);
     reels();
+    carousels();
     tick();
     setInterval(tick, 1000);
   }

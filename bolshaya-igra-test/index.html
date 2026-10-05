@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Herr+Von+Muellerhoff&family=Manrope:wght@400;500;600;700;800&family=Oranienbaum&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=59">
+<link rel="stylesheet" href="style.css?v=60">
 </head>
 <body>
 
@@ -305,23 +305,58 @@
 <section class="sec sec--line cases">
   <div class="wrap col">
     <h2>Что получилось у участниц <em>первого потока?</em></h2>
-    <div class="cases__grid">
-      <article class="case">
-        <p class="case__name">Сайхо</p>
-        <span class="pill">Было</span>
-        <p class="case__text">Пришла со 140 подписчиками и ни разу в жизни не снимала рилс</p>
-        <span class="pill pill--red">Стало</span>
-        <p class="case__text">Выложила первый рилс на второй день Игры и написала в чате «Это мой первый рилс за всю мою жизнь». За месяц набрала <b>474 тысячи просмотров</b> и выросла до <b>543 подписчиков</b></p>
-        <div class="case__shot slot" data-slot="case-saikho" data-label="скрин профиля и статистики"></div>
-      </article>
-      <article class="case">
-        <p class="case__name">Маша</p>
-        <span class="pill">Было</span>
-        <p class="case__text">Пришла с 747 подписчиками</p>
-        <span class="pill pill--red">Стало</span>
-        <p class="case__text">Выложила 43 ролика, за месяц набрала <b>251 тысячу просмотров</b> и выросла до <b>2.166 подписчиков</b></p>
-        <div class="case__shot slot" data-slot="case-masha" data-label="скрин профиля и статистики"></div>
-      </article>
+    <div class="cases__car" data-car>
+      <div class="cases__nav">
+        <button type="button" class="arrow arrow--prev" data-car-go="-1" aria-label="Предыдущий кейс"></button>
+        <button type="button" class="arrow" data-car-go="1" aria-label="Следующий кейс"></button>
+      </div>
+      <div class="cases__row" data-car-row>
+        <article class="case">
+          <header class="case__head">
+            <div>
+              <p class="case__name">Сайхо</p>
+              <a class="case__handle" href="https://www.instagram.com/d_saikho/" target="_blank" rel="noopener">@d_saikho</a>
+              <p class="case__who">— фармацевт из Москвы</p>
+            </div>
+            <img class="case__ava" src="../assets/case-saikho-ava.webp" alt="Сайхо" width="240" height="240" loading="lazy">
+          </header>
+          <span class="pill">Было</span>
+          <p class="case__text">Пришла со 140 подписчиками и ни разу в жизни не снимала рилс</p>
+          <span class="pill pill--red">Стало</span>
+          <ul class="case__list">
+            <li>Выложила первый рилс на второй день Игры и написала в чате «Это мой первый рилс за всю мою жизнь»</li>
+            <li>За месяц набрала <b>474 тысячи просмотров</b></li>
+            <li>Выросла до <b>543 подписчиков</b></li>
+          </ul>
+          <p class="case__sub">Её рилсы</p>
+          <ul class="case__reels">
+            <li><img src="../assets/case-saikho-r1.webp" alt="Рилс Сайхо, 248 тысяч просмотров" width="464" height="723" loading="lazy"><p><b>248 тыс.</b>просмотров</p></li>
+            <li><img src="../assets/case-saikho-r2.webp" alt="Рилс Сайхо, 191 тысяча просмотров" width="750" height="1342" loading="lazy"><p><b>191 тыс.</b>просмотров</p></li>
+            <li><img src="../assets/case-saikho-r3.webp" alt="Рилс Сайхо, 113 тысяч просмотров" width="464" height="723" loading="lazy"><p><b>113 тыс.</b>просмотров</p></li>
+            <li><img src="../assets/case-saikho-r4.webp" alt="Рилс Сайхо, 30 тысяч просмотров" width="672" height="1197" loading="lazy"><p><b>30 тыс.</b>просмотров</p></li>
+          </ul>
+          <p class="case__sub">Сайхо в чате Игры</p>
+          <div class="case__chat">
+            <img src="../assets/case-saikho-chat1.webp" alt="Сообщение Сайхо в чате Игры: рилс набрал 47 тысяч просмотров" width="774" height="190" loading="lazy">
+            <img src="../assets/case-saikho-chat2.webp" alt="Сообщение Сайхо в чате Игры: ролик получил 15 тысяч просмотров и 570 лайков" width="914" height="152" loading="lazy">
+          </div>
+        </article>
+        <article class="case">
+          <header class="case__head">
+            <div>
+              <p class="case__name">Маша</p>
+            </div>
+          </header>
+          <span class="pill">Было</span>
+          <p class="case__text">Пришла с 747 подписчиками</p>
+          <span class="pill pill--red">Стало</span>
+          <ul class="case__list">
+            <li>Выложила 43 ролика</li>
+            <li>За месяц набрала <b>251 тысячу просмотров</b></li>
+            <li>Выросла до <b>2.166 подписчиков</b></li>
+          </ul>
+        </article>
+      </div>
     </div>
     <a class="btn btn--big" href="#tariffs">Принять участие</a>
   </div>
@@ -347,7 +382,7 @@
   <a class="btn btn--sm" href="#tariffs">Принять участие</a>
 </div>
 
-<script src="page.js?v=25"></script>
+<script src="page.js?v=26"></script>
 <script src="../bolshaya-igra/tariff-forms.js?v=20261005c"></script>
 </body>
 </html>
