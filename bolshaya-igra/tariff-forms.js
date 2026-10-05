@@ -99,7 +99,7 @@
   var V = VARIANTS[VKEY];
   // Страницы с тремя тарифами: условие оплаты одно на страницу, тариф выбирают кнопкой в карточке (data-bg-tariff).
   var MULTI = /bolshaya-igra-tarify-rassrochka/.test(PATH) ? { self: "selfhalf", team: "half", close: "closehalf" } :
-    /bolshaya-igra-tarify/.test(PATH) ? { self: "self", team: "full", close: "close" } : null;
+    /bolshaya-igra-(tarify|test)/.test(PATH) ? { self: "self", team: "full", close: "close" } : null;
   var STORE = "bg_lead_q";
 
   // С 03.10 на лендинге один тариф. Чтобы вернуть выбор, добавь тарифы сюда и ссылки в CONFIG.pay.

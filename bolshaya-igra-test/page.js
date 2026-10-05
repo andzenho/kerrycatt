@@ -17,22 +17,16 @@
        что там должно быть, команда ещё не решила. Окно участниц Разминки (04–09.11) сюда не входит. — */
   var WINDOWS = [
     { until: "2026-10-19T23:59:59+03:00", first: true },
-    { until: "2026-11-14T23:59:59+03:00", price: "29 990", inst: "Платишь целиком или берёшь рассрочку от 2 500 ₽ в месяц",
-      due: "С 15 ноября 34 990 ₽", hero: "14 ноября цена вырастет", label: "До повышения цены" },
-    { until: "2026-11-22T23:59:59+03:00", price: "34 990", inst: "Платишь целиком или берёшь рассрочку от 2 916 ₽ в месяц",
-      due: "", hero: "Продажи закрываются 22 ноября", label: "До закрытия продаж" }
+    { until: "2026-11-14T23:59:59+03:00", price: "29 990", hero: "14 ноября цена вырастет", label: "До повышения цены" },
+    { until: "2026-11-22T23:59:59+03:00", price: "34 990", hero: "Продажи закрываются 22 ноября", label: "До закрытия продаж" }
   ];
   var applied = null;
   function apply(w) {
     if (applied === w) return;
     applied = w;
-    $$("[data-first]").forEach(function (el) { el.hidden = !w.first; });   // выгоды первого окна
-    $$("[data-later]").forEach(function (el) { el.hidden = !!w.first; });  // строка про 45 дней доступа
     if (w.first) return;
-    set("[data-price]", w.price);
-    set("[data-alt]", "");            // цены в валюте для следующих окон не заданы
-    set("[data-inst]", w.inst);
-    set("[data-due]", w.due);
+    set("[data-price]", w.price);     // цена «В команде»; остальные тарифы по окнам не заданы
+    set("[data-due]", "");
     set("[data-hero-line]", w.hero);
     set("[data-timer-label]", w.label);
     set("[data-bar-label]", w.label);
