@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Herr+Von+Muellerhoff&family=Manrope:wght@400;500;600;700;800&family=Oranienbaum&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=69">
+<link rel="stylesheet" href="style.css?v=70">
 </head>
 <body>
 
@@ -152,19 +152,18 @@
 <section class="sec sec--line">
   <div class="wrap col col--wide">
     <h2>Как Игра выглядит <em>изнутри?</em></h2>
-    <div class="shots">
-      <figure class="shot" data-slot="inside-zadanie">
-        <div class="shot__ph"><span>здесь будет скрин задания</span></div>
-        <figcaption>Задание</figcaption>
-      </figure>
-      <figure class="shot" data-slot="inside-razbor">
-        <div class="shot__ph"><span>здесь будет скрин разбора</span></div>
-        <figcaption>Разбор опытного эксперта по контенту</figcaption>
-      </figure>
-      <figure class="shot" data-slot="inside-chat">
-        <div class="shot__ph"><span>здесь будут скрины чата</span></div>
-        <figcaption>Чат первого потока</figcaption>
-      </figure>
+    <div class="inside" data-car>
+      <div class="cases__nav">
+        <button type="button" class="arrow arrow--prev" data-car-go="-1" aria-label="Назад"></button>
+        <button type="button" class="arrow" data-car-go="1" aria-label="Вперёд"></button>
+      </div>
+      <ul class="inside__row" data-car-row>
+        <li class="inside__item"><p class="inside__cap">Задание</p><img src="../assets/inside-1.webp" alt="Задание дня из Игры: «Мнение, с которым ты не согласна»" width="643" height="777" loading="lazy"></li>
+        <li class="inside__item"><p class="inside__cap">Поддержка в чате</p><img src="../assets/inside-2.webp" alt="Чат Игры: эксперт ждёт работы участниц и отвечает на вопросы" width="944" height="872" loading="lazy"></li>
+        <li class="inside__item"><p class="inside__cap">Разборы рилсов от эксперта</p><img src="../assets/inside-3.webp" alt="Чат Игры: эксперт разбирает статистику рилса участницы" width="946" height="930" loading="lazy"></li>
+        <li class="inside__item"><p class="inside__cap">Урок от Карины</p><img src="../assets/inside-4.webp" alt="Урок 2 от Карины «Как снимать рилсы по методу Яппинга?»" width="844" height="924" loading="lazy"></li>
+        <li class="inside__item"><p class="inside__cap">Доп. материалы</p><img src="../assets/inside-5.webp" alt="Гайд «Как реагировать на хейт?»" width="588" height="770" loading="lazy"></li>
+      </ul>
     </div>
     <a class="btn btn--big" href="#tariffs">Принять участие</a>
   </div>
