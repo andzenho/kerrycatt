@@ -4,7 +4,7 @@
    Если отправка не прошла, заявка сохраняется в браузере и уходит при следующем заходе.
    После заявки показываем экран оплаты: галка оферты и две кнопки (рубли и зарубежные методы).
    Один файл на все страницы: основную, бронь, внутреннюю рассрочку, по две страницы тарифов «В своём темпе»
-   и «Ближний круг» и две страницы с тремя тарифами сразу (см. VARIANTS и MULTI).
+   и «Ближний круг» и страницы с тремя тарифами сразу: полная оплата, оплата частями и бронь (см. VARIANTS и MULTI).
    Не зависит от бандла. */
 (function () {
   if (window.__bgTariffForms) return; window.__bgTariffForms = true;
@@ -33,6 +33,27 @@
     },
     bron: {
       tariff: "В команде",
+      type: "бронь",
+      rub: "https://anny-nizh.getplatinum.ru/payment/a2EJYy5",
+      intl: "https://app.lava.top/products/ea6fc160-07f7-48f1-8c0d-53a2d76294d9",
+      rubHint: "2 000 ₽ · бронь места",
+      intlHint: "$24 или €22 · карты зарубежных банков",
+      lead: "Оставь контакты, и сразу откроется оплата брони. Если будут вопросы, моя команда ответит.",
+      pay: "Бронь фиксирует цену и входит в стоимость участия. Выбери, как удобнее оплатить."
+    },
+    // бронь на любой тариф: сумма и ссылки те же, в таблицу уходит выбранный тариф
+    selfbron: {
+      tariff: "В своём темпе",
+      type: "бронь",
+      rub: "https://anny-nizh.getplatinum.ru/payment/a2EJYy5",
+      intl: "https://app.lava.top/products/ea6fc160-07f7-48f1-8c0d-53a2d76294d9",
+      rubHint: "2 000 ₽ · бронь места",
+      intlHint: "$24 или €22 · карты зарубежных банков",
+      lead: "Оставь контакты, и сразу откроется оплата брони. Если будут вопросы, моя команда ответит.",
+      pay: "Бронь фиксирует цену и входит в стоимость участия. Выбери, как удобнее оплатить."
+    },
+    closebron: {
+      tariff: "Ближний круг",
       type: "бронь",
       rub: "https://anny-nizh.getplatinum.ru/payment/a2EJYy5",
       intl: "https://app.lava.top/products/ea6fc160-07f7-48f1-8c0d-53a2d76294d9",
@@ -99,6 +120,7 @@
   var V = VARIANTS[VKEY];
   // Страницы с тремя тарифами: условие оплаты одно на страницу, тариф выбирают кнопкой в карточке (data-bg-tariff).
   var MULTI = /bolshaya-igra-tarify-rassrochka/.test(PATH) ? { self: "selfhalf", team: "half", close: "closehalf" } :
+    /bolshaya-igra-bron/.test(PATH) ? { self: "selfbron", team: "bron", close: "closebron" } :
     /bolshaya-igra-(tarify|test)/.test(PATH) ? { self: "self", team: "full", close: "close" } : null;
   var STORE = "bg_lead_q";
 

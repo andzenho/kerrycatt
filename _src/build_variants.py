@@ -519,8 +519,13 @@ def build_multi(name, v):
     print(name, len(p.s))
 
 
+# С 05.10 эти три страницы собираются в новом дизайне скриптом _src/build_bi2.py, здесь их не трогаем.
+NEW_DESIGN = {'bolshaya-igra-bron', 'bolshaya-igra-tarify', 'bolshaya-igra-tarify-rassrochka'}
+
 if __name__ == '__main__':
     for name, v in VARIANTS.items():
-        build(name, v)
+        if name not in NEW_DESIGN:
+            build(name, v)
     for name, v in MULTI.items():
-        build_multi(name, v)
+        if name not in NEW_DESIGN:
+            build_multi(name, v)
