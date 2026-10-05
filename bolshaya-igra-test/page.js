@@ -50,14 +50,17 @@
     $$("[data-bar-timer]").forEach(function (el) { el.textContent = d + "д " + pad(h) + ":" + pad(m) + ":" + pad(s); });
   }
 
-  /* — Висячие предлоги: короткое слово приклеиваем к следующему — */
+  /* — Висячие предлоги: любое слово до трёх букв приклеиваем к следующему, число к слову после него, тире к слову перед ним.
+       Замену повторяем, пока текст меняется: иначе в цепочке «и в», «а не на» склеивалось только первое слово. — */
   function nbsp(root) {
-    var short = "а|и|в|о|у|к|с|я|не|но|то|за|на|по|из|от|до|со|во|же|ли|бы|их|мы|ты|он|про|для|это|как|что|чем|или";
-    var re1 = new RegExp("(^|[\\s(«—])(" + short + ")\\s+", "gi"), re2 = /(\s)(\d+)\s+/g;
-    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), n;
+    var re1 = /(^|[\s(«—])([A-Za-zА-Яа-яЁё]{1,3})[ \t\n\r]+/g;
+    var re2 = /(\d)[ \t\n\r]+(?=[A-Za-zА-Яа-яЁё])/g, re3 = /[ \t\n\r]+—/g;
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), n, v, prev;
     while ((n = w.nextNode())) {
       if (!n.nodeValue.trim() || /^(SCRIPT|STYLE)$/.test(n.parentNode.nodeName)) continue;
-      n.nodeValue = n.nodeValue.replace(re1, "$1$2 ").replace(re1, "$1$2 ").replace(re2, "$1$2 ");
+      v = n.nodeValue;
+      do { prev = v; v = v.replace(re1, "$1$2\u00a0"); } while (v !== prev);
+      n.nodeValue = v.replace(re2, "$1\u00a0").replace(re3, "\u00a0—");
     }
   }
 
