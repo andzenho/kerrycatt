@@ -7,6 +7,10 @@
 Тариф «В своём темпе» (даунсейл: задания и уроки, без куратора, эфиров и новых пунктов командного тарифа):
   /bolshaya-igra-sam/              полная оплата
   /bolshaya-igra-sam-rassrochka/   внутренняя рассрочка, первый платёж
+Тариф «Ближний круг» (всё из «В команде» плюс закрытый чат с Кариной, продюсеры и модуль по UGC; меняется карточка тарифа):
+  /bolshaya-igra-krug/             полная оплата
+  /bolshaya-igra-krug-rassrochka/  внутренняя рассрочка, первый платёж
+Полная оплата тарифа «В команде» идёт через основной лендинг /bolshaya-igra/.
 
 После любой правки основного лендинга запусти: python3 _src/build_variants.py
 Ссылки оплаты, суммы под кнопками и тексты формы лежат в bolshaya-igra/tariff-forms.js (VARIANTS)."""
@@ -72,6 +76,28 @@ VARIANTS = {
         'faq': 'Оплату можно разделить на два платежа. Первый платёж 7 495 ₽, а если карта не из России, то $90 или €80. '
                'Сумму и дату второго платежа подтвердит моя команда.',
     },
+    'bolshaya-igra-krug': {
+        'close': True,
+        'title': 'Большая Игра: ближний круг — Карина',
+        'label': '',
+        'price': '49&nbsp;990&nbsp;₽',
+        'old': '69&nbsp;990&nbsp;₽',
+        'alt': 'или $599 \\u002F €539 картой не из России',
+        'note': '',
+        'faq': 'Сейчас участие стоит 49 990 ₽, а если карта не из России, то $599 или €539. '
+               'Оплатить можно сразу после заявки. Если остались вопросы, моя команда ответит.',
+    },
+    'bolshaya-igra-krug-rassrochka': {
+        'close': True,
+        'title': 'Большая Игра: ближний круг, оплата частями — Карина',
+        'label': 'первый платёж из двух',
+        'price': '24&nbsp;995&nbsp;₽',
+        'old': '',
+        'alt': 'или $300 \\u002F €270 картой не из России',
+        'note': 'Оплата делится на два платежа. Сумму и дату второго платежа подтвердит менеджер.',
+        'faq': 'Оплату можно разделить на два платежа. Первый платёж 24 995 ₽, а если карта не из России, то $300 или €270. '
+               'Сумму и дату второго платежа подтвердит моя команда.',
+    },
 }
 
 
@@ -121,18 +147,25 @@ ITEM = ('<span style=\\"display:flex;gap:12px;align-items:flex-start;font-size:1
         'color:rgba(246,238,226,.9);\\"><span style=\\"flex:0 0 auto;width:20px;height:20px;background:#F6EEE2;'
         'color:#1F1F1F;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;'
         'margin-top:2px;\\">✓' + END + '%s' + END + '\\n')
-BADGE = ('<span style=\\"display:inline-block;margin-left:4px;padding:1px 6px;border:1px solid rgba(227,118,139,.55);'
-         "border-radius:999px;color:#E3768B;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;"
-         'letter-spacing:.1em;line-height:1.4;text-transform:uppercase;white-space:nowrap;vertical-align:middle;'
-         'position:relative;top:-1px;\\">новинка' + END)
+BADGE_CSS = ('display:inline-block;margin-left:4px;padding:1px 6px;border:1px solid rgba(227,118,139,.55);'
+             "border-radius:999px;color:#E3768B;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;"
+             'letter-spacing:.1em;line-height:1.4;text-transform:uppercase;white-space:nowrap;vertical-align:middle;'
+             'position:relative;top:-1px;')
 
 
-def new_item(text):
-    """Пункт карточки с маленькой меткой «новинка» справа от текста; метка держится за последнее слово."""
+def badge(text, extra=''):
+    return '<span style=\\"' + BADGE_CSS + extra + '\\">' + text + END
+
+
+BADGE = badge('новинка')
+
+
+def new_item(text, mark=BADGE):
+    """Пункт карточки с маленькой меткой справа от текста (по умолчанию «новинка»); метка держится за последнее слово."""
     nb = '&nbsp;'
     i = max(text.rfind(' '), text.rfind(nb))
     j = i + (len(nb) if text.startswith(nb, i) else 1)
-    return ITEM % ('<span>' + text[:j] + '<span style=\\"white-space:nowrap;\\">' + text[j:] + ' ' + BADGE + END + END)
+    return ITEM % ('<span>' + text[:j] + '<span style=\\"white-space:nowrap;\\">' + text[j:] + ' ' + mark + END + END)
 
 
 CARD_FIRST = new_item('Неделя погружения до&nbsp;старта: как дойти до&nbsp;30&nbsp;роликов и&nbsp;не&nbsp;слиться')
@@ -202,11 +235,64 @@ def to_self(p):
            + '<span style=\\"' + NOTE + '\\">Без куратора и&nbsp;группы.' + END + '\\n' + p.s[b + len(CARD_LAST):])
 
 
+# Карточка тарифа «Ближний круг», тексты по макету тарифов от 05.10. Пункт: текст и метка (NEW, ONLY или пусто).
+NEW = badge('новое')
+ONLY = badge('только здесь', 'background:#E3768B;border-color:#E3768B;color:#1F1F1F;')
+CLOSE_ITEMS = [
+    ('30 заданий и&nbsp;уроки по&nbsp;методу яппинга', ''),
+    ('Модуль «Дисциплина»: как дойти до&nbsp;30&nbsp;роликов и&nbsp;не&nbsp;слиться', NEW),
+    ('ИИ-ассистент: подскажет тему, идеи и&nbsp;первую фразу ролика', NEW),
+    ('Шаблоны профиля и&nbsp;контент-плана, банк хуков', NEW),
+    ('Первая неделя: куратор помогает найти и&nbsp;утвердить твою тему', NEW),
+    ('Куратор разбирает каждый твой ролик', ''),
+    ('По&nbsp;понедельникам&nbsp;— план работы на&nbsp;неделю', NEW),
+    ('2&nbsp;эфира с&nbsp;Кариной: она отвечает на&nbsp;ваши вопросы', ''),
+    ('Чат участниц потока: отдельно для&nbsp;экспертного и&nbsp;лайфстайл-блога', ''),
+    ('Модуль «Ритм на&nbsp;год»: как снимать после Игры весь год без&nbsp;выгорания', NEW),
+    ('Закрытый чат с&nbsp;Кариной: раз в&nbsp;неделю она голосом отвечает на&nbsp;ваши вопросы', NEW),
+    ('Продюсеры Карины отвечают в&nbsp;чате между её&nbsp;голосовыми', NEW),
+    ('Модуль по&nbsp;UGC: заработок на&nbsp;контенте для&nbsp;брендов', ONLY),
+]
+CLOSE_PILL = ('<span style=\\"display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:999px;'
+              "background:#F6EEE2;color:#1F1F1F;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;"
+              'letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;\\">UGC + максимум связи' + END)
+
+
+def to_close(p):
+    """Тариф «Ближний круг»: страница та же, что у «В команде», меняется карточка тарифа. Доступ к урокам навсегда."""
+    p.once(' Доступ к&nbsp;урокам остаётся ещё 45&nbsp;дней после игры.', '')
+    p.once('>50 мест' + END, '>20 мест' + END + '\\n' + CLOSE_PILL)
+    p.once('>В команде' + END, '>Ближний круг' + END)
+    p.once('Проходишь Игру с&nbsp;куратором и&nbsp;потоком, без&nbsp;шанса слиться',
+           'Три уровня обратной связи: Карина, её&nbsp;продюсеры и&nbsp;куратор. '
+           'Плюс модуль о&nbsp;заработке на&nbsp;контенте для&nbsp;брендов.')
+    a = p.s.find(CARD_FIRST)
+    b = p.s.find(CARD_LAST)
+    assert 0 < a < b, (p.name, 'список тарифа')
+    items = ''.join(new_item(t, m) if m else ITEM % t for t, m in CLOSE_ITEMS)
+    p.s = p.s[:a] + items + p.s[b + len(CARD_LAST):]
+    # Плашка «Доступ к урокам навсегда» здесь часть тарифа, а не бонус первого окна: показываем всегда
+    head = '<sc-if value=\\"{{ firstWindow }}\\" hint-placeholder-val=\\"{{ true }}\\">\\n'
+    tail = '<\\u002Fsc-if>\\n'
+    a = p.s.find(head)
+    b = p.s.find(tail, a)
+    assert 0 < a < b and 'Доступ к&nbsp;урокам навсегда' in p.s[a:b], (p.name, 'плашка доступа')
+    p.s = p.s[:a] + p.s[a + len(head):b] + p.s[b + len(tail):]
+
+
+BAD_SELF = ['куратор', 'Куратор', 'групп', 'Zoom', 'зум', '50 мест', 'В команде', 'ИИ-ассистент', 'планёрк', 'кружок',
+            'погружени', 'Розыгрыш', 'Чат участниц', 'урокам навсегда', '45&nbsp;дней', 'новинка']
+BAD_CLOSE = ['50 мест', 'В команде', '45&nbsp;дней', 'новинка', '$299', '24 990']
+
+
 def build(name, v):
     p = Page(name)
     if v.get('self'):
         to_self(p)
-    drop_bonus(p)
+    if v.get('close'):
+        to_close(p)
+    else:
+        drop_bonus(p)
     p.once('<script src="tariff-forms.js?v=', '<script src="../bolshaya-igra/tariff-forms.js?v=')
     p.once('<title>Большая Игра — Карина</title>',
            '<title>' + v['title'] + '</title>\n  <meta name="robots" content="noindex">')
@@ -218,8 +304,7 @@ def build(name, v):
     p.once(ALT_MAIN + END + '\\n', v['alt'] + END + '\\n' + note)
     p.once(FAQ_MAIN, v['faq'])
 
-    for bad in (['куратор', 'Куратор', 'групп', 'Zoom', 'зум', '50 мест', 'В команде', 'ИИ-ассистент', 'планёрк', 'кружок', 'погружени', 'Розыгрыш', 'Чат участниц', 'урокам навсегда', '45&nbsp;дней', 'новинка']
-                if v.get('self') else []):
+    for bad in BAD_SELF if v.get('self') else BAD_CLOSE if v.get('close') else []:
         # в коде страницы остаются служебные упоминания; проверяем только шаблон и тексты
         a = p.s.find('<x-dc'); b = p.s.find('<\\u002Fx-dc>')
         c = p.s.find('const pains'); d = p.s.find('].map(([q, a], i)')

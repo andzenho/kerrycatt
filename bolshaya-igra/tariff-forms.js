@@ -3,7 +3,8 @@
    Заявка уходит в Google Таблицу лидов (лист «Заявки Большая Игра») через Apps Script.
    Если отправка не прошла, заявка сохраняется в браузере и уходит при следующем заходе.
    После заявки показываем экран оплаты: галка оферты и две кнопки (рубли и зарубежные методы).
-   Один файл на пять страниц: основную, бронь, внутреннюю рассрочку и две страницы тарифа «В своём темпе» (см. VARIANTS).
+   Один файл на семь страниц: основную, бронь, внутреннюю рассрочку и по две страницы тарифов «В своём темпе»
+   и «Ближний круг» (см. VARIANTS).
    Не зависит от бандла. */
 (function () {
   if (window.__bgTariffForms) return; window.__bgTariffForms = true;
@@ -69,10 +70,31 @@
       intlHint: "$90 или €80 · карты зарубежных банков",
       lead: "Оставь контакты, и сразу откроется оплата первого платежа. Если будут вопросы, моя команда ответит.",
       pay: "Оплата делится на два платежа. Сейчас первый. Выбери, как удобнее оплатить."
+    },
+    close: {
+      tariff: "Ближний круг",
+      type: "полная оплата",
+      rub: "https://anny-nizh.getplatinum.ru/payment/aRVrm8t",
+      intl: "https://app.lava.top/products/3c00d727-01eb-433d-88de-b38a5e9bf51a",
+      rubHint: "49 990 ₽",
+      intlHint: "$599 или €539 · карты зарубежных банков",
+      lead: "Оставь контакты, и сразу откроется оплата. Если будут вопросы, моя команда ответит.",
+      pay: "Место можно занять сразу. Выбери, как удобнее оплатить."
+    },
+    closehalf: {
+      tariff: "Ближний круг",
+      type: "внутренняя рассрочка",
+      rub: "https://anny-nizh.getplatinum.ru/payment/zMkjs57",
+      intl: "https://app.lava.top/products/7a2f1be7-2e8b-47a1-9142-2335fd0a75b7",
+      rubHint: "24 995 ₽ · первый платёж",
+      intlHint: "$300 или €270 · карты зарубежных банков",
+      lead: "Оставь контакты, и сразу откроется оплата первого платежа. Если будут вопросы, моя команда ответит.",
+      pay: "Оплата делится на два платежа. Сейчас первый. Выбери, как удобнее оплатить."
     }
   };
   var PATH = location.pathname;
-  var VKEY = /bolshaya-igra-sam-rassrochka/.test(PATH) ? "selfhalf" : /bolshaya-igra-sam/.test(PATH) ? "self" :
+  var VKEY = /bolshaya-igra-krug-rassrochka/.test(PATH) ? "closehalf" : /bolshaya-igra-krug/.test(PATH) ? "close" :
+    /bolshaya-igra-sam-rassrochka/.test(PATH) ? "selfhalf" : /bolshaya-igra-sam/.test(PATH) ? "self" :
     /bolshaya-igra-bron/.test(PATH) ? "bron" : /bolshaya-igra-rassrochka/.test(PATH) ? "half" : "full";
   var V = VARIANTS[VKEY];
   var STORE = "bg_lead_q";
