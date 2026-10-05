@@ -46,7 +46,7 @@ h2 { font-size: clamp(40px, 11.2vw, 72px); text-align: center; }
 h3 { font-size: clamp(28px, 7.8vw, 44px); }
 h2 em, h3 em { font-style: normal; white-space: nowrap; color: var(--red-d); }
 .sheet h2 em, .sheet h3 em { color: var(--cta); }
-.sec--wine h2 em { color: #F4909D; }
+.sec--wine h2 em { color: inherit; }
 .label { font: 700 11.5px/1.4 var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: var(--on-d); }
 .lead { font: 600 clamp(18.5px, 5vw, 22px)/1.42 var(--f-body); }
 .center { text-align: center; }
