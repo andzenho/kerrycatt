@@ -237,21 +237,21 @@ h2 em, h3 em { font-style: normal; white-space: nowrap; color: var(--red-d); }
   overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); scrollbar-width: none;
 }
 .reels__row::-webkit-scrollbar { display: none; }
+.reels__row > li { scroll-snap-align: start; min-width: 0; }
 .reel {
-  position: relative; scroll-snap-align: start; aspect-ratio: 9 / 12.2; overflow: hidden;
+  position: relative; aspect-ratio: 9 / 12.2; overflow: hidden;
   border: 1px solid rgba(240, 231, 219, .24); border-radius: 22px; background: #1A1011; box-shadow: 0 26px 44px -26px rgba(0, 0, 0, .85);
 }
-/* снизу у скрина мелкий счётчик просмотров: его срезаем и ставим свой, крупный */
-.reel img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
-.reel::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 44%; background: linear-gradient(180deg, rgba(14, 10, 11, 0) 0%, rgba(14, 10, 11, .9) 100%); }
-.reel__views { position: absolute; z-index: 1; left: 14px; bottom: 13px; display: flex; flex-direction: column; align-items: flex-start; gap: 3px; text-align: left; }
-.reel__views b { font: 400 36px/.95 var(--f-display); color: #FFF8EE; }
+/* снизу у скрина мелкий счётчик просмотров: его срезаем и ставим свой, крупный, под карточкой */
+.reel img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
+.reel__views { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin: 14px 0 0 4px; text-align: left; }
+.reel__views b { font: 400 34px/.95 var(--f-display); text-transform: uppercase; color: #FFF8EE; }
 .reel__views span { font: 700 10.5px/1.2 var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: rgba(240, 231, 219, .82); }
 /* пустое место под скрин рилса */
 .reel--slot { display: flex; align-items: center; justify-content: center; padding: 16px; border: 1px dashed rgba(240, 231, 219, .36); background: rgba(240, 231, 219, .04); box-shadow: none; }
 .reel--slot::after { display: none; }
 .reel--slot span { font: 700 10.5px/1.6 var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: rgba(240, 231, 219, .6); }
-.reels__nav { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+.reels__nav { display: flex; justify-content: center; gap: 10px; margin-top: 22px; }
 .arrow {
   width: 46px; height: 46px; padding: 0; border: 1.5px solid rgba(240, 231, 219, .5); border-radius: 13px; cursor: pointer;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F0E7DB' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") center / 20px 20px no-repeat;
