@@ -11,6 +11,9 @@
   /bolshaya-igra-krug/             полная оплата
   /bolshaya-igra-krug-rassrochka/  внутренняя рассрочка, первый платёж
 Полная оплата тарифа «В команде» идёт через основной лендинг /bolshaya-igra/.
+Все три тарифа на одной странице (карточки по макету тарифов от 05.10, тариф выбирают кнопкой в карточке):
+  /bolshaya-igra-tarify/             полная оплата
+  /bolshaya-igra-tarify-rassrochka/  внутренняя рассрочка, первый платёж
 
 После любой правки основного лендинга запусти: python3 _src/build_variants.py
 Ссылки оплаты, суммы под кнопками и тексты формы лежат в bolshaya-igra/tariff-forms.js (VARIANTS)."""
@@ -319,6 +322,205 @@ def build(name, v):
     print(name, len(p.s))
 
 
+# ---------- Страницы с тремя тарифами ----------
+# Карточки пишем обычным HTML и экранируем под бандл функцией J. Тексты по макету тарифов от 05.10.
+# Суммы в валюте стоят по страницам оплаты Lava (у «В своём темпе» $180, в макете было $179).
+
+def J(html):
+    return html.replace('"', '\\"').replace('/', '\\u002F').replace('\n', '\\n')
+
+
+MONO11 = "font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;"
+TAG = ("display:inline-block;margin-left:4px;padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;"
+       'font-size:9px;font-weight:700;letter-spacing:.1em;line-height:1.4;text-transform:uppercase;white-space:nowrap;'
+       'vertical-align:middle;position:relative;top:-1px;')
+PILL = ('display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:999px;'
+        "font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.1em;"
+        'text-transform:uppercase;white-space:nowrap;')
+
+# Пункт: текст и метка ('' нет, 'new' «новое», 'only' «только здесь»). Тариф получает первые N пунктов, остальные зачёркнуты.
+ALL_ITEMS = [
+    ('30 заданий и&nbsp;уроки по&nbsp;методу яппинга', ''),
+    ('Модуль «Дисциплина»: как дойти до&nbsp;30&nbsp;роликов и&nbsp;не&nbsp;слиться', 'new'),
+    ('ИИ-ассистент: подскажет тему, идеи и&nbsp;первую фразу ролика', 'new'),
+    ('Шаблоны профиля и&nbsp;контент-плана, банк хуков', 'new'),
+    ('Первая неделя: куратор помогает найти и&nbsp;утвердить твою тему', 'new'),
+    ('Куратор разбирает каждый твой ролик', ''),
+    ('По&nbsp;понедельникам&nbsp;— план работы на&nbsp;неделю', 'new'),
+    ('2&nbsp;эфира с&nbsp;Кариной: она отвечает на&nbsp;ваши вопросы', ''),
+    ('Чат участниц потока: отдельно для&nbsp;экспертного и&nbsp;лайфстайл-блога', ''),
+    ('Модуль «Ритм на&nbsp;год»: как снимать после Игры весь год без&nbsp;выгорания', 'new'),
+    ('Закрытый чат с&nbsp;Кариной: раз в&nbsp;неделю она голосом отвечает на&nbsp;ваши вопросы', 'new'),
+    ('Продюсеры Карины отвечают в&nbsp;чате между её&nbsp;голосовыми', 'new'),
+    ('Модуль по&nbsp;UGC: заработок на&nbsp;контенте для&nbsp;брендов', 'only'),
+]
+
+DARK = dict(soft='rgba(246,238,226,.62)', line='rgba(246,238,226,.16)', text='rgba(246,238,226,.92)',
+            off='rgba(246,238,226,.36)', box='background:#F6EEE2;color:#1F1F1F;',
+            new='background:#E3768B;color:#1F1F1F;', only='background:#F6EEE2;color:#1F1F1F;')
+LIGHT = dict(soft='rgba(31,31,31,.62)', line='rgba(31,31,31,.16)', text='rgba(31,31,31,.92)',
+             off='rgba(31,31,31,.36)', box='background:#1F1F1F;color:#F6EEE2;',
+             new='background:#C05B3B;color:#F6EEE2;', only='background:#1F1F1F;color:#F6EEE2;')
+
+# Порядок карточек как в макете. full и half: цена, зачёркнутая цена, сумма для карт не из России.
+CARDS = [
+    dict(key='self', n=4, bg='#1F1F1F', fg='#F6EEE2', th=DARK,
+         kicker='в&nbsp;своём темпе', pill='', title='Самостоятельно',
+         desc='Проходишь Игру по&nbsp;урокам и&nbsp;заданиям сама, без&nbsp;куратора и&nbsp;чата.',
+         full=('14&nbsp;990&nbsp;₽', '', '$180 / €160'), half=('7&nbsp;495&nbsp;₽', '', '$90 / €80'),
+         access=dict(full='Доступ к&nbsp;урокам 2&nbsp;месяца', half='Доступ к&nbsp;урокам 2&nbsp;месяца'),
+         btn='background:transparent;border:1.5px solid rgba(246,238,226,.7);color:#F6EEE2;',
+         hover='background:rgba(246,238,226,.14);'),
+    dict(key='team', n=10, bg='#8A2E3E', fg='#F6EEE2', th=DARK,
+         kicker='50&nbsp;мест', pill=('выбирают чаще', 'background:#F6EEE2;color:#1F1F1F;'), title='В&nbsp;команде',
+         desc='Куратор смотрит каждый твой ролик и&nbsp;говорит, что усилить. Каждый понедельник&nbsp;— план на&nbsp;неделю.',
+         full=('24&nbsp;990&nbsp;₽', '44&nbsp;990&nbsp;₽', '$299 / €269'), half=('12&nbsp;485&nbsp;₽', '', '$150 / €135'),
+         # «навсегда» по оферте даётся за полную оплату в первом окне; при оплате частями действует срок из Приложения 1
+         access=dict(full='Доступ к&nbsp;урокам навсегда', half='Доступ к&nbsp;урокам 45&nbsp;дней после Игры'),
+         first_window_only=True,
+         btn='background:#F6EEE2;color:#1F1F1F;', hover='background:#FFFFFF;'),
+    dict(key='close', n=13, bg='#F6EEE2', fg='#1F1F1F', th=LIGHT,
+         kicker='20&nbsp;мест', pill=('UGC + максимум связи', 'background:#8A2E3E;color:#F6EEE2;'), title='Ближний круг',
+         desc='Три уровня обратной связи: Карина, её&nbsp;продюсеры и&nbsp;куратор. '
+              'Плюс модуль о&nbsp;заработке на&nbsp;контенте для&nbsp;брендов.',
+         full=('49&nbsp;990&nbsp;₽', '69&nbsp;990&nbsp;₽', '$599 / €539'), half=('24&nbsp;995&nbsp;₽', '', '$300 / €270'),
+         access=dict(full='Доступ к&nbsp;урокам навсегда', half='Доступ к&nbsp;урокам навсегда'),
+         btn='background:#8A2E3E;color:#F6EEE2;', hover='background:#6F2331;'),
+]
+
+
+def card_item(text, mark, on, th):
+    row = 'display:flex;gap:12px;align-items:flex-start;font-size:16px;line-height:1.45;'
+    box = ('flex:0 0 auto;width:20px;height:20px;display:flex;align-items:center;justify-content:center;'
+           'font-size:12px;font-weight:800;margin-top:2px;')
+    if not on:
+        return ('<span style="%scolor:%s;"><span style="%sbox-sizing:border-box;border:1px solid %s;">×</span>'
+                '<span style="text-decoration:line-through;">%s</span></span>\n' % (row, th['off'], box, th['off'], text))
+    if mark:
+        nb = '&nbsp;'
+        i = max(text.rfind(' '), text.rfind(nb))
+        j = i + (len(nb) if text.startswith(nb, i) else 1)
+        label = 'новое' if mark == 'new' else 'только здесь'
+        text = ('%s<span style="white-space:nowrap;">%s <span style="%s%s">%s</span></span>'
+                % (text[:j], text[j:], TAG, th[mark], label))
+    return ('<span style="%scolor:%s;"><span style="%s%s">✓</span><span>%s</span></span>\n'
+            % (row, th['text'], box, th['box'], text))
+
+
+def card(c, mode):
+    th = c['th']
+    price, old, alt = c[mode]
+    out = ('<div style="flex:1 1 320px;position:relative;display:flex;flex-direction:column;gap:18px;background:%s;color:%s;'
+           'border-radius:18px;padding:clamp(24px,3vw,32px);box-shadow:0 24px 50px -26px rgba(31,31,31,.8);">\n'
+           % (c['bg'], c['fg']))
+    pill = '<span style="%s%s">%s</span>' % (PILL, c['pill'][1], c['pill'][0]) if c['pill'] else ''
+    out += ('<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:24px;">'
+            '<span style="%scolor:%s;">%s</span>%s</div>\n' % (MONO11, th['soft'], c['kicker'], pill))
+    out += ("<span style=\"font-family:'Unbounded',sans-serif;font-size:clamp(22px,5.6vw,26px);font-weight:800;"
+            'line-height:1.1;letter-spacing:-.02em;">%s</span>\n' % c['title'])
+    if mode == 'half':
+        out += '<span style="margin-bottom:-10px;%scolor:%s;">первый платёж из двух</span>\n' % (MONO11, th['soft'])
+    out += ('<div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">'
+            "<span style=\"font-family:'Unbounded',sans-serif;font-weight:800;font-size:clamp(26px,6vw,32px);"
+            'letter-spacing:-.03em;white-space:nowrap;">%s</span>' % price)
+    if old:
+        out += ('<span style="font-weight:700;font-size:clamp(15px,3.8vw,18px);text-decoration:line-through;'
+                'color:%s;white-space:nowrap;">%s</span>' % (th['soft'], old))
+    out += '</div>\n'
+    # когда три карточки встают в ряд (экран от 1084px), строку с валютой и описание выравниваем по высоте,
+    # чтобы списки во всех карточках начинались с одной линии
+    row3 = 'min-height:clamp(0px,(100vw - 1083px)*999,%s);'
+    out += ("<span style=\"display:block;margin-top:-8px;font-family:'JetBrains Mono',monospace;font-size:12px;"
+            'line-height:1.6;letter-spacing:.1em;text-transform:uppercase;color:%s;%s">или %s картой не из России</span>\n'
+            % (th['soft'], row3 % '3.2em', alt))
+    out += ('<p style="margin:0;font-size:clamp(16px,4.2vw,17px);line-height:1.5;font-weight:600;%s">%s</p>\n'
+            % (row3 % '6em', c['desc']))
+    out += ('<div style="display:flex;flex-direction:column;gap:10px;padding-top:16px;border-top:1px solid %s;">\n'
+            % th['line'])
+    for i, (text, mark) in enumerate(ALL_ITEMS):
+        out += card_item(text, mark, i < c['n'], th)
+    out += '</div>\n'
+    plaque = ('<span style="display:block;padding:12px 14px;border:1.5px solid %s;border-radius:12px;font-size:15px;'
+              'font-weight:700;line-height:1.4;">%s</span>\n' % (th['soft'], c['access'][mode]))
+    if mode == 'full' and c.get('first_window_only'):
+        plaque = '<sc-if value="{{ firstWindow }}" hint-placeholder-val="{{ true }}">\n' + plaque + '</sc-if>\n'
+    # обёртка прижимает плашку доступа и кнопку к низу карточки, чтобы в ряду они стояли на одной линии
+    out += '<div style="margin-top:auto;display:flex;flex-direction:column;gap:12px;">\n' + plaque
+    out += ('<a href="#finish" data-bg-tariff="%s" style="display:flex;width:100%%;box-sizing:border-box;align-items:center;'
+            "justify-content:center;min-height:58px;padding:0 26px;border-radius:999px;%sfont-family:'Unbounded',sans-serif;"
+            'font-size:clamp(15px,4vw,18px);font-weight:700;letter-spacing:-.01em;text-align:center;" '
+            'style-hover="%s">Принять участие</a>\n' % (c['key'], c['btn'], c['hover']))
+    return out + '</div>\n</div>\n'
+
+
+CARDS_OPEN = ('<div style=\\"display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(16px,2.4vw,22px);'
+              'align-items:stretch;\\">')
+CARDS_AFTER = ('<div style=\\"display:flex;flex-wrap:wrap;gap:14px;align-items:center;background:#F6EEE2;color:#1F1F1F;'
+               'border-radius:18px;padding:clamp(20px,3vw,30px);\\">')
+HALF_NOTE = ('<div style="background:#F6EEE2;color:#1F1F1F;border-radius:18px;padding:clamp(16px,3vw,22px) '
+             'clamp(16px,3vw,20px);font-size:clamp(15px,4vw,17px);line-height:1.45;font-weight:600;">'
+             'Оплата делится на&nbsp;два платежа. Сумму и&nbsp;дату второго платежа подтвердит менеджер.</div>\n')
+
+MULTI = {
+    'bolshaya-igra-tarify': {
+        'mode': 'full',
+        'title': 'Большая Игра: тарифы — Карина',
+        'faq': 'Зависит от тарифа: «В своём темпе» 14 990 ₽, «В команде» 24 990 ₽, «Ближний круг» 49 990 ₽. '
+               'Если карта не из России, цена в долларах и евро стоит в карточке тарифа. '
+               'Оплатить можно сразу после заявки. Если остались вопросы, моя команда ответит.',
+    },
+    'bolshaya-igra-tarify-rassrochka': {
+        'mode': 'half',
+        'title': 'Большая Игра: тарифы, оплата частями — Карина',
+        'faq': 'Оплату можно разделить на два платежа. Первый платёж: «В своём темпе» 7 495 ₽, «В команде» 12 485 ₽, '
+               '«Ближний круг» 24 995 ₽. Если карта не из России, сумма в долларах и евро стоит в карточке тарифа. '
+               'Сумму и дату второго платежа подтвердит моя команда.',
+    },
+}
+
+
+def build_multi(name, v):
+    p = Page(name)
+    mode = v['mode']
+    # сроки доступа у тарифов разные, они стоят в карточках
+    p.once(' Доступ к&nbsp;урокам остаётся ещё 45&nbsp;дней после игры.', '')
+    # шапка блока тарифов
+    sec = p.s.find('id=\\"tariffs\\"')
+    old = '>старт 16 ноября' + END
+    k = p.s.find(old, sec)
+    assert 0 < k - sec < 1500, (name, 'надзаголовок тарифов')
+    p.s = p.s[:k] + '>Большая игра · второй поток · старт 16&nbsp;ноября' + END + p.s[k + len(old):]
+    p.once('>Участие в <span style=\\"white-space:nowrap;\\">Большой игре' + END,
+           '>Твоё место <span style=\\"white-space:nowrap;\\">в&nbsp;игре' + END)
+    # три карточки вместо одной
+    a = p.s.find(CARDS_OPEN)
+    b = p.s.find(CARDS_AFTER)
+    assert 0 < a < b and p.s.count(CARDS_OPEN) == 1 and p.s.count(CARDS_AFTER) == 1, (name, 'блок карточек')
+    box = ('<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(16px,2.4vw,22px);'
+           'align-items:stretch;">\n\n' + '\n'.join(card(c, mode) for c in CARDS) + '</div>\n\n')
+    p.s = p.s[:a] + J((HALF_NOTE if mode == 'half' else '') + box) + p.s[b:]
+
+    p.once('<script src="tariff-forms.js?v=', '<script src="../bolshaya-igra/tariff-forms.js?v=')
+    p.once('<title>Большая Игра — Карина</title>',
+           '<title>' + v['title'] + '</title>\n  <meta name="robots" content="noindex">')
+    p.once(FAQ_MAIN, v['faq'])
+
+    a = p.s.find('<x-dc'); b = p.s.find('<\\u002Fx-dc>')
+    assert 0 < a < b, (name, 'границы шаблона')
+    tpl = p.s[a:b]
+    for key in ('self', 'team', 'close'):
+        assert tpl.count('data-bg-tariff=\\"%s\\"' % key) == 1, (name, 'кнопка тарифа', key)
+    for bad in ['новинка', '{{ price }}', '{{ oldPrice }}', 'остаётся ещё 45', '$179', '34 990']:
+        assert bad not in tpl, (name, bad)
+
+    out = os.path.join(RL, name)
+    os.makedirs(out, exist_ok=True)
+    open(os.path.join(out, 'index.html'), 'w', encoding='utf-8').write(p.s)
+    print(name, len(p.s))
+
+
 if __name__ == '__main__':
     for name, v in VARIANTS.items():
         build(name, v)
+    for name, v in MULTI.items():
+        build_multi(name, v)

@@ -3,8 +3,8 @@
    Заявка уходит в Google Таблицу лидов (лист «Заявки Большая Игра») через Apps Script.
    Если отправка не прошла, заявка сохраняется в браузере и уходит при следующем заходе.
    После заявки показываем экран оплаты: галка оферты и две кнопки (рубли и зарубежные методы).
-   Один файл на семь страниц: основную, бронь, внутреннюю рассрочку и по две страницы тарифов «В своём темпе»
-   и «Ближний круг» (см. VARIANTS).
+   Один файл на все страницы: основную, бронь, внутреннюю рассрочку, по две страницы тарифов «В своём темпе»
+   и «Ближний круг» и две страницы с тремя тарифами сразу (см. VARIANTS и MULTI).
    Не зависит от бандла. */
 (function () {
   if (window.__bgTariffForms) return; window.__bgTariffForms = true;
@@ -97,6 +97,9 @@
     /bolshaya-igra-sam-rassrochka/.test(PATH) ? "selfhalf" : /bolshaya-igra-sam/.test(PATH) ? "self" :
     /bolshaya-igra-bron/.test(PATH) ? "bron" : /bolshaya-igra-rassrochka/.test(PATH) ? "half" : "full";
   var V = VARIANTS[VKEY];
+  // Страницы с тремя тарифами: условие оплаты одно на страницу, тариф выбирают кнопкой в карточке (data-bg-tariff).
+  var MULTI = /bolshaya-igra-tarify-rassrochka/.test(PATH) ? { self: "selfhalf", team: "half", close: "closehalf" } :
+    /bolshaya-igra-tarify/.test(PATH) ? { self: "self", team: "full", close: "close" } : null;
   var STORE = "bg_lead_q";
 
   // С 03.10 на лендинге один тариф. Чтобы вернуть выбор, добавь тарифы сюда и ссылки в CONFIG.pay.
@@ -156,7 +159,7 @@
   function renderForm() {
     body.innerHTML =
       '<h2 class="bgl-title">Принять участие</h2>' +
-      '<p class="bgl-sub">старт 16 ноября · 40 дней</p>' +
+      '<p class="bgl-sub">' + (MULTI ? esc(V.tariff) + " · старт 16 ноября" : "старт 16 ноября · 40 дней") + "</p>" +
       '<p class="bgl-lead">' + V.lead + "</p>" +
       '<form class="bgl-form" novalidate>' +
         '<div class="bgl-field" data-f="name"><label class="bgl-label" for="bgl-name">Имя</label><input class="bgl-input" id="bgl-name" name="name" autocomplete="given-name" maxlength="80"></div>' +
@@ -187,7 +190,7 @@
     var links = V;
     body.innerHTML =
       '<div class="bgl-done"><h2 class="bgl-title">' + (saved ? "Заявка у нас" : "Остался один шаг") + "</h2>" +
-      '<p class="bgl-sub">Большая игра · старт 16 ноября</p>' +
+      '<p class="bgl-sub">' + (MULTI ? esc(V.tariff) : "Большая игра") + " · старт 16 ноября</p>" +
       "<p>" + V.pay + "</p>" +
       '<div class="bgl-field" data-f="offer"><label class="bgl-chk"><input type="checkbox" name="offer"><span>Принимаю ' +
         doc("offer", "оферту") + " и " + doc("offer-prilozhenie-1", "Приложение № 1") + ", мне есть 18 лет</span></label></div>" +
@@ -286,6 +289,7 @@
   }
 
   function open(key) {
+    if (MULTI) { VKEY = MULTI[key] || MULTI.team; V = VARIANTS[VKEY]; }
     S.tariff = byKey(key) ? key : T[0].key;
     S.openedAt = Date.now();
     renderForm();
@@ -320,6 +324,8 @@
 
   /* — привязка кнопок: «Принять участие» в карточках тарифов и в финальном блоке — */
   function tagCtas() {
+    // на странице с тремя тарифами кнопки карточек размечены в шаблоне, а кнопка финального блока ведёт к карточкам
+    if (MULTI) return document.querySelectorAll("[data-bg-tariff]").length;
     ["tariffs", "finish"].forEach(function (id) {
       var sec = document.getElementById(id);
       if (sec) [].forEach.call(sec.querySelectorAll("a"), function (a) {
