@@ -46,7 +46,7 @@ h2 { font-size: clamp(40px, 11.2vw, 72px); text-align: center; }
 h3 { font-size: clamp(28px, 7.8vw, 44px); }
 h2 em, h3 em { font-style: normal; white-space: nowrap; color: var(--red-d); }
 .sheet h2 em, .sheet h3 em { color: var(--cta); }
-.sec--wine h2 em { color: inherit; }
+.sec--wine h2 em, .sec--wine h3 em { color: inherit; }
 .label { font: 700 11.5px/1.4 var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: var(--on-d); }
 .lead { font: 600 clamp(18.5px, 5vw, 22px)/1.42 var(--f-body); }
 .center { text-align: center; }
@@ -209,9 +209,23 @@ h2 em, h3 em { font-style: normal; white-space: nowrap; color: var(--red-d); }
 .sign { margin-top: 20px; font-size: 62px; color: var(--red); transform: rotate(-4deg); transform-origin: left center; }
 
 /* ───────── 4. Почему Яппинг ───────── */
-.sec .lead.center { margin-top: 22px; }
-.plain { margin-top: 18px; text-align: center; color: var(--on-d); }
-.plain b { color: var(--cream); }
+
+/* Ответ на светлой карточке, ниже две строки с иконками: что не работает и что нужно */
+.why__answer { margin-top: 28px; padding: 24px 22px; border-radius: 24px; text-align: left; }
+.pair { display: grid; gap: 12px; margin-top: 12px; }
+.pair li {
+  position: relative; padding: 18px 18px 18px 62px; border: 1px solid rgba(240, 231, 219, .22); border-radius: 20px;
+  background: rgba(14, 10, 11, .3); text-align: left; font: 500 16.5px/1.5 var(--f-body); color: var(--on-d);
+}
+.pair b { color: var(--cream); }
+.pair li::before, .pair li::after { content: ""; position: absolute; left: 18px; top: 19px; width: 30px; height: 30px; }
+.pair li::before { border-radius: 9px; }
+.pair li::after { -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.6 7.5l2.9 2.9 5.9-6.6'/%3E%3C/svg%3E") center / 17px 17px no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.6 7.5l2.9 2.9 5.9-6.6'/%3E%3C/svg%3E") center / 17px 17px no-repeat; }
+.pair li.pair__no::before { box-shadow: inset 0 0 0 1.5px rgba(240, 231, 219, .55); }
+.pair li.pair__no::after { background: rgba(240, 231, 219, .8); -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round'%3E%3Cpath d='M3.6 3.6l6.8 6.8M10.4 3.6l-6.8 6.8'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round'%3E%3Cpath d='M3.6 3.6l6.8 6.8M10.4 3.6l-6.8 6.8'/%3E%3C/svg%3E"); }
+.pair__yes { border-color: rgba(240, 231, 219, .5) !important; }
+.pair li.pair__yes::before { background: linear-gradient(180deg, #FFFFFF 0%, #E6DACA 100%); }
+.pair li.pair__yes::after { background: var(--cta); }
 
 /* Карусель рилсов: обложки в скруглённых карточках, просмотры крупно поверх нижнего затемнения */
 .reels { margin-top: 48px; text-align: center; }
@@ -416,6 +430,8 @@ details p { padding: 0 16px 18px; font-size: 16.5px; color: var(--on-d); }
   .offer h2 { font-size: 33px; }
   .offer__goals { margin-top: 0; padding-top: 0; border-top: 0; }
   .cases__grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .why__answer { max-width: 860px; margin-inline: auto; padding: 32px 36px; }
+  .pair { grid-template-columns: 1fr 1fr; gap: 16px; max-width: 860px; margin-inline: auto; }
   .reels { margin-top: 64px; }
   .reels__row { grid-auto-columns: calc((100% - 54px) / 4); gap: 18px; margin-inline: 0; padding-inline: 0; scroll-padding-inline: 0; }
   .reel__views b { font-size: 40px; }
@@ -426,8 +442,6 @@ details p { padding: 0 16px 18px; font-size: 16.5px; color: var(--on-d); }
   .sheet--lg { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); column-gap: 52px; align-items: start; padding: 52px; }
   .sheet--lg > * { grid-column: 2; }
   .sheet--lg > .sheet__photo { grid-column: 1; grid-row: 1 / span 8; height: 100%; min-height: 460px; margin: 0; aspect-ratio: auto; }
-  .sec .lead.center { max-width: 32em; margin-inline: auto; }
-  .plain { max-width: 38em; margin-inline: auto; text-align: center; }
 
   .how .col { display: grid; grid-template-columns: 1fr 1fr; column-gap: 64px; align-items: start; }
   .how .stage::before { display: none; }
