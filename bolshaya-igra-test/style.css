@@ -189,9 +189,36 @@ h2 em, h3 em { font-style: normal; white-space: nowrap; color: var(--red-d); }
 
 /* ───────── 4. Почему Яппинг ───────── */
 .sec .lead.center { margin-top: 22px; }
-.wide-photo { aspect-ratio: 4 / 3.3; margin-top: 28px; border: 1px solid var(--line-d); }
 .plain { margin-top: 18px; text-align: center; color: var(--on-d); }
 .plain b { color: var(--cream); }
+
+/* Карусель рилсов: обложки в скруглённых карточках, просмотры крупно поверх нижнего затемнения */
+.reels { margin-top: 48px; text-align: center; }
+.reels__row {
+  display: grid; grid-auto-flow: column; grid-auto-columns: 62%; gap: 14px;
+  margin: 26px calc(var(--gutter) * -1) 0; padding: 0 var(--gutter) 10px;
+  overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); scrollbar-width: none;
+}
+.reels__row::-webkit-scrollbar { display: none; }
+.reel {
+  position: relative; scroll-snap-align: start; aspect-ratio: 9 / 12.2; overflow: hidden;
+  border: 1px solid rgba(240, 231, 219, .24); border-radius: 22px; background: #1A1011; box-shadow: 0 26px 44px -26px rgba(0, 0, 0, .85);
+}
+/* снизу у скрина мелкий счётчик просмотров: его срезаем и ставим свой, крупный */
+.reel img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
+.reel::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 44%; background: linear-gradient(180deg, rgba(14, 10, 11, 0) 0%, rgba(14, 10, 11, .9) 100%); }
+.reel__views { position: absolute; z-index: 1; left: 14px; bottom: 13px; display: flex; flex-direction: column; align-items: flex-start; gap: 3px; text-align: left; }
+.reel__views b { font: 400 36px/.95 var(--f-display); color: #FFF8EE; }
+.reel__views span { font: 700 10.5px/1.2 var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: rgba(240, 231, 219, .82); }
+.reels__nav { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+.arrow {
+  width: 46px; height: 46px; padding: 0; border: 1.5px solid rgba(240, 231, 219, .5); border-radius: 13px; cursor: pointer;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F0E7DB' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") center / 20px 20px no-repeat;
+  transition: background-color .2s, border-color .2s;
+}
+.arrow:hover { border-color: var(--cream); background-color: rgba(240, 231, 219, .1); }
+.arrow:focus-visible { outline: 2px solid var(--cream); outline-offset: 3px; }
+.arrow--prev { transform: scaleX(-1); }
 
 /* ───────── 5. Этапы ───────── */
 .stage { text-align: center; }
@@ -358,6 +385,9 @@ details p { padding: 0 16px 18px; font-size: 16.5px; color: var(--on-d); }
   .offer h2 { font-size: 33px; }
   .offer__goals { margin-top: 0; padding-top: 0; border-top: 0; }
   .cases__grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .reels { margin-top: 64px; }
+  .reels__row { grid-auto-columns: calc((100% - 54px) / 4); gap: 18px; margin-inline: 0; padding-inline: 0; scroll-padding-inline: 0; }
+  .reel__views b { font-size: 40px; }
   .sheet--lg { border-radius: 40px; }
 
   .nums, .sheet--note, .faq { max-width: 680px; margin-inline: auto; }
@@ -366,7 +396,6 @@ details p { padding: 0 16px 18px; font-size: 16.5px; color: var(--on-d); }
   .sheet--lg > * { grid-column: 2; }
   .sheet--lg > .sheet__photo { grid-column: 1; grid-row: 1 / span 8; height: 100%; min-height: 460px; margin: 0; aspect-ratio: auto; }
   .sec .lead.center { max-width: 32em; margin-inline: auto; }
-  .wide-photo { aspect-ratio: 21 / 8; }
   .plain { max-width: 38em; margin-inline: auto; text-align: center; }
 
   .how .col { display: grid; grid-template-columns: 1fr 1fr; column-gap: 64px; align-items: start; }

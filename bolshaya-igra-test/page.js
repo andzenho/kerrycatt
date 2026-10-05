@@ -17,8 +17,8 @@
        что там должно быть, команда ещё не решила. Окно участниц Разминки (04–09.11) сюда не входит. — */
   var WINDOWS = [
     { until: "2026-10-19T23:59:59+03:00", first: true },
-    { until: "2026-11-14T23:59:59+03:00", price: "29 990", hero: "14 ноября цена вырастет", label: "До повышения цены" },
-    { until: "2026-11-22T23:59:59+03:00", price: "34 990", hero: "Продажи закрываются 22 ноября", label: "До закрытия продаж" }
+    { until: "2026-11-14T23:59:59+03:00", price: "29.990", hero: "14 ноября цена вырастет", label: "До повышения цены" },
+    { until: "2026-11-22T23:59:59+03:00", price: "34.990", hero: "Продажи закрываются 22 ноября", label: "До закрытия продаж" }
   ];
   var applied = null;
   function apply(w) {
@@ -60,8 +60,23 @@
     }
   }
 
+  /* — Карусель рилсов: стрелки листают на одну карточку, на широком экране на две — */
+  function reels() {
+    var row = document.querySelector("[data-reels-row]");
+    if (!row) return;
+    $$("[data-reels]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var card = row.querySelector(".reel"); if (!card) return;
+        var gap = parseFloat(getComputedStyle(row).columnGap) || 14;
+        var step = (card.getBoundingClientRect().width + gap) * (window.innerWidth >= 980 ? 2 : 1);
+        row.scrollBy({ left: step * Number(btn.getAttribute("data-reels")), behavior: "smooth" });
+      });
+    });
+  }
+
   function init() {
     nbsp(document.body);
+    reels();
     tick();
     setInterval(tick, 1000);
   }
