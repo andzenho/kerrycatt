@@ -133,11 +133,19 @@ h2 em, h3 em { font-style: normal; white-space: nowrap; color: var(--red-d); }
 .offer__goals .checks { margin-top: 16px; }
 .sheet .checks li { color: var(--on-l); }
 .sheet .checks li b { color: var(--ink); }
-/* срок и таймер над тарифами */
-.due__line { font: 700 18px/1.35 var(--f-body); }
-.tdue { max-width: 440px; margin: 24px auto 0; text-align: center; }
-.tdue .label--box { margin-top: 14px; border-color: var(--red-d); color: var(--red-d) !important; }
-.tdue .timer span { border: 1px solid var(--line-d); background: rgba(240, 231, 219, .07); }
+/* срок цены над тарифами: бордовая карточка, дата крупно, таймер светлыми плитками */
+.dl {
+  position: relative; overflow: hidden; max-width: 520px; margin: 28px auto 0; padding: 24px 18px 20px; border-radius: 28px; text-align: center;
+  border: 1px solid rgba(240, 231, 219, .2); background: radial-gradient(130% 80% at 50% 0%, #7A1626 0%, #5C0F1C 46%, #3F0A16 100%);
+  box-shadow: 0 34px 70px -34px rgba(184, 36, 58, .95);
+}
+.dl::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: url(grain.png); opacity: .22; mix-blend-mode: overlay; }
+.dl > * { position: relative; }
+.dl__top { font: 700 12px/1.4 var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: rgba(240, 231, 219, .86); }
+.dl__date { margin-top: 8px; font: 400 clamp(40px, 11vw, 60px)/1 var(--f-display); text-transform: uppercase; color: #FFF8EE; }
+.dl__label { margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(240, 231, 219, .2); font: 700 11px/1.4 var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: rgba(240, 231, 219, .78); }
+.dl .timer span { background: var(--cream); color: var(--ink); }
+.dl .timer i { color: var(--on-l); }
 .label--box { display: inline-block; padding: 8px 12px 7px; border: 1.5px solid var(--cta); border-radius: 6px; color: var(--cta) !important; }
 /* стрелка вниз: полукруглая выемка в нижней кромке листа, кнопка по центру кромки с ровным зазором */
 .down {
