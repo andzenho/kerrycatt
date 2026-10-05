@@ -25,18 +25,26 @@ BANK = '    <p class="fine">Рассрочка до 12 месяцев, для Р
 CARDS_OPEN = '    <div class="tcards">\n'
 PRICE = re.compile(r'<p class="price"><b[^>]*>[\d.]+</b><span class="rub">₽</span>(?:<s>[^<]*</s>)?</p>')
 ALT = re.compile(r'<b>\$\d+</b><b>€\d+</b>')
-ACCESS = re.compile(r'<p class="tc__access">[^<]*</p>')
+ACCESS = re.compile(r'<p class="tc__access"[^>]*>[^<]*</p>')
 BUTTON = '>Принять участие</a>'
 
-# Тариф: сумма первого платежа и валюта для оплаты частями, полная цена для строки про бронь, срок доступа без бонуса первого окна.
-# «Навсегда» у тарифа «В команде» по оферте даётся за полную оплату в первом окне, поэтому при брони и оплате частями стоит срок из Приложения 1.
+# Тариф: сумма первого платежа и валюта для оплаты частями, полная цена для строки про бронь, плашка доступа по способу оплаты.
+# «Навсегда» у тарифа «В команде» по Приложению 1 (п. 3.5) даётся только за полную оплату в первом окне, по 19 октября.
+# Бронь и оплата частями права на бонус не дают, поэтому в плашке стоит условие: вся сумма до 19 октября.
+# После первого окна page.js сам меняет плашку на текст из data-after-first.
+TEAM_AFTER = 'Доступ к урокам 45 дней после Игры'
 CARDS = {
     'self': dict(cls='tc tc--dark', half=('7.495', '$90', '€80'), full_price='<b>14.990 ₽</b>',
-                 access='Доступ к урокам 2 месяца'),
+                 access=dict(half='<p class="tc__access">Доступ к урокам 2 месяца</p>',
+                             bron='<p class="tc__access">Доступ к урокам 2 месяца</p>')),
     'team': dict(cls='tc tc--wine', half=('12.485', '$150', '€135'), full_price='<b><span data-price>24.990</span> ₽</b>',
-                 access='Доступ к урокам 45 дней после Игры'),
+                 access=dict(
+                     half='<p class="tc__access">' + TEAM_AFTER + '<small data-after-first="">Навсегда, если оплатишь всю сумму до 19 октября</small></p>',
+                     bron='<p class="tc__access" data-after-first="' + TEAM_AFTER + '">Оплатишь всю сумму до 19 октября, и доступ к урокам останется навсегда'
+                          '<small>Иначе доступ 45 дней после Игры</small></p>')),
     'close': dict(cls='tc tc--cream', half=('24.995', '$300', '€270'), full_price='<b>49.990 ₽</b>',
-                  access='Доступ к урокам навсегда'),
+                  access=dict(half='<p class="tc__access">Доступ к урокам навсегда</p>',
+                              bron='<p class="tc__access">Доступ к урокам навсегда</p>')),
 }
 
 PAGES = {
@@ -89,7 +97,7 @@ def card(s, key, mode, name):
         chunk = (chunk[:alt_end] + '\n          <p class="tc__note">Бронь входит в стоимость участия и фиксирует для тебя цену %s</p>'
                  % c['full_price'] + chunk[alt_end:])
         chunk = once(chunk, BUTTON, '>Забронировать место</a>', name)
-    chunk = sub1(ACCESS, '<p class="tc__access">%s</p>' % c['access'], chunk, name)
+    chunk = sub1(ACCESS, c['access'][mode], chunk, name)
     assert 'data-price' not in chunk or mode == 'bron', (name, key, 'цена по окнам')
     return s[:a] + chunk + s[b:]
 

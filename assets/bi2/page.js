@@ -32,6 +32,8 @@
     set("[data-timer-label]", w.label);
     set("[data-bar-label]", w.label);
     set("[data-step3]", "Оплачиваешь и получаешь доступ к Игре");
+    // бонус первого окна (доступ навсегда) после него не действует: в плашке остаётся срок из Приложения 1
+    $$("[data-after-first]").forEach(function (el) { var t = el.getAttribute("data-after-first"); el.textContent = t; el.hidden = !t; });
   }
 
   function tick() {

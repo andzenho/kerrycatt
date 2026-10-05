@@ -355,6 +355,7 @@ h2 em, h3 em { font-style: normal; white-space: nowrap; color: var(--red-d); }
 .tc__pre + .price { margin-top: 4px; }
 .tc__note { margin-top: 12px; font: 600 14.5px/1.45 var(--f-body); opacity: .9; }
 .tc__note b { font-weight: 800; white-space: nowrap; }
+.tc__access small { display: block; margin-top: 6px; font: 600 13.5px/1.4 var(--f-body); opacity: .8; }
 .tnote { margin-top: 26px; padding: 16px 18px; border-radius: 18px; background: var(--cream); color: var(--ink); font: 700 16px/1.45 var(--f-body); text-align: left; }
 .tnote + .tcards { margin-top: 22px; }
 .tc__desc { margin-top: 14px; padding-bottom: 18px; border-bottom: 1px solid var(--line-d); font: 600 17px/1.45 var(--f-body); }
