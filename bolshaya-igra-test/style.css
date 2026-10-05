@@ -105,20 +105,28 @@ h2 em, h3 em { font-style: normal; white-space: nowrap; color: var(--red-d); }
   background: var(--red-d); box-shadow: 0 0 10px 2px rgba(221, 59, 80, .8);
 }
 .hero h1 {
-  order: 2; margin-top: 30px; font-size: clamp(58px, 21vw, 150px); line-height: .9;
+  order: 3; position: relative; z-index: 2; font-size: clamp(58px, 21vw, 150px); line-height: .9;
   background: linear-gradient(180deg, #FFFAF1 0%, #F0E7DB 48%, #B5A593 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 .hero h1 span { display: block; }
-.hero__sign { order: 3; margin-top: 4px; font-size: 70px; color: var(--cream); transform: rotate(-5deg); }
-.hero .btn--big { order: 5; margin-top: 26px; }
+.hero__sign { order: 4; position: relative; z-index: 2; margin-top: 4px; font-size: 66px; color: var(--cream); transform: rotate(-5deg); }
+.hero .btn--big { order: 5; position: relative; z-index: 2; margin-top: 20px; }
+/* фото сверху во всю ширину; сверху, снизу и по бокам растворяется в чёрном, название наезжает на его низ */
 .hero__photo {
-  order: 6; align-self: stretch; height: min(112vw, 540px); margin: 36px calc(var(--gutter) * -1) 0;
-  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 18%); mask-image: linear-gradient(180deg, transparent 0, #000 18%);
+  order: 2; position: relative; align-self: stretch; height: min(116vw, 470px); margin: 12px calc(var(--gutter) * -1) -92px;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 17%); mask-image: linear-gradient(180deg, transparent 0, #000 17%);
 }
-.hero__photo[data-label]::after { left: 50%; top: 42%; bottom: auto; transform: translateX(-50%); white-space: nowrap; }
+.hero__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 56% 30%; }
+.hero__photo::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(14, 10, 11, 0) 0%, rgba(14, 10, 11, 0) 54%, rgba(14, 10, 11, .8) 80%, var(--ink) 100%),
+    linear-gradient(90deg, rgba(14, 10, 11, .55) 0%, rgba(14, 10, 11, 0) 20%, rgba(14, 10, 11, 0) 80%, rgba(14, 10, 11, .55) 100%);
+}
 
 /* Светлый лист */
-.after-hero { position: relative; z-index: 2; margin-top: -72px; }
+.hero { padding-bottom: 6px; }
+.after-hero { position: relative; z-index: 2; margin-top: 44px; }
 .sheet { position: relative; padding: 28px 22px 30px; border-radius: 28px; background: var(--cream); color: var(--ink); }
 .sheet p + p { margin-top: 14px; }
 .sheet .label { color: var(--on-l); }
@@ -368,31 +376,31 @@ details p { padding: 0 16px 18px; font-size: 16.5px; color: var(--on-d); }
   body { font-size: 18px; }
   .col { max-width: 1040px; }
 
-  .hero { padding: 30px 0 76px; }
-  .hero .wrap { display: block; }
-  .pills { justify-content: space-between; max-width: 900px; margin-inline: auto; }
+  /* название слева, фото справа во всю высоту экрана; левый и нижний край фото растворяются в чёрном */
+  .hero { padding: 30px 0 118px; text-align: left; }
+  .hero .wrap { position: static; display: block; }
+  .hero .wrap > *, .hero__stage > * { position: relative; z-index: 2; }
+  .pills { justify-content: flex-start; }
   .pills li { flex: 0 0 160px; }
-  .pills li + li::before { left: -24px; }
-  .pills li:first-child::after { content: ""; position: absolute; right: -24px; top: 50%; width: 8px; height: 8px; margin-top: -4px; border-radius: 50%; background: var(--red-d); box-shadow: 0 0 10px 2px rgba(221, 59, 80, .8); }
+  .pills li + li::before { left: -11px; }
   .pills span { font-size: 12px; }
   .pills b { font-size: 15px; }
-  /* заголовок во всю ширину, фото по центру поверх него, роспись поверх фото */
-  .hero__stage { display: block; position: relative; height: 640px; margin-top: 4px; }
-  .hero h1 { position: absolute; z-index: 1; left: 0; right: 0; top: 58px; margin: 0; font-size: clamp(110px, 12vw, 172px); white-space: nowrap; }
-  .hero h1 span { display: inline; }
-  .hero__photo {
-    position: absolute; z-index: 2; left: 50%; bottom: 0; width: 400px; height: 590px; margin: 0 0 0 -200px;
-    border: 1px dashed rgba(240, 231, 219, .4); border-radius: 26px 26px 0 0; background: rgba(124, 23, 39, .3);
-    -webkit-mask-image: none; mask-image: none;
+  .hero .wrap > .hero__stage { display: block; position: static; z-index: auto; }
+  .hero h1 { margin-top: 74px; font-size: clamp(104px, 11vw, 166px); }
+  .hero__sign { margin-top: 10px; font-size: clamp(84px, 7vw, 104px); transform-origin: left center; }
+  .hero .btn--big { max-width: 420px; margin: 40px 0 0; }
+  .hero__stage > .hero__photo {
+    position: absolute; z-index: 1; top: 0; right: 0; bottom: 0; width: 66%; height: auto; margin: 0;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 46%); mask-image: linear-gradient(90deg, transparent 0, #000 46%);
   }
-  .hero__photo::before { display: none; }
-  .hero__sign { position: absolute; z-index: 3; left: calc(50% + 90px); top: 300px; margin: 0; font-size: clamp(80px, 7vw, 104px); white-space: nowrap; }
-  .hero__stage::after {
-    content: ""; position: absolute; z-index: 3; left: -10%; right: -10%; bottom: 0; height: 250px; pointer-events: none;
-    background: linear-gradient(180deg, rgba(14, 10, 11, 0) 0%, var(--ink) 80%);
+  .hero__photo img { object-position: 56% 28%; }
+  .hero__photo::after {
+    background:
+      linear-gradient(90deg, rgba(14, 10, 11, .5) 0%, rgba(14, 10, 11, 0) 56%),
+      linear-gradient(180deg, rgba(14, 10, 11, .5) 0%, rgba(14, 10, 11, 0) 22%, rgba(14, 10, 11, 0) 64%, var(--ink) 100%),
+      linear-gradient(270deg, rgba(14, 10, 11, .5) 0%, rgba(14, 10, 11, 0) 16%);
   }
-  .hero .btn--big { position: relative; z-index: 4; margin: -118px auto 0; }
-  .after-hero { margin-top: -34px; }
+  .after-hero { margin-top: -44px; }
   .after-hero .sheet { display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; column-gap: 56px; padding: 48px 52px 60px; border-radius: 40px; }
   .offer h2 { font-size: 33px; }
   .offer__goals { margin-top: 0; padding-top: 0; border-top: 0; }
