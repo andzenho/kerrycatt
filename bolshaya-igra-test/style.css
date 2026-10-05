@@ -125,7 +125,7 @@ h2 em, h3 em { font-style: normal; white-space: nowrap; color: var(--red-d); }
 .after-hero .sheet { padding-bottom: 48px; }
 .after-hero .btn--big { margin-top: 54px; }
 /* оффер: обещание и плашка, ниже цели для каждой участницы */
-.offer h2 { font-size: clamp(28px, 7.6vw, 42px); line-height: 1.05; text-align: left; }
+.offer h2 { font: 800 clamp(23px, 6.3vw, 30px)/1.22 var(--f-body); letter-spacing: -.01em; text-transform: none; text-align: left; }
 .offer h2 em { white-space: normal; }
 .offer .lead { margin-top: 16px; }
 .offer .badge--plate { position: static; display: inline-block; max-width: none; margin-top: 18px; padding: 12px 16px 11px; }
@@ -355,7 +355,7 @@ details p { padding: 0 16px 18px; font-size: 16.5px; color: var(--on-d); }
   .hero .btn--big { position: relative; z-index: 4; margin: -118px auto 0; }
   .after-hero { margin-top: -34px; }
   .after-hero .sheet { display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; column-gap: 56px; padding: 48px 52px 60px; border-radius: 40px; }
-  .offer h2 { font-size: 40px; }
+  .offer h2 { font-size: 33px; }
   .offer__goals { margin-top: 0; padding-top: 0; border-top: 0; }
   .cases__grid { grid-template-columns: 1fr 1fr; gap: 24px; }
   .sheet--lg { border-radius: 40px; }
