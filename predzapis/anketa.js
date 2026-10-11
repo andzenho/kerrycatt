@@ -40,7 +40,9 @@
     ".pz-opt span{display:block;padding:10px 14px;border:1.5px solid rgba(128,128,128,.45);border-radius:14px;font:600 14.5px/1.25 'Manrope',system-ui,sans-serif}" +
     ".pz-opt input:checked+span{background:#B8243A;border-color:#B8243A;color:#FFF8EE}.pz-opt input:focus-visible+span{outline:2px solid currentColor;outline-offset:2px}" +
     ".pz-opts.bad .pz-opt span{border-color:#C05B3B}.pz-nav{display:flex;gap:10px;align-items:stretch}.pz-nav .bgl-btn{flex:1}.pz-back{flex:0 0 auto!important;width:auto!important;padding-inline:18px!important;background:transparent!important;color:inherit!important;border:1.5px solid rgba(128,128,128,.45)!important;box-shadow:none!important}" +
-    "textarea.bgl-input{min-height:84px;resize:vertical}";
+    "textarea.bgl-input{min-height:84px;resize:vertical}" +
+    ".pz-get{margin:0 0 18px;padding:14px 16px;border-radius:16px;background:rgba(184,36,58,.1);border:1px solid rgba(184,36,58,.3)}.pz-get p{margin:0 0 8px;font:800 11px/1.3 'Manrope',system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;opacity:.7}" +
+    ".pz-get ul{margin:0;padding:0;list-style:none;display:grid;gap:6px}.pz-get li{position:relative;padding-left:22px;font:500 14px/1.4 'Manrope',system-ui,sans-serif}.pz-get li::before{content:'✓';position:absolute;left:0;font-weight:800;color:#B8243A}";
   var st = document.createElement("style"); st.textContent = css;
 
   // t: text, area, one (один вариант), many (несколько). req: обязательный
@@ -67,6 +69,8 @@
       { k: "result", l: "Какой результат хочешь через 40 дней?", t: "area", hint: "Необязательно" },
       { k: "consult", l: "Хочешь консультацию по твоему контенту и Большой Игре 2.0?", t: "one", req: 1, o: ["Да, хочу", "Пока нет"] } ] }
   ];
+  // на первом шаге напоминаем, что человек получит за анкету
+  var GET = '<div class="pz-get"><p>За анкету ты получишь</p><ul><li><b>Возможность получить самую низкую цену</b> на Большую Игру 2.0</li><li><b>Закрытый Телеграм-канал</b> про Большую Игру 2.0</li><li><b>Личную консультацию</b>. Разберём, какой блог тебе вести и что снимать</li><li><b>Команда подробно расскажет</b> про Игру и что в неё входит</li></ul></div>';
   var A = {}, step = 0, openedAt = 0, sending = false;
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
 
@@ -93,7 +97,7 @@
   function render() {
     var s = STEPS[step], last = step === STEPS.length - 1;
     body.innerHTML = '<p class="pz-step">Шаг ' + (step + 1) + " из " + STEPS.length + '</p><div class="pz-bar"><i style="width:' + ((step + 1) / STEPS.length * 100) + '%"></i></div>' +
-      '<h2 class="bgl-title">' + s.title + '</h2><form class="bgl-form" novalidate>' + s.q.map(field).join("") +
+      '<h2 class="bgl-title">' + s.title + "</h2>" + (step ? "" : GET) + '<form class="bgl-form" novalidate>' + s.q.map(field).join("") +
       (last ? '<div class="bgl-hp" aria-hidden="true"><input name="company" tabindex="-1" autocomplete="off"></div><div class="bgl-field" data-f="consent"><label class="bgl-chk"><input type="checkbox" name="consent_pd"' + (A.consent ? " checked" : "") + '><span>Даю <a href="../consent/" target="_blank" rel="noopener">согласие на обработку персональных данных</a></span></label></div>' : "") +
       '<div class="pz-nav">' + (step ? '<button class="bgl-btn pz-back" type="button" data-act="back">Назад</button>' : "") +
       '<button class="bgl-btn" type="submit">' + (last ? "Отправить анкету" : "Дальше") + "</button></div></form>";
