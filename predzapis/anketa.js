@@ -71,6 +71,7 @@
   ];
   // на первом шаге напоминаем, что человек получит за анкету
   var GET = '<div class="pz-get"><p>За анкету ты получишь</p><ul><li><b>Возможность получить самую низкую цену</b> на Большую Игру 2.0</li><li><b>Закрытый Телеграм-канал</b> про Большую Игру 2.0</li><li><b>Личную консультацию</b>. Разберём, какой блог тебе вести и что снимать</li><li><b>Команда подробно расскажет</b> про Игру и что в неё входит</li></ul></div>';
+  var TARIFFS = { self: "В своём темпе", team: "В команде", close: "Ближний круг" }, tariff = "";
   var A = {}, step = 0, openedAt = 0, sending = false;
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
 
@@ -97,7 +98,7 @@
   function render() {
     var s = STEPS[step], last = step === STEPS.length - 1;
     body.innerHTML = '<p class="pz-step">Шаг ' + (step + 1) + " из " + STEPS.length + '</p><div class="pz-bar"><i style="width:' + ((step + 1) / STEPS.length * 100) + '%"></i></div>' +
-      '<h2 class="bgl-title">' + s.title + "</h2>" + (step ? "" : GET) + '<form class="bgl-form" novalidate>' + s.q.map(field).join("") +
+      '<h2 class="bgl-title">' + s.title + "</h2>" + (tariff ? '<p class="bgl-sub">Предзапись на тариф «' + esc(tariff) + '»</p>' : "") + (step ? "" : GET) + '<form class="bgl-form" novalidate>' + s.q.map(field).join("") +
       (last ? '<div class="bgl-hp" aria-hidden="true"><input name="company" tabindex="-1" autocomplete="off"></div><div class="bgl-field" data-f="consent"><label class="bgl-chk"><input type="checkbox" name="consent_pd"' + (A.consent ? " checked" : "") + '><span>Даю <a href="../consent/" target="_blank" rel="noopener">согласие на обработку персональных данных</a></span></label></div>' : "") +
       '<div class="pz-nav">' + (step ? '<button class="bgl-btn pz-back" type="button" data-act="back">Назад</button>' : "") +
       '<button class="bgl-btn" type="submit">' + (last ? "Отправить анкету" : "Дальше") + "</button></div></form>";
@@ -157,9 +158,9 @@
       ["courses", "Курсы"], ["before", "Была раньше"], ["when", "Когда начать"], ["invest", "Вкладываться"], ["format", "Формат"], ["result", "Результат за 40 дней"], ["consult", "Консультация"]];
     var text = labels.map(function (p) { var v = A[p[0]]; v = Array.isArray(v) ? v.join(", ") : v; return v ? p[1] + ": " + v : ""; }).filter(Boolean).join(" | ");
     var m = marks(), src = new URLSearchParams(location.search).get("src") || "";
-    var lead = { tariff: "", type: "анкета предзаписи", name: A.name, phone: A.phone, tgNick: tg, instagram: A.inst, age: A.age,
+    var lead = { tariff: tariff, type: "анкета предзаписи", name: A.name, phone: A.phone, tgNick: tg, instagram: A.inst, age: A.age,
       consent_pd: true, consent_ads: false, consent_ts: new Date().toISOString(), consent_rev: REV,
-      utm: (m ? m + " || " : "") + text, marks: m, src: src, answers: text, form: A };
+      utm: (m ? m + " || " : "") + (tariff ? "Тариф: " + tariff + " | " : "") + text, marks: m, src: src, answers: text, form: A };
     var payload = JSON.stringify({ kind: "bi", source: "bi_predzapis", lead: lead, answers: text, src: src,
       hp: form.company.value || (Date.now() - openedAt < 2500 ? "fast" : ""), page: location.href.split("#")[0].slice(0, 300), ua: navigator.userAgent.slice(0, 160) });
     sending = true;
@@ -177,7 +178,7 @@
       '<p class="bgl-note">В тот же день тебе напишет моя команда в Телеграм. Проверь, что ник указан верно</p></div>';
     overlay.querySelector(".bgl-box").scrollTop = 0; A = {}; step = 0;
   }
-  function open() { openedAt = openedAt || Date.now(); render(); overlay.classList.add("open"); document.body.style.overflow = "hidden"; }
+  function open(k) { tariff = TARIFFS[k] || ""; openedAt = openedAt || Date.now(); render(); overlay.classList.add("open"); document.body.style.overflow = "hidden"; }
   function close() { overlay.classList.remove("open"); document.body.style.overflow = ""; }
   window.__openAnketa = open;
 
@@ -194,7 +195,7 @@
   });
   document.addEventListener("click", function (e) {
     var a = e.target.closest ? e.target.closest("[data-pz-open]") : null;
-    if (a) { e.preventDefault(); open(); }
+    if (a) { e.preventDefault(); open(a.getAttribute("data-pz-tariff")); }
   }, true);
   function init() {
     document.body.appendChild(st); document.body.appendChild(overlay);
