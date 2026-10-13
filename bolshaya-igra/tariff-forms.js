@@ -18,14 +18,14 @@
     pay: { team: true }
   };
 
-  // Условия оплаты по страницам. rub — GetPlatinum, intl — Lava (карты не из РФ).
+  // Условия оплаты по страницам. rub и intl — обе ссылки на GetPlatinum; intl для карт не из РФ, цена в долларах (с 13.10, раньше была Lava).
   // type уходит в таблицу в колонку «Тип заявки». Страницы-копии собирает _src/build_variants.py.
   var VARIANTS = {
     full: {
       tariff: "В команде",
       type: "полная оплата",
       rub: "https://anny-nizh.getplatinum.ru/payment/50m8VOq",
-      intl: "https://app.lava.top/products/852fcd5c-464e-426b-848d-62c227f8b55c",
+      intl: "https://anny-nizh.getplatinum.ru/payment/xGGrUCM",
       rubHint: "24 990 ₽ · вся сумма или рассрочка",
       intlHint: "$299 или €269 · карты зарубежных банков",
       lead: "Оставь контакты, и сразу откроется оплата. Если будут вопросы, моя команда ответит.",
@@ -35,7 +35,7 @@
       tariff: "В команде",
       type: "бронь",
       rub: "https://anny-nizh.getplatinum.ru/payment/a2EJYy5",
-      intl: "https://app.lava.top/products/ea6fc160-07f7-48f1-8c0d-53a2d76294d9",
+      intl: "https://anny-nizh.getplatinum.ru/payment/VQxgFSC",
       rubHint: "2 000 ₽ · бронь места",
       intlHint: "$24 или €22 · карты зарубежных банков",
       lead: "Оставь контакты, и сразу откроется оплата брони. Если будут вопросы, моя команда ответит.",
@@ -46,7 +46,7 @@
       tariff: "В своём темпе",
       type: "бронь",
       rub: "https://anny-nizh.getplatinum.ru/payment/a2EJYy5",
-      intl: "https://app.lava.top/products/ea6fc160-07f7-48f1-8c0d-53a2d76294d9",
+      intl: "https://anny-nizh.getplatinum.ru/payment/VQxgFSC",
       rubHint: "2 000 ₽ · бронь места",
       intlHint: "$24 или €22 · карты зарубежных банков",
       lead: "Оставь контакты, и сразу откроется оплата брони. Если будут вопросы, моя команда ответит.",
@@ -56,7 +56,7 @@
       tariff: "Ближний круг",
       type: "бронь",
       rub: "https://anny-nizh.getplatinum.ru/payment/a2EJYy5",
-      intl: "https://app.lava.top/products/ea6fc160-07f7-48f1-8c0d-53a2d76294d9",
+      intl: "https://anny-nizh.getplatinum.ru/payment/VQxgFSC",
       rubHint: "2 000 ₽ · бронь места",
       intlHint: "$24 или €22 · карты зарубежных банков",
       lead: "Оставь контакты, и сразу откроется оплата брони. Если будут вопросы, моя команда ответит.",
@@ -66,7 +66,7 @@
       tariff: "В команде",
       type: "внутренняя рассрочка",
       rub: "https://anny-nizh.getplatinum.ru/payment/oD8EO8r",
-      intl: "https://app.lava.top/products/cd82525d-e5bd-4aa7-a17c-fd85600187ed",
+      intl: "https://anny-nizh.getplatinum.ru/payment/gshPEuA",
       rubHint: "12 485 ₽ · первый платёж",
       intlHint: "$150 или €135 · карты зарубежных банков",
       lead: "Оставь контакты, и сразу откроется оплата первого платежа. Если будут вопросы, моя команда ответит.",
@@ -76,7 +76,7 @@
       tariff: "В своём темпе",
       type: "полная оплата",
       rub: "https://anny-nizh.getplatinum.ru/payment/3F8i6ce",
-      intl: "https://app.lava.top/products/cf9d060e-c6b1-496d-a683-b0bd3f0db20f",
+      intl: "https://anny-nizh.getplatinum.ru/payment/BkeF7v8",
       rubHint: "14 990 ₽",
       intlHint: "$180 или €160 · карты зарубежных банков",
       lead: "Оставь контакты, и сразу откроется оплата. Если будут вопросы, моя команда ответит.",
@@ -86,7 +86,7 @@
       tariff: "В своём темпе",
       type: "внутренняя рассрочка",
       rub: "https://anny-nizh.getplatinum.ru/payment/jSYrQvS",
-      intl: "https://app.lava.top/products/5d269282-a1ce-4e90-ad7e-b98611dabfac",
+      intl: "https://anny-nizh.getplatinum.ru/payment/4AyWtsT",
       rubHint: "7 495 ₽ · первый платёж",
       intlHint: "$90 или €80 · карты зарубежных банков",
       lead: "Оставь контакты, и сразу откроется оплата первого платежа. Если будут вопросы, моя команда ответит.",
@@ -96,7 +96,7 @@
       tariff: "Ближний круг",
       type: "полная оплата",
       rub: "https://anny-nizh.getplatinum.ru/payment/aRVrm8t",
-      intl: "https://app.lava.top/products/3c00d727-01eb-433d-88de-b38a5e9bf51a",
+      intl: "https://anny-nizh.getplatinum.ru/payment/nXsSzko",
       rubHint: "49 990 ₽",
       intlHint: "$599 или €539 · карты зарубежных банков",
       lead: "Оставь контакты, и сразу откроется оплата. Если будут вопросы, моя команда ответит.",
@@ -106,7 +106,7 @@
       tariff: "Ближний круг",
       type: "внутренняя рассрочка",
       rub: "https://anny-nizh.getplatinum.ru/payment/zMkjs57",
-      intl: "https://app.lava.top/products/7a2f1be7-2e8b-47a1-9142-2335fd0a75b7",
+      intl: "https://anny-nizh.getplatinum.ru/payment/lq00Mhh",
       rubHint: "24 995 ₽ · первый платёж",
       intlHint: "$300 или €270 · карты зарубежных банков",
       lead: "Оставь контакты, и сразу откроется оплата первого платежа. Если будут вопросы, моя команда ответит.",

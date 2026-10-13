@@ -17,7 +17,7 @@ import shutil
 RL = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(RL, 'bolshaya-igra-test')
 SHARED = os.path.join(RL, 'assets', 'bi2')
-FORMS_VER = '20261005d'
+FORMS_VER = '20261013a'
 
 TITLE = '<title>Большая Игра 2.0 — Kerry Catt · тест дизайна</title>'
 STEP3 = ('<span data-step3><b>Оплачиваешь</b>, сразу открываешь первый модуль и сохраняешь уроки навсегда</span>')
