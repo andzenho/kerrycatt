@@ -17,14 +17,14 @@ import shutil
 RL = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(RL, 'bolshaya-igra-test')
 SHARED = os.path.join(RL, 'assets', 'bi2')
-FORMS_VER = '20261013a'
+FORMS_VER = '20261013b'
 
 TITLE = '<title>Большая Игра 2.0 — Kerry Catt · тест дизайна</title>'
 STEP3 = ('<span data-step3><b>Оплачиваешь</b>, сразу открываешь первый модуль и сохраняешь уроки навсегда</span>')
 BANK = '    <p class="fine">Рассрочка до 12 месяцев, для России и СНГ</p>\n'
 CARDS_OPEN = '    <div class="tcards">\n'
 PRICE = re.compile(r'<p class="price"><b[^>]*>[\d.]+</b><span class="rub">₽</span>(?:<s>[^<]*</s>)?</p>')
-ALT = re.compile(r'<b>\$\d+</b><b>€\d+</b>')
+ALT = re.compile(r'<b>\$\d+</b>')
 ACCESS = re.compile(r'<p class="tc__access"[^>]*>[^<]*</p>')
 BUTTON = '>Принять участие</a>'
 
@@ -34,15 +34,15 @@ BUTTON = '>Принять участие</a>'
 # После первого окна page.js сам меняет плашку на текст из data-after-first.
 TEAM_AFTER = 'Доступ к урокам 45 дней после Игры'
 CARDS = {
-    'self': dict(cls='tc tc--dark', half=('7.495', '$90', '€80'), full_price='<b>14.990 ₽</b>',
+    'self': dict(cls='tc tc--dark', half=('7.495', '$90'), full_price='<b>14.990 ₽</b>',
                  access=dict(half='<p class="tc__access">Доступ к урокам 2 месяца</p>',
                              bron='<p class="tc__access">Доступ к урокам 2 месяца</p>')),
-    'team': dict(cls='tc tc--wine', half=('12.485', '$150', '€135'), full_price='<b><span data-price>24.990</span> ₽</b>',
+    'team': dict(cls='tc tc--wine', half=('12.485', '$150'), full_price='<b><span data-price>24.990</span> ₽</b>',
                  access=dict(
                      half='<p class="tc__access">' + TEAM_AFTER + '<small data-after-first="">Навсегда, если оплатишь всю сумму до 19 октября</small></p>',
                      bron='<p class="tc__access" data-after-first="' + TEAM_AFTER + '">Оплатишь всю сумму до 19 октября, и доступ к урокам останется навсегда'
                           '<small>Иначе доступ 45 дней после Игры</small></p>')),
-    'close': dict(cls='tc tc--cream', half=('24.995', '$300', '€270'), full_price='<b>49.990 ₽</b>',
+    'close': dict(cls='tc tc--cream', half=('24.995', '$300'), full_price='<b>49.990 ₽</b>',
                   access=dict(half='<p class="tc__access">Доступ к урокам навсегда</p>',
                               bron='<p class="tc__access">Доступ к урокам навсегда</p>')),
 }
@@ -85,14 +85,14 @@ def card(s, key, mode, name):
     chunk = s[a:b]
     assert chunk.count('data-bg-tariff="%s"' % key) == 1, (name, key, 'кнопка')
     if mode == 'half':
-        price, usd, eur = c['half']
+        price, usd = c['half']
         chunk = sub1(PRICE, '<p class="tc__pre">первый платёж из двух</p>\n          '
                      '<p class="price"><b>%s</b><span class="rub">₽</span></p>' % price, chunk, name)
-        chunk = sub1(ALT, '<b>%s</b><b>%s</b>' % (usd, eur), chunk, name)
+        chunk = sub1(ALT, '<b>%s</b>' % usd, chunk, name)
     else:
         chunk = sub1(PRICE, '<p class="tc__pre">бронь места</p>\n          '
                      '<p class="price"><b>2.000</b><span class="rub">₽</span></p>', chunk, name)
-        chunk = sub1(ALT, '<b>$24</b><b>€22</b>', chunk, name)
+        chunk = sub1(ALT, '<b>$24</b>', chunk, name)
         alt_end = chunk.find('</p>', chunk.find('<p class="alt">')) + len('</p>')
         chunk = (chunk[:alt_end] + '\n          <p class="tc__note">Бронь входит в стоимость участия и фиксирует для тебя цену %s</p>'
                  % c['full_price'] + chunk[alt_end:])
