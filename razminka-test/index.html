@@ -98,11 +98,11 @@ h2 em{white-space:normal}.rz-thesis{max-width:560px;margin:20px auto 0;text-alig
 .rz-ladder i:nth-child(n){height:calc(14px + var(--k)*2.6px);align-self:end}
 .rz-ladder{align-items:end;height:56px}
 .rz-price__rule{margin-top:12px;font:600 14.5px/1.45 var(--f-body);color:var(--on-l)}
-.rz-facts{margin:20px 0 0;border:1px solid var(--line-l);border-radius:18px;overflow:hidden}
-.rz-facts div{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:14px 16px}
-.rz-facts div + div{border-top:1px solid var(--line-l)}
-.rz-facts dt{font:800 11px/1.3 var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:var(--on-l)}
-.rz-facts dd{margin:0;font:800 16px/1.3 var(--f-body);text-align:right;white-space:nowrap}
+.rz-facts{display:grid;grid-template-columns:1fr 1fr;margin:20px 0 0;border:1px solid var(--line-l);border-radius:18px;overflow:hidden}
+.rz-facts div{display:flex;flex-direction:column;justify-content:space-between;gap:8px;padding:14px 16px}
+.rz-facts div + div{border-left:1px solid var(--line-l)}
+.rz-facts dt{font:800 10.5px/1.35 var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:var(--on-l)}
+.rz-facts dd{margin:0;font:800 17px/1.25 var(--f-body)}
 .rz-facts dd span{font:inherit}
 .rz-price .checks{margin-top:14px}
 .rz-price .checks li{color:var(--ink);font-size:16.5px}
@@ -367,8 +367,8 @@ h2 em{white-space:normal}.rz-thesis{max-width:560px;margin:20px auto 0;text-alig
         <div class="rz-ladder" data-rz-ladder></div>
         <p class="rz-price__rule"><b>Цена растёт каждые 50 участниц.</b> Первые 50 участниц заходят за 490 ₽, дальше каждые 50 мест цена поднимается на 100 ₽.</p>
         <dl class="rz-facts">
-          <div data-rz-leftline><dt>По этой цене</dt><dd>осталось <span data-rz-left>50</span> мест</dd></div>
-          <div><dt>Продажи закрываются</dt><dd>3 ноября, 23:59 мск</dd></div>
+          <div data-rz-leftline><dt>По этой цене осталось</dt><dd><span data-rz-left>50</span> мест</dd></div>
+          <div><dt>Продажи закрываются</dt><dd>3 ноября, 23:59&nbsp;мск</dd></div>
         </dl>
       </div>
       <div class="rz-price__col">
