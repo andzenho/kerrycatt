@@ -42,8 +42,8 @@
 .case .rz-row:last-child .case__text{color:#FFF8EE;font-weight:700}
 /* яппинг */
 .rz-thesis{margin-top:28px;text-align:center}
-.rz-thesis b{display:block;font:400 clamp(40px,11vw,68px)/.98 var(--f-display);text-transform:uppercase;color:var(--cream)}
-.rz-thesis span{display:block;max-width:600px;margin:16px auto 0;font:500 17.5px/1.55 var(--f-body);color:var(--on-d)}
+.rz-kicker{text-align:center;margin-bottom:14px;color:rgba(240,231,219,.7)}.sec--wine h2 em{color:var(--cream);opacity:.82}
+.rz-thesis span{display:block;max-width:560px;margin:0 auto;font:500 17.5px/1.55 var(--f-body);color:var(--on-d);text-align:center}.sec--wine h2 em{white-space:normal}.rz-thesis{margin-top:20px}
 .rz-formula{max-width:640px;margin:36px auto 0;padding:22px 24px;border-radius:24px;background:var(--cream);color:var(--ink);text-align:center;font:600 17.5px/1.5 var(--f-body)}
 .rz-formula b{display:block;margin-top:6px;font:400 clamp(28px,7.4vw,40px)/1.05 var(--f-display);text-transform:uppercase;color:var(--cta)}
 /* 4 дня */
@@ -71,13 +71,15 @@
 .rz-ladder i:nth-child(n){height:calc(14px + var(--k)*2.6px);align-self:end}
 .rz-ladder{align-items:end;height:56px}
 .rz-price__rule{margin-top:12px;font:600 14.5px/1.45 var(--f-body);color:var(--on-l)}
-.rz-facts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
-.rz-facts div{padding:14px 16px;border-radius:18px;background:rgba(14,10,11,.06)}
-.rz-facts span{display:block;font:800 10.5px/1.3 var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:var(--on-l)}
-.rz-facts b{display:block;margin-top:6px;font:800 17px/1.3 var(--f-body)}
+.rz-facts{margin:20px 0 0;border:1px solid var(--line-l);border-radius:18px;overflow:hidden}
+.rz-facts div{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:14px 16px}
+.rz-facts div + div{border-top:1px solid var(--line-l)}
+.rz-facts dt{font:800 11px/1.3 var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:var(--on-l)}
+.rz-facts dd{margin:0;font:800 16px/1.3 var(--f-body);text-align:right;white-space:nowrap}
+.rz-facts dd span{font:inherit}
 .rz-price .checks{margin-top:14px}
 .rz-price .checks li{color:var(--ink);font-size:16.5px}
-.rz-price .checks b{color:var(--ink);font-weight:800}.rz-price .checks .rz-gift b{color:var(--cta)}.rz-facts b span{display:inline;font:inherit;letter-spacing:0;text-transform:none;color:inherit}.rz-price__col + .rz-price__col > .label{margin-top:24px}
+.rz-price .checks b{color:var(--ink);font-weight:800}.rz-price .checks .rz-gift b{color:var(--cta)}.rz-price__col + .rz-price__col > .label{margin-top:24px}
 .rz-pay{display:grid;gap:12px;margin-top:22px}
 .rz-pay .btn--big{margin:0;max-width:none}
 .rz-pay .btn--alt{background:var(--ink);box-shadow:none;border-color:transparent}
@@ -154,34 +156,122 @@
       </div>
       <div class="cases__row" data-car-row>
         <article class="case">
-          <header class="case__head"><div><p class="case__name">Сайхо</p><p class="case__who">фармацевт из Москвы</p></div><img class="case__ava" src="../assets/case-saikho-ava.webp?v=2" alt="Сайхо" width="240" height="240" loading="lazy"></header>
-            <div class="rz-row"><span class="pill">Было</span><p class="case__text">140 подписчиков, ни разу в жизни не снимала рилс</p></div>
-            <div class="rz-row"><span class="pill">Сделала</span><p class="case__text">выложила свой первый рилс и написала в чат «Это мой первый рилс за всю мою жизнь»</p></div>
-            <div class="rz-row"><span class="pill pill--red">Стало</span><p class="case__text">за месяц её ролики набрали 474 тысячи просмотров</p></div>
+          <div class="case__main">
+            <header class="case__head">
+              <div>
+                <p class="case__name">Сайхо</p>
+                <a class="case__handle" href="https://www.instagram.com/d_saikho/" target="_blank" rel="noopener">@d_saikho</a>
+                <p class="case__who">— фармацевт из Москвы</p>
+              </div>
+              <img class="case__ava" src="../assets/case-saikho-ava.webp?v=2" alt="Сайхо" width="240" height="240" loading="lazy">
+            </header>
+            <span class="pill">Было</span>
+            <p class="case__text">Пришла со 140 подписчиками и ни разу в жизни не снимала рилс</p>
+            <span class="pill pill--red">Стало</span>
+            <ul class="case__list">
+              <li>Выложила первый рилс на второй день Игры и написала в чате «Это мой первый рилс за всю мою жизнь»</li>
+              <li>За месяц набрала <b>474 тысячи просмотров</b></li>
+              <li>Выросла до <b>543 подписчиков</b></li>
+            </ul>
+            </div>
+          <div class="case__proof">
+            <div class="case__block">
+              <p class="case__sub">Её рилсы</p>
+              <ul class="case__reels">
+                <li><img src="../assets/case-saikho-r1.webp" alt="Рилс Сайхо, на скрине 248 тысяч просмотров" width="377" height="587" loading="lazy"></li>
+                <li><img src="../assets/case-saikho-r3.webp" alt="Рилс Сайхо, на скрине 113 тысяч просмотров" width="377" height="587" loading="lazy"></li>
+              </ul>
+              </div>
+            <div class="case__block">
+              <p class="case__sub">Сайхо в чате Игры</p>
+              <div class="case__chat">
+                <img src="../assets/case-saikho-chat1.webp" alt="Сообщение Сайхо в чате Игры: рилс набрал 47 тысяч просмотров" width="774" height="190" loading="lazy">
+                <img src="../assets/case-saikho-chat2.webp" alt="Сообщение Сайхо в чате Игры: ролик получил 15 тысяч просмотров и 570 лайков" width="914" height="152" loading="lazy">
+              </div>
+              </div>
+            </div>
         </article>
         <article class="case">
-          <header class="case__head"><div><p class="case__name">Velunova</p><p class="case__who">диджей</p></div><img class="case__ava" src="../assets/case-velunova-ava.webp?v=2" alt="Velunova" width="240" height="240" loading="lazy"></header>
-            <div class="rz-row"><span class="pill">Было</span><p class="case__text">«Раньше я бы такое не то что не выставила, а и не сняла бы»</p></div>
-            <div class="rz-row"><span class="pill">Сделала</span><p class="case__text">по совету эксперта выложила рилс про имбирный шот и завела свою рубрику «Каждый раз»</p></div>
-            <div class="rz-row"><span class="pill pill--red">Стало</span><p class="case__text">её ролики досматривают до 40–50 секунд вместо 20, один набрал 119 тысяч просмотров</p></div>
+          <div class="case__main">
+            <header class="case__head">
+              <div>
+                <p class="case__name">Velunova</p>
+                <a class="case__handle" href="https://www.instagram.com/velunova_/" target="_blank" rel="noopener">@velunova_</a>
+                <p class="case__who">— диджей</p>
+              </div>
+              <img class="case__ava" src="../assets/case-velunova-ava.webp?v=2" alt="Velunova" width="240" height="240" loading="lazy">
+            </header>
+            <span class="pill">Было</span>
+            <p class="case__text">«Раньше я бы такое не то что не выставила, а и не сняла бы»</p>
+            <span class="pill pill--red">Стало</span>
+            <ul class="case__list">
+              <li>По совету опытного эксперта по контенту выложила рилс про имбирный шот</li>
+              <li>Рилс набрал <b>28 тысяч просмотров</b> в пробном режиме и <b>12 тысяч</b> в основном профиле</li>
+              <li>Зрители стали смотреть её ролики до 40–50 секунд вместо 20</li>
+              <li>Завела свою рубрику «Каждый раз»</li>
+              <li>Ещё один её рилс набрал <b>119 тысяч просмотров</b></li>
+            </ul>
+            </div>
+          <div class="case__proof">
+            <div class="case__block">
+              <p class="case__sub">Её рилсы</p>
+              <ul class="case__reels">
+                <li><img src="../assets/case-velunova-r1.webp?v=2" alt="Рилс Velunova, на скрине 119 тысяч просмотров" width="377" height="587" loading="lazy"></li>
+                <li><img src="../assets/case-velunova-r2.webp" alt="Рилс Velunova, на скрине 29,1 тысячи просмотров" width="474" height="738" loading="lazy"></li>
+                <li><img src="../assets/case-velunova-r3.webp" alt="Рилс Velunova, на скрине 19,5 тысячи просмотров" width="377" height="587" loading="lazy"></li>
+                <li><img src="../assets/case-velunova-r4.webp" alt="Рилс Velunova, на скрине 8 035 просмотров" width="474" height="736" loading="lazy"></li>
+              </ul>
+              </div>
+            <div class="case__block">
+              <p class="case__sub">Velunova в чате Игры</p>
+              <div class="case__chat">
+                <img src="../assets/case-velunova-chat.webp" alt="Сообщение в чате Игры: на основной 12,500 просмотров, на пробном 28,700" width="738" height="206" loading="lazy">
+              </div>
+              </div>
+            </div>
         </article>
         <article class="case">
-          <header class="case__head"><div><p class="case__name">Маша</p></div><span class="case__ini">М</span></header>
-            <div class="rz-row"><span class="pill">Было</span><p class="case__text">747 подписчиков</p></div>
-            <div class="rz-row"><span class="pill">Сделала</span><p class="case__text">отправила ролик на разбор, и его разобрали на эфире</p></div>
-            <div class="rz-row"><span class="pill pill--red">Стало</span><p class="case__text">ролик за день набрал больше 100 тысяч просмотров, она сняла 43 ролика и выросла до 2 166 подписчиков</p></div>
-        </article>
-        <article class="case">
-          <header class="case__head"><div><p class="case__name">Ольга</p><p class="case__who">психолог</p></div><img class="case__ava" src="../assets/case-olga-ava.webp" alt="Ольга" width="240" height="240" loading="lazy"></header>
-            <div class="rz-row"><span class="pill">Было</span><p class="case__text">блог про тревогу несколько лет стоял на 2 400 подписчиках</p></div>
-            <div class="rz-row"><span class="pill">Сделала</span><p class="case__text">записала три рилса</p></div>
-            <div class="rz-row"><span class="pill pill--red">Стало</span><p class="case__text">351, 171 и 71 тысяча просмотров и 6 748 подписчиков</p></div>
-        </article>
-        <article class="case">
-          <header class="case__head"><div><p class="case__name">Zlodeyka</p></div><span class="case__ini">Z</span></header>
-            <div class="rz-row"><span class="pill">Было</span><p class="case__text">выкладывала только милые видео своих животных</p></div>
-            <div class="rz-row"><span class="pill">Сделала</span><p class="case__text">сняла первое видео со своим голосом</p></div>
-            <div class="rz-row"><span class="pill">Её слова</span><p class="case__text">«Страшно, но пофиг уже»</p></div>
+          <div class="case__main">
+            <header class="case__head">
+              <div>
+                <p class="case__name">Ольга</p>
+                <a class="case__handle" href="https://www.instagram.com/lomakina.pro/" target="_blank" rel="noopener">@lomakina.pro</a>
+                <p class="case__who">— психолог, блог про тревогу</p>
+              </div>
+              <img class="case__ava" src="../assets/case-olga-ava.webp" alt="Ольга" width="240" height="240" loading="lazy">
+            </header>
+            <span class="pill">Было</span>
+            <p class="case__text">Блог про тревогу не выстреливал и несколько лет стоял на 2.400 подписчиках</p>
+            <span class="pill pill--red">Стало</span>
+            <ul class="case__list">
+              <li>Записала три рилса, и они выстрелили: <b>351 тысяча</b>, <b>171 тысяча</b> и <b>71 тысяча просмотров</b></li>
+              <li>Выросла до <b>6.748 подписчиков</b></li>
+              <li>За последние 30 дней её блог набрал <b>291 тысячу просмотров</b></li>
+            </ul>
+            </div>
+          <div class="case__proof">
+            <div class="case__block">
+              <p class="case__sub">Её рилсы</p>
+              <ul class="case__reels">
+                <li><img src="../assets/case-olga-r1.webp" alt="Рилс Ольги, на скрине 351 тысяча просмотров" width="379" height="590" loading="lazy"></li>
+                <li><img src="../assets/case-olga-r2.webp" alt="Рилс Ольги, на скрине 171 тысяча просмотров" width="379" height="590" loading="lazy"></li>
+                <li><img src="../assets/case-olga-r3.webp" alt="Рилс Ольги, на скрине 71,8 тысячи просмотров" width="379" height="590" loading="lazy"></li>
+                <li><img src="../assets/case-olga-r4.webp" alt="Рилс Ольги, на скрине 33,4 тысячи просмотров" width="377" height="587" loading="lazy"></li>
+              </ul>
+              </div>
+            <div class="case__block">
+              <p class="case__sub">Её профиль</p>
+              <div class="case__chat">
+                <img class="case__shot" src="../assets/case-olga-profile.webp" alt="Профиль Ольги: 6 748 подписчиков, 291,7 тысячи просмотров за последние 30 дней" width="590" height="462" loading="lazy">
+              </div>
+              </div>
+            <div class="case__block">
+              <p class="case__sub">Ольга в чате Игры</p>
+              <div class="case__chat">
+                <img src="../assets/case-olga-chat.webp" alt="Сообщение Ольги в чате Игры: блог стоял на 2400 несколько лет, записала 3 рилса, и они выстрелили" width="956" height="224" loading="lazy">
+              </div>
+              </div>
+            </div>
         </article>
       </div>
     </div>
@@ -192,8 +282,9 @@
 <!-- ───────── 4. Почему яппинг ───────── -->
 <section class="sec sec--wine">
   <div class="wrap col col--wide">
-    <h2>Почему <em>яппинг</em></h2>
-    <div class="rz-thesis"><b>Яппинг это тренд 2027 года</b><span>и набирать своих людей в блог ещё никогда не было так легко, как сейчас. Ты просто разговариваешь на камеру, и люди подписываются на тебя как на человека, а мне именно такие ролики принесли больше всего подписчиков.</span></div>
+    <p class="label rz-kicker">Почему яппинг</p>
+    <h2>Яппинг это <em>тренд 2027 года</em></h2>
+    <div class="rz-thesis"><span>и набирать своих людей в блог ещё никогда не было так легко, как сейчас. Ты просто разговариваешь на камеру, и люди подписываются на тебя как на человека, а мне именно такие ролики принесли больше всего подписчиков.</span></div>
     <div class="reels">
       <ul class="reels__row" data-reels-row>
         <li><div class="reel"><img src="../assets/reel2.webp" alt="Рилс Карины, 2,4 млн просмотров" width="570" height="886" loading="lazy"></div><p class="reel__views"><b>2,4 млн</b><span>просмотров</span></p></li>
@@ -238,10 +329,10 @@
         <p class="rz-price__now"><span data-rz-price>490</span><small>₽</small></p>
         <div class="rz-ladder" data-rz-ladder></div>
         <p class="rz-price__rule"><b>Цена растёт каждые 50 участниц.</b> Первые 50 участниц заходят за 490 ₽, дальше каждые 50 мест цена поднимается на 100 ₽.</p>
-        <div class="rz-facts">
-          <div data-rz-leftline><span>По этой цене</span><b>осталось <span data-rz-left>50</span> мест</b></div>
-          <div><span>Продажи закрываются</span><b>3 ноября в 23:59 по Москве</b></div>
-        </div>
+        <dl class="rz-facts">
+          <div data-rz-leftline><dt>По этой цене</dt><dd>осталось <span data-rz-left>50</span> мест</dd></div>
+          <div><dt>Продажи закрываются</dt><dd>3 ноября, 23:59 мск</dd></div>
+        </dl>
       </div>
       <div class="rz-price__col">
         <p class="label">Что входит</p>
