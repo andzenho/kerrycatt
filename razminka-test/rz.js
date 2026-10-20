@@ -16,6 +16,7 @@
   function apply() {
     $$("[data-rz-price]").forEach(function (e) { e.textContent = fmt(step.rub); });
     $$("[data-rz-left]").forEach(function (e) { e.textContent = left; });
+    $$("[data-rz-next]").forEach(function (e) { var n = STEPS[Math.min(i + 1, STEPS.length - 1)]; e.textContent = fmt(n.rub); });
     if (step.last) $$("[data-rz-leftline]").forEach(function (e) { e.hidden = true; });
     // полоска мест текущей ступени и лесенка цен
     $$("[data-rz-bar]").forEach(function (e) { e.style.width = (step.last ? 100 : (50 - left) / 50 * 100) + "%"; });
