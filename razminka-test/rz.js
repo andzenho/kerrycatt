@@ -17,6 +17,9 @@
     $$("[data-rz-price]").forEach(function (e) { e.textContent = fmt(step.rub); });
     $$("[data-rz-left]").forEach(function (e) { e.textContent = left; });
     if (step.last) $$("[data-rz-leftline]").forEach(function (e) { e.hidden = true; });
+    // полоска мест текущей ступени и лесенка цен
+    $$("[data-rz-bar]").forEach(function (e) { e.style.width = (step.last ? 100 : (50 - left) / 50 * 100) + "%"; });
+    $$("[data-rz-ladder]").forEach(function (e) { e.innerHTML = STEPS.map(function (s, k) { return '<i style="--k:' + k + '"' + (k === i ? ' class="on" data-p="' + fmt(s.rub) + ' ₽"' : "") + "></i>"; }).join(""); });
     var now = Date.now(), closed = $$("[data-rz-closed]")[0], pay = $$("[data-rz-pay]")[0];
     if (now > new Date(CLOSE).getTime()) { pay.hidden = true; closed.hidden = false; closed.textContent = "Продажи закрыты"; }
     else if (now < new Date(OPEN).getTime()) { pay.hidden = true; closed.hidden = false; closed.textContent = "Продажи откроются 26 октября в 10:00 по Москве"; }
