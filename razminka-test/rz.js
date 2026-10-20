@@ -20,7 +20,8 @@
     if (step.last) $$("[data-rz-leftline]").forEach(function (e) { e.hidden = true; });
     // полоска мест текущей ступени и лесенка цен
     $$("[data-rz-bar]").forEach(function (e) { e.style.width = (step.last ? 100 : (50 - left) / 50 * 100) + "%"; });
-    $$("[data-rz-ladder]").forEach(function (e) { e.innerHTML = STEPS.map(function (s, k) { return '<i style="--k:' + k + '"' + (k === i ? ' class="on" data-p="' + fmt(s.rub) + ' ₽"' : "") + "></i>"; }).join(""); });
+    // лесенка: столбик на каждую ступень, подпись цены через ступень и на текущей
+    $$("[data-rz-ladder]").forEach(function (e) { e.innerHTML = STEPS.map(function (s, k) { var lab = k === i || (k % 2 === 0 && Math.abs(k - i) > 1); return '<span class="rz-st' + (k === i ? " on" : "") + '"><i style="--k:' + k + '"></i>' + (lab ? "<em>" + fmt(s.rub) + "</em>" : "") + "</span>"; }).join(""); });
     var now = Date.now(), closed = $$("[data-rz-closed]")[0], pay = $$("[data-rz-pay]")[0];
     if (now > new Date(CLOSE).getTime()) { pay.hidden = true; closed.hidden = false; closed.textContent = "Продажи закрыты"; }
     else if (now < new Date(OPEN).getTime()) { pay.hidden = true; closed.hidden = false; closed.textContent = "Продажи откроются 26 октября в 10:00 по Москве"; }

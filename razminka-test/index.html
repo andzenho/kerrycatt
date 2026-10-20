@@ -91,12 +91,12 @@ h2 em{white-space:normal}.rz-thesis{max-width:560px;margin:20px auto 0;text-alig
 .rz-price .label{color:var(--on-l)}
 .rz-price .rz-price__now{display:flex;align-items:baseline;gap:10px;margin-top:6px;font:400 clamp(80px,22vw,112px)/.9 var(--f-display)}
 .rz-price .rz-price__now small{font:600 30px/1 var(--f-body)}
-.rz-ladder{display:grid;grid-template-columns:repeat(11,1fr);gap:4px;margin-top:20px}
-.rz-ladder i{height:36px;border-radius:6px;background:rgba(14,10,11,.1);position:relative}
-.rz-ladder i.on{background:linear-gradient(180deg,#C02841,#8C1829)}
-.rz-ladder i.on::after{content:attr(data-p);position:absolute;left:50%;bottom:calc(100% + 6px);transform:translateX(-50%);white-space:nowrap;font:800 11px/1 var(--f-body);color:var(--cta)}
-.rz-ladder i:nth-child(n){height:calc(14px + var(--k)*2.6px);align-self:end}
-.rz-ladder{align-items:end;height:56px}
+.rz-ladder{display:grid;grid-template-columns:repeat(11,1fr);gap:4px;align-items:end;margin-top:20px;padding-bottom:22px}
+.rz-st{position:relative;display:flex;flex-direction:column;justify-content:flex-end}
+.rz-st i{display:block;height:calc(12px + var(--k)*2.8px);border-radius:6px;background:rgba(14,10,11,.12)}
+.rz-st.on i{background:linear-gradient(180deg,#C02841,#8C1829)}
+.rz-st em{position:absolute;left:50%;top:calc(100% + 7px);transform:translateX(-50%);white-space:nowrap;font:700 10.5px/1 var(--f-body);font-style:normal;color:var(--on-l)}
+.rz-st.on em{font-weight:800;color:var(--cta)}
 .rz-price__rule{margin-top:12px;font:600 14.5px/1.45 var(--f-body);color:var(--on-l)}
 .rz-facts{display:grid;grid-template-columns:1fr 1fr;margin:20px 0 0;border:1px solid var(--line-l);border-radius:18px;overflow:hidden}
 .rz-facts div{display:flex;flex-direction:column;justify-content:space-between;gap:8px;padding:14px 16px}
@@ -457,6 +457,6 @@ h2 em{white-space:normal}.rz-thesis{max-width:560px;margin:20px auto 0;text-alig
 </div>
 
 <script src="../assets/bi2/page.js?v=rz1"></script>
-<script src="rz.js?v=4"></script>
+<script src="rz.js?v=5"></script>
 </body>
 </html>
