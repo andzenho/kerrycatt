@@ -4,13 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#0E0A0B">
+<meta name="theme-color" content="#16191B">
 <title>Разминка · Kerry Catt · тест</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Herr+Von+Muellerhoff&family=Manrope:wght@400;500;600;700;800&family=Oranienbaum&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/bi2/style.css?v=rz2">
 <style>
+/* палитра Разминки: холодный графит под фон фото первого экрана, красный акцент как у Большой Игры */
+:root{--ink:#121517;--wine:#1E262B;--wine-2:#2A353C}
+body{background:var(--ink)}
+.hero{background:radial-gradient(85% 50% at 28% 22%,rgba(78,95,106,.6) 0%,rgba(78,95,106,0) 72%),radial-gradient(120% 260px at 50% 560px,rgba(184,36,58,.26) 0%,rgba(184,36,58,0) 100%),#17191B}
+.sec--wine{background:radial-gradient(120% 70% at 50% 0%,#3B4952 0%,#27313717 0%,#263036 34%,#171C1F 100%)}
+.hero__photo img{object-position:50% 10%}
+.foot{background:#0E1113}
+.bar{background:rgba(18,21,23,.92)}
 /* Разминка поверх общего стиля Большой Игры: свои блоки, акценты и ритм */
 .hero .pills{margin-bottom:4px}
 .pills li{min-width:150px}
@@ -117,7 +125,7 @@
     </ul>
     <div class="hero__stage">
       <h1>Разминка</h1>
-      <div class="hero__photo"><img src="../assets/hero-kerry-2.webp" alt="Карина" width="1024" height="1536" fetchpriority="high"></div>
+      <div class="hero__photo"><img src="../assets/razminka-hero.webp" alt="Карина" width="1024" height="1535" fetchpriority="high"></div>
       <p class="hand hero__sign">Kerry Catt</p>
     </div>
     <p class="rz-hl">За 4 дня снимешь <em>свой первый рилс</em>, даже если не знаешь, о чём рассказывать</p>
