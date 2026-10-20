@@ -62,10 +62,11 @@
   var body = overlay.querySelector(".bgl-body"), method = "rub", openedAt = 0, sending = false;
   function form() {
     body.innerHTML = '<h2 class="bgl-title">Занять место</h2><p class="bgl-sub">Разминка · 3–6 ноября · ' + (method === "rub" ? fmt(step.rub) + " ₽" : "$" + step.usd) + "</p>" +
-      '<p class="bgl-lead">Оставь контакты, и откроется оплата. После оплаты Даша напишет тебе в Telegram и пришлёт доступ.</p>' +
+      '<p class="bgl-lead">Оставь контакты, и откроется оплата. После оплаты ты сразу получишь доступ в Телеграм-канал Разминки, а приглашение продублируем на указанную почту.</p>' +
       '<form class="bgl-form" novalidate>' +
       '<div class="bgl-field" data-f="name"><label class="bgl-label" for="rz-name">Имя</label><input class="bgl-input" id="rz-name" name="name" autocomplete="given-name" maxlength="80"></div>' +
       '<div class="bgl-field" data-f="phone"><label class="bgl-label" for="rz-phone">Телефон</label><input class="bgl-input" id="rz-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00" maxlength="30"></div>' +
+      '<div class="bgl-field" data-f="email"><label class="bgl-label" for="rz-email">Почта</label><input class="bgl-input" id="rz-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="name@mail.ru" maxlength="120"><p class="bgl-hint">Сюда продублируем приглашение в канал</p></div>' +
       '<div class="bgl-field" data-f="tg"><label class="bgl-label" for="rz-tg">Ник в Телеграме</label><input class="bgl-input" id="rz-tg" name="tg" autocomplete="off" placeholder="@nickname" maxlength="60"></div>' +
       '<div class="bgl-hp" aria-hidden="true"><input name="company" tabindex="-1" autocomplete="off"></div>' +
       '<div class="bgl-field" data-f="consent"><label class="bgl-chk"><input type="checkbox" name="consent_pd"><span>Даю <a href="../consent/" target="_blank" rel="noopener">согласие на обработку персональных данных</a> и принимаю <a href="../privacy/" target="_blank" rel="noopener">Политику</a></span></label>' +
@@ -77,7 +78,7 @@
     body.innerHTML = '<div class="bgl-done"><h2 class="bgl-title">Остался один шаг</h2><p class="bgl-sub">Разминка · 3–6 ноября</p>' +
       '<div class="bgl-field" data-f="offer"><label class="bgl-chk"><input type="checkbox" name="offer"><span>Принимаю <a href="../offer/" target="_blank" rel="noopener">оферту</a> и <a href="../offer-prilozhenie-2/" target="_blank" rel="noopener">Приложение № 2</a>, мне есть 18 лет</span></label></div>' +
       (link ? '<a class="bgl-btn bgl-pay off" href="' + link + '" target="_blank" rel="noopener">' + (method === "rub" ? "Оплатить " + fmt(step.rub) + " ₽" : "Оплатить $" + step.usd + " зарубежной картой") + "</a>"
-            : '<p class="bgl-note">Ссылка на оплату появится здесь к старту продаж. Заявку мы сохранили, Даша напишет тебе в Telegram.</p>') + "</div>";
+            : '<p class="bgl-note">Ссылка на оплату появится здесь к старту продаж. Заявку мы сохранили.</p>') + "</div>";
   }
   function mark(f, m) { var b = body.querySelector('[data-f="' + f + '"]'); if (!b) return null; var el = b.querySelector(".bgl-input"); if (el) el.classList.add("bad"); if (!b.querySelector(".bgl-err")) b.insertAdjacentHTML("beforeend", '<p class="bgl-err">' + m + "</p>"); return b; }
   function post(b) { return fetch(EP, { method: "POST", body: b }).then(function (r) { return r.json(); }).then(function (j) { return !!(j && j.ok); }).catch(function () { return false; }); }
@@ -88,13 +89,15 @@
     var name = f.name.value.trim(), phone = f.phone.value.trim(), tg = f.tg.value.trim(), bad = [];
     if (name.length < 2) bad.push(mark("name", "Напиши, как тебя зовут"));
     if (phone.replace(/\D/g, "").length < 10) bad.push(mark("phone", "Похоже, в номере не хватает цифр"));
-    if (tg.replace("@", "").length < 2) bad.push(mark("tg", "Укажи ник, Даша напишет туда"));
+    var email = f.email.value.trim();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) bad.push(mark("email", "Проверь почту, на неё придёт приглашение"));
+    if (tg.replace("@", "").length < 2) bad.push(mark("tg", "Укажи ник в Телеграме"));
     if (!f.consent_pd.checked) bad.push(mark("consent", "Без согласия на обработку данных заявку не отправить"));
     bad = bad.filter(Boolean); if (bad.length) { bad[0].scrollIntoView({ behavior: "smooth", block: "center" }); return; }
     if (!/^@/.test(tg) && !/t\.me\//.test(tg)) tg = "@" + tg;
     var price = method === "rub" ? step.rub + " ₽" : "$" + step.usd;
     var payload = JSON.stringify({ kind: "bi", source: "razminka", lead: { tariff: "Разминка", type: "Разминка · " + price + " · " + (method === "rub" ? "рубли" : "зарубежная карта"),
-      name: name, phone: phone, tgNick: tg, consent_pd: true, consent_ads: f.consent_ads.checked, consent_ts: new Date().toISOString(), consent_rev: REV, utm: marks() },
+      name: name, phone: phone, tgNick: tg, email: email, consent_pd: true, consent_ads: f.consent_ads.checked, consent_ts: new Date().toISOString(), consent_rev: REV, utm: "email=" + email + (marks() ? "; " + marks() : "") },
       hp: f.company.value || (Date.now() - openedAt < 2500 ? "fast" : ""), page: location.href.split("#")[0].slice(0, 300), ua: navigator.userAgent.slice(0, 160) });
     sending = true; var btn = f.querySelector(".bgl-btn"); btn.disabled = true; btn.textContent = "Отправляю…";
     post(payload).then(function (ok) { sending = false; if (!ok) queue(payload); pay(); });
