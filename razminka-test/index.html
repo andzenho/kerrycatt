@@ -60,7 +60,14 @@ body{background:var(--ink)}
 /* яппинг */
 .rz-thesis{margin-top:28px;text-align:center}
 .rz-kicker{text-align:center;margin-bottom:14px;color:rgba(240,231,219,.7)}.sec--wine h2 em{color:var(--cream);opacity:.82}
-.rz-thesis span{display:block;max-width:560px;margin:0 auto;font:500 17.5px/1.55 var(--f-body);color:var(--on-d);text-align:center}.sec--wine h2 em{white-space:normal}.rz-thesis{margin-top:20px}
+.sec--wine h2 em{white-space:normal}.rz-thesis{max-width:560px;margin:20px auto 0;text-align:center;font:500 18px/1.5 var(--f-body);color:var(--on-d)}
+.rz-thesis b{color:var(--cream);font-weight:800}
+.rz-why{display:grid;gap:10px;max-width:560px;margin:28px auto 0}
+.rz-why li{display:flex;align-items:center;gap:14px;padding:14px 18px;border-radius:18px;background:rgba(14,17,19,.4);border:1px solid rgba(240,231,219,.14);font:500 16.5px/1.4 var(--f-body);color:var(--on-d);text-align:left}
+.rz-why b{color:var(--cream);font-weight:800}
+.rz-why i{flex:none;display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:linear-gradient(180deg,#B8243A,#7A1425)}
+.rz-why svg{width:20px;height:20px;fill:none;stroke:#FFF8EE;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+@media (min-width:980px){.rz-why{grid-template-columns:repeat(3,1fr);max-width:none}.rz-why li{flex-direction:column;text-align:center;padding:22px 18px}}
 .rz-formula{max-width:640px;margin:36px auto 0;padding:22px 24px;border-radius:24px;background:var(--cream);color:var(--ink);text-align:center;font:600 17.5px/1.5 var(--f-body)}
 .rz-formula b{display:block;margin-top:6px;font:400 clamp(28px,7.4vw,40px)/1.05 var(--f-display);text-transform:uppercase;color:var(--cta)}
 /* 4 дня */
@@ -104,8 +111,12 @@ body{background:var(--ink)}
 .rz-after{display:flex;gap:12px;align-items:flex-start;margin-top:18px;font:600 15px/1.45 var(--f-body);color:var(--on-l)}
 .rz-after::before{content:"✈";flex:none;display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--cream);font-size:14px}
 /* кринж */
-.rz-me{margin-top:28px;padding:24px 22px;border-radius:24px;background:rgba(14,10,11,.3);border:1px solid rgba(240,231,219,.18);font:500 17.5px/1.55 var(--f-body);color:var(--on-d)}
-.rz-me b{color:var(--cream)}
+.rz-me{margin-top:34px;text-align:left}
+.rz-me__big{font:400 clamp(30px,8.2vw,46px)/1.06 var(--f-display);text-transform:uppercase;color:var(--cream)}
+.rz-me__big em{font-style:normal;color:var(--red-d)}
+.rz-me__txt{margin-top:24px;padding-left:18px;border-left:2px solid var(--red-d);font:500 17.5px/1.6 var(--f-body);color:var(--on-d)}
+.rz-me__txt b{color:var(--cream);font-weight:800}
+.rz-me__sign{margin:10px 0 0 6px;padding:0 .4em .15em 0;font-size:58px;color:var(--cream);transform:rotate(-4deg);transform-origin:left center}
 .rz-tg{max-width:420px;margin:26px auto 0;padding:16px 18px 14px;border-radius:22px 22px 22px 6px;background:var(--cream);color:var(--ink)}
 .rz-tg small{display:block;font:800 12px/1.3 var(--f-body);color:var(--cta)}
 .rz-tg p{margin-top:6px;font:600 18px/1.4 var(--f-body)}
@@ -301,7 +312,12 @@ body{background:var(--ink)}
   <div class="wrap col col--wide">
     <p class="label rz-kicker">Почему яппинг</p>
     <h2>Яппинг это <em>тренд 2027 года</em></h2>
-    <div class="rz-thesis"><span>и набирать своих людей в блог ещё никогда не было так легко, как сейчас. Ты просто разговариваешь на камеру, и люди подписываются на тебя как на человека, а мне именно такие ролики принесли больше всего подписчиков.</span></div>
+    <p class="rz-thesis">И набирать своих людей в блог <b>ещё никогда не было так легко, как сейчас</b></p>
+    <ul class="rz-why">
+      <li><i><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0013 0M12 17.5V21"/></svg></i><span>Ты просто <b>разговариваешь на камеру</b></span></li>
+      <li><i><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/></svg></i><span>Люди подписываются на тебя <b>как на человека</b></span></li>
+      <li><i><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></i><span>Мне именно такие ролики принесли <b>больше всего подписчиков</b></span></li>
+    </ul>
     <div class="reels">
       <ul class="reels__row" data-reels-row>
         <li><div class="reel"><img src="../assets/reel2.webp" alt="Рилс Карины, 2,4 млн просмотров" width="570" height="886" loading="lazy"></div><p class="reel__views"><b>2,4 млн</b><span>просмотров</span></p></li>
@@ -375,7 +391,11 @@ body{background:var(--ink)}
 <section class="sec sec--wine">
   <div class="wrap col">
     <h2>Кажется, что в кадре <em>ты кринж</em></h2>
-    <div class="rz-me">Мне тоже так казалось, на первых роликах <b>я двух слов не могла связать и постоянно мекала.</b> Меня называют смелой, потому что я говорю то, что думаю, и на Разминке мы будем <b>жёстко работать с головой</b>, чтобы ты перестала бояться камеры и чужого мнения.</div>
+    <div class="rz-me">
+      <p class="rz-me__big">Мне тоже так казалось, на первых роликах <em>я двух слов не могла связать и постоянно мекала.</em></p>
+      <p class="rz-me__txt">Меня называют смелой, потому что я говорю то, что думаю, и на Разминке мы будем <b>жёстко работать с головой</b>, чтобы ты перестала бояться камеры и чужого мнения.</p>
+      <p class="hand rz-me__sign">Kerry Catt</p>
+    </div>
     <div class="rz-tg"><small>моя ученица после своего первого рилса</small><p>«Для меня кажется, что рилс кринж, но мне уже пофиг»</p></div>
     <p class="rz-tip"><i>!</i><span>Первый ролик можно выложить в пробные рилсы. Их показывают тем, кто на тебя не подписан, так что знакомые его почти не увидят.</span></p>
     <div class="rz-punch"><p>Не бойся.</p><p>Всегда будут осуждать</p></div>
