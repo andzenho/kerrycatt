@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0E0A0B">
+<title>Разминка · Kerry Catt · тест</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Herr+Von+Muellerhoff&family=Manrope:wght@400;500;600;700;800&family=Oranienbaum&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/bi2/style.css?v=rz1">
+<style>
+/* Разминка: свои мелочи поверх общего стиля Большой Игры */
+.rz-meta{order:1;margin:0 0 6px;text-align:center;font:800 12.5px/1.5 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:rgba(240,231,219,.8)}
+.hero .rz-lead{order:5;position:relative;z-index:2;max-width:560px;margin-top:18px;text-align:center;font:700 clamp(19px,5.2vw,26px)/1.35 var(--f-body);color:var(--cream)}
+.hero .rz-sub{order:6;position:relative;z-index:2;max-width:520px;margin-top:12px;text-align:center;font:500 16.5px/1.5 var(--f-body);color:var(--on-d)}
+.hero .btn--big{order:7}
+.rz-left{display:block;margin-top:14px;text-align:center;font:600 14.5px/1.45 var(--f-body);color:var(--on-d)}
+.hero .rz-left{order:8;position:relative;z-index:2}
+.rz-msgs{display:grid;gap:12px;margin-top:30px}
+.rz-msg{max-width:88%;padding:14px 18px 13px;border-radius:20px 20px 20px 6px;background:#F0E7DB;color:#0E0A0B;font:600 17px/1.45 var(--f-body)}
+.rz-msg:nth-child(even){justify-self:end;border-radius:20px 20px 6px 20px}
+.rz-msg small{display:block;margin-top:4px;font:600 12.5px/1.3 var(--f-body);opacity:.6}
+.rz-big{margin-top:34px;text-align:center;font:400 clamp(34px,9vw,54px)/1.05 var(--f-display);text-transform:uppercase;color:var(--cream)}
+.rz-big em{font-style:normal;color:var(--red-d)}
+.case .rz-row{margin-top:14px}
+.case .rz-row .pill{margin-top:0}
+.case__ini{flex:none;display:flex;align-items:center;justify-content:center;width:88px;height:88px;border-radius:50%;border:2px solid rgba(240,231,219,.3);font:400 40px/1 var(--f-display);color:var(--cream);background:rgba(240,231,219,.06)}
+.rz-days{display:grid;gap:14px;margin-top:30px}
+.rz-day{padding:20px 22px;border-radius:24px;background:rgba(240,231,219,.055);border:1px solid var(--line-d)}
+.rz-day b{display:block;font:800 12px/1.4 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--red-d)}
+.rz-day h3{margin-top:8px;font-size:clamp(28px,7.4vw,38px)}
+.rz-day p{margin-top:8px;font:500 16.5px/1.5 var(--f-body);color:var(--on-d)}
+.rz-day--live{background:radial-gradient(130% 120% at 80% 0%,#8C1829 0%,#5C0F1C 60%,#46091A 100%);border-color:rgba(240,231,219,.3)}
+.rz-day--live b{color:var(--cream)}
+.rz-price{margin-top:30px;padding:26px 22px;border-radius:28px;background:var(--cream);color:var(--ink);text-align:left}
+.rz-price .label{color:var(--on-l)}
+.rz-price .rz-price__now{margin-top:6px;font:400 clamp(64px,18vw,92px)/.95 var(--f-display)}
+.rz-price__now small{font:600 .42em/1 var(--f-body)}
+.rz-price p{margin-top:12px;font:600 16px/1.5 var(--f-body)}
+.rz-price .checks{margin-top:20px}
+.rz-price .checks li{color:var(--on-l)}
+.rz-pay{display:grid;gap:12px;margin-top:22px}
+.rz-pay .btn--big{margin:0;max-width:none}
+.rz-pay .btn--ghost2{background:transparent;color:var(--ink);border:1.5px solid rgba(14,10,11,.4);box-shadow:none}
+.rz-closed{margin-top:22px;padding:16px;border-radius:18px;background:var(--ink);color:var(--cream);text-align:center;font:800 16px/1.4 var(--f-body)}
+.rz-after{margin-top:18px;font:500 15px/1.5 var(--f-body);color:var(--on-l)}
+.rz-quote{margin-top:28px;padding:20px 22px;border-left:3px solid var(--red-d);font:600 19px/1.45 var(--f-body);color:var(--cream)}
+.rz-quote small{display:block;margin-top:8px;font:600 13.5px/1.3 var(--f-body);color:var(--on-d)}
+.rz-text{margin-top:22px;font:500 17px/1.55 var(--f-body);color:var(--on-d)}
+.bar{justify-content:center}
+@media (min-width:980px){.rz-meta{text-align:left}.hero .rz-lead,.hero .rz-sub,.hero .rz-left{text-align:left;margin-left:0}.rz-days{grid-template-columns:1fr 1fr}.rz-price{padding:34px 36px}}
+</style>
+</head>
+<body>
+
+<!-- ───────── 1. Первый экран ───────── -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <p class="rz-meta">kerry.catt · 765 тысяч в Instagram<br>3–6 ноября · 4 дня онлайн</p>
+    <div class="hero__stage">
+      <h1>Разминка</h1>
+      <div class="hero__photo"><img src="../assets/hero-kerry-2.webp" alt="Карина" width="1024" height="1536" fetchpriority="high"></div>
+      <p class="hand hero__sign">Kerry Catt</p>
+    </div>
+    <p class="rz-lead">За 4 дня снимешь свой первый рилс, даже если не знаешь, о чём рассказывать</p>
+    <p class="rz-sub">Снимаешь с первого дня, эксперты разбирают твои ролики, а в финале эфир со мной</p>
+    <a class="btn btn--big" href="#price">Занять место за <span data-rz-price>490</span> ₽</a>
+    <span class="rz-left" data-rz-leftline>Цена растёт каждые 50 участниц, по <span data-rz-price>490</span> ₽ осталось <span data-rz-left>50</span> мест</span>
+  </div>
+</header>
+
+<!-- ───────── 2. Так вы мне пишете ───────── -->
+<section class="sec" id="pains">
+  <div class="wrap col">
+    <h2>Так вы <em>мне пишете</em></h2>
+    <!-- временно текстом: сюда встанут скрины сообщений -->
+    <div class="rz-msgs">
+      <p class="rz-msg">«Хотя бы начать, это самое страшное для меня»</p>
+      <p class="rz-msg">«Каждую неделю клятвенно обещаю себе начать»</p>
+      <p class="rz-msg">«Я чайник в блоггинге»</p>
+      <p class="rz-msg">«У меня голова пустеет, когда беру телефон»</p>
+    </div>
+    <p class="rz-big">Если узнала себя, <em>Разминка для тебя.</em></p>
+  </div>
+</section>
+
+<!-- ───────── 3. Кейсы ───────── -->
+<section class="sec sec--line cases">
+  <div class="wrap col">
+    <h2>Что получилось <em>у моих учениц</em></h2>
+    <div class="cases__car" data-car>
+      <div class="cases__nav">
+        <button type="button" class="arrow arrow--prev" data-car-go="-1" aria-label="Предыдущий кейс"></button>
+        <button type="button" class="arrow" data-car-go="1" aria-label="Следующий кейс"></button>
+      </div>
+      <div class="cases__row" data-car-row>
+        <article class="case">
+          <header class="case__head"><div><p class="case__name">Сайхо</p><p class="case__who">фармацевт из Москвы</p></div><img class="case__ava" src="../assets/case-saikho-ava.webp?v=2" alt="Сайхо" width="240" height="240" loading="lazy"></header>
+            <div class="rz-row"><span class="pill">Было</span><p class="case__text">140 подписчиков, ни разу в жизни не снимала рилс</p></div>
+            <div class="rz-row"><span class="pill">Сделала</span><p class="case__text">выложила свой первый рилс и написала в чат «Это мой первый рилс за всю мою жизнь»</p></div>
+            <div class="rz-row"><span class="pill pill--red">Стало</span><p class="case__text">за месяц её ролики набрали 474 тысячи просмотров</p></div>
+        </article>
+        <article class="case">
+          <header class="case__head"><div><p class="case__name">Velunova</p><p class="case__who">диджей</p></div><img class="case__ava" src="../assets/case-velunova-ava.webp?v=2" alt="Velunova" width="240" height="240" loading="lazy"></header>
+            <div class="rz-row"><span class="pill">Было</span><p class="case__text">«Раньше я бы такое не то что не выставила, а и не сняла бы»</p></div>
+            <div class="rz-row"><span class="pill">Сделала</span><p class="case__text">по совету эксперта выложила рилс про имбирный шот и завела свою рубрику «Каждый раз»</p></div>
+            <div class="rz-row"><span class="pill pill--red">Стало</span><p class="case__text">её ролики досматривают до 40–50 секунд вместо 20, один набрал 119 тысяч просмотров</p></div>
+        </article>
+        <article class="case">
+          <header class="case__head"><div><p class="case__name">Маша</p></div><span class="case__ini">М</span></header>
+            <div class="rz-row"><span class="pill">Было</span><p class="case__text">747 подписчиков</p></div>
+            <div class="rz-row"><span class="pill">Сделала</span><p class="case__text">отправила ролик на разбор, и его разобрали на эфире</p></div>
+            <div class="rz-row"><span class="pill pill--red">Стало</span><p class="case__text">ролик за день набрал больше 100 тысяч просмотров, она сняла 43 ролика и выросла до 2 166 подписчиков</p></div>
+        </article>
+        <article class="case">
+          <header class="case__head"><div><p class="case__name">Ольга</p><p class="case__who">психолог</p></div><img class="case__ava" src="../assets/case-olga-ava.webp" alt="Ольга" width="240" height="240" loading="lazy"></header>
+            <div class="rz-row"><span class="pill">Было</span><p class="case__text">блог про тревогу несколько лет стоял на 2 400 подписчиках</p></div>
+            <div class="rz-row"><span class="pill">Сделала</span><p class="case__text">записала три рилса</p></div>
+            <div class="rz-row"><span class="pill pill--red">Стало</span><p class="case__text">351, 171 и 71 тысяча просмотров и 6 748 подписчиков</p></div>
+        </article>
+        <article class="case">
+          <header class="case__head"><div><p class="case__name">Zlodeyka</p></div><span class="case__ini">Z</span></header>
+            <div class="rz-row"><span class="pill">Было</span><p class="case__text">выкладывала только милые видео своих животных</p></div>
+            <div class="rz-row"><span class="pill">Сделала</span><p class="case__text">сняла первое видео со своим голосом</p></div>
+            <div class="rz-row"><span class="pill">Её слова</span><p class="case__text">«Страшно, но пофиг уже»</p></div>
+        </article>
+      </div>
+    </div>
+    <a class="btn btn--big" href="#price">Занять место за <span data-rz-price>490</span> ₽</a>
+  </div>
+</section>
+
+<!-- ───────── 4. Почему яппинг ───────── -->
+<section class="sec sec--wine">
+  <div class="wrap col col--wide">
+    <h2>Почему <em>яппинг</em></h2>
+    <div class="sheet why__answer"><p>Яппинг это тренд 2027 года, и набирать своих людей в блог ещё никогда не было так легко, как сейчас. Ты просто разговариваешь на камеру, и люди подписываются на тебя как на человека, а мне именно такие ролики принесли больше всего подписчиков.</p></div>
+    <div class="reels">
+      <ul class="reels__row" data-reels-row>
+        <li><div class="reel"><img src="../assets/reel2.webp" alt="Рилс Карины, 2,4 млн просмотров" width="570" height="886" loading="lazy"></div><p class="reel__views"><b>2,4 млн</b><span>просмотров</span></p></li>
+        <li><div class="reel"><img src="../assets/reel8.webp" alt="Рилс Карины, 1,8 млн просмотров" width="570" height="886" loading="lazy"></div><p class="reel__views"><b>1,8 млн</b><span>просмотров</span></p></li>
+        <li><div class="reel"><img src="../assets/reel6.webp" alt="Рилс Карины, 1,5 млн просмотров" width="570" height="886" loading="lazy"></div><p class="reel__views"><b>1,5 млн</b><span>просмотров</span></p></li>
+        <li><div class="reel"><img src="../assets/reel7.webp" alt="Рилс Карины, 1,5 млн просмотров" width="570" height="886" loading="lazy"></div><p class="reel__views"><b>1,5 млн</b><span>просмотров</span></p></li>
+        <li><div class="reel"><img src="../assets/reel1.webp" alt="Рилс Карины, 1,2 млн просмотров" width="570" height="886" loading="lazy"></div><p class="reel__views"><b>1,2 млн</b><span>просмотров</span></p></li>
+        <li><div class="reel"><img src="../assets/reel3.webp" alt="Рилс Карины, 1,1 млн просмотров" width="570" height="886" loading="lazy"></div><p class="reel__views"><b>1,1 млн</b><span>просмотров</span></p></li>
+        <li><div class="reel"><img src="../assets/reel4.webp" alt="Рилс Карины, 1 млн просмотров" width="570" height="886" loading="lazy"></div><p class="reel__views"><b>1 млн</b><span>просмотров</span></p></li>
+        <li><div class="reel"><img src="../assets/reel5.webp" alt="Рилс Карины, 1 млн просмотров" width="570" height="886" loading="lazy"></div><p class="reel__views"><b>1 млн</b><span>просмотров</span></p></li>
+      </ul>
+      <div class="reels__nav">
+        <button type="button" class="arrow arrow--prev" data-reels="-1" aria-label="Назад"></button>
+        <button type="button" class="arrow" data-reels="1" aria-label="Вперёд"></button>
+      </div>
+    </div>
+    <p class="rz-text" style="text-align:center;max-width:620px;margin-inline:auto">Со стороны кажется, что я просто включаю камеру и болтаю, но у каждого ролика есть формула. Её я и покажу на Разминке.</p>
+  </div>
+</section>
+
+<!-- ───────── 5. Как проходят 4 дня ───────── -->
+<section class="sec">
+  <div class="wrap col col--wide">
+    <h2>Как проходят <em>4 дня</em></h2>
+    <div class="rz-days">
+      <div class="rz-day"><b>День 1 · 3 ноября</b><h3>Первый ролик</h3><p>Формула разговорного рилса и твой первый ролик в тот же вечер</p></div>
+      <div class="rz-day"><b>День 2 · 4 ноября</b><h3>Тема</h3><p>Где в обычной жизни спрятаны темы, которые смотрят</p></div>
+      <div class="rz-day"><b>День 3 · 5 ноября</b><h3>Разбор</h3><p>Эксперты разбирают твой ролик, и ты видишь, почему его пролистывают на первых секундах</p></div>
+      <div class="rz-day rz-day--live"><b>День 4 · 6 ноября · Эфир со мной в 21:00 по Москве</b><h3>Голова</h3><p>Работаем с головой и разбираем, почему ты боишься кадра и чужого мнения и как это перестать</p></div>
+    </div>
+    <a class="btn btn--big" href="#price">Занять место за <span data-rz-price>490</span> ₽</a>
+  </div>
+</section>
+
+<!-- ───────── 6. Сколько стоит ───────── -->
+<section class="sec sec--line" id="price">
+  <div class="wrap col">
+    <h2>Сколько <em>стоит</em></h2>
+    <div class="rz-price">
+      <p class="label">Цена растёт каждые 50 участниц</p>
+      <p>Первые 50 участниц заходят за 490 ₽, дальше каждые 50 мест цена поднимается на 100 ₽.</p>
+      <p class="rz-price__now"><span data-rz-price>490</span> <small>₽</small></p>
+      <p data-rz-leftline>Сейчас <span data-rz-price>490</span> ₽, по этой цене осталось <span data-rz-left>50</span> мест</p>
+      <p>Продажи закрываются 3 ноября в 23:59 по Москве</p>
+      <p class="label" style="margin-top:22px">Что входит</p>
+      <ul class="checks">
+        <li>4 дня заданий и чат участниц</li>
+        <li>Разбор роликов от экспертов</li>
+        <li>Эфир со мной</li>
+        <li>В подарок 50 идей рилсов, 100 хуков и промпты для нейросетей</li>
+        <li>Скидка на Большую Игру для участниц Разминки</li>
+      </ul>
+      <div class="rz-pay" data-rz-pay>
+        <a class="btn btn--big" href="#price" data-rz-open="rub">Оплатить в рублях</a>
+        <a class="btn btn--big btn--ghost2" href="#price" data-rz-open="intl">Оплатить зарубежной картой</a>
+      </div>
+      <p class="rz-closed" data-rz-closed hidden></p>
+      <p class="rz-after">После оплаты моя помощница Даша напишет тебе в Telegram и пришлёт доступ.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── 7. Кринж ───────── -->
+<section class="sec sec--wine">
+  <div class="wrap col">
+    <h2>Кажется, что в кадре <em>ты кринж</em></h2>
+    <p class="rz-text">Мне тоже так казалось, на первых роликах я двух слов не могла связать и постоянно мекала. Меня называют смелой, потому что я говорю то, что думаю, и на Разминке мы будем жёстко работать с головой, чтобы ты перестала бояться камеры и чужого мнения.</p>
+    <p class="rz-quote">«Для меня кажется, что рилс кринж, но мне уже пофиг»<small>моя ученица после своего первого рилса</small></p>
+    <p class="rz-text">Первый ролик можно выложить в пробные рилсы. Их показывают тем, кто на тебя не подписан, так что знакомые его почти не увидят.</p>
+    <p class="rz-big">Не бойся. <em>Всегда будут осуждать</em></p>
+  </div>
+</section>
+
+<!-- ───────── 8. Вопросы ───────── -->
+<section class="sec">
+  <div class="wrap col">
+    <h2>Вопросы</h2>
+    <div class="faq">
+      <details><summary>Я ни разу не снимала</summary><p>Разминка как раз для этого, нужен только телефон.</p></details>
+      <details><summary>Нет времени</summary><p>Задание одно в день, его можно снять вечером.</p></details>
+      <details><summary>Боюсь, что увидят знакомые</summary><p>Выложи ролик в пробные рилсы, их показывают только тем, кто на тебя не подписан.</p></details>
+      <details><summary>Мне уже не 25</summary><p>«Каждому своё. Это нормально. Но попробовать ты должен»</p></details>
+      <details><summary>Я не в России</summary><p>Для тебя есть кнопка «Оплатить зарубежной картой».</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── 9. Обычная жизнь ───────── -->
+<section class="sec sec--line">
+  <div class="wrap col">
+    <h2>«У меня обычная жизнь, <em>мне не о чем снимать»</em></h2>
+    <p class="rz-text">С этим ко мне приходят чаще всего, а вот что участницы пишут уже после первого урока</p>
+    <!-- временно текстом: сюда встанут скрины из канала ЯППИНГ, посты 97, 98 и 106 -->
+    <div class="rz-msgs">
+      <p class="rz-msg">«Уже после одного урока появилось понимание, что на самом деле это не так сложно, придумывать идеи к видео»</p>
+      <p class="rz-msg">«Теперь в голове есть структура и на самом деле я уже начинаю видеть идеи очень во многом»</p>
+      <p class="rz-msg">«Я снимаю уже пол года, и до конца не могу остановиться в одной теме, у меня их много… Но благодаря первому уроку очень многое прояснилось в голове»</p>
+    </div>
+    <a class="btn btn--big" href="#price">Занять место за <span data-rz-price>490</span> ₽</a>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap col">
+    <p class="foot__brand">Разминка <span class="hand">Kerry Catt</span></p>
+    <nav>
+      <a href="../offer/" target="_blank" rel="noopener">Оферта</a>
+      <a href="../offer-prilozhenie-2/" target="_blank" rel="noopener">Приложение № 2. Разминка</a>
+      <a href="../privacy/" target="_blank" rel="noopener">Политика обработки персональных данных</a>
+      <a href="../consent/" target="_blank" rel="noopener">Согласие на обработку персональных данных</a>
+      <a href="../consent-ads/" target="_blank" rel="noopener">Согласие на рассылки</a>
+      <a href="../terms/" target="_blank" rel="noopener">Пользовательское соглашение</a>
+    </nav>
+    <p class="label">@kerry.catt · 3–6 ноября</p>
+  </div>
+</footer>
+
+<div class="bar">
+  <a class="btn btn--sm" href="#price">Занять место за <span data-rz-price>490</span> ₽</a>
+</div>
+
+<script src="../assets/bi2/page.js?v=rz1"></script>
+<script src="rz.js?v=1"></script>
+</body>
+</html>
