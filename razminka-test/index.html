@@ -17,8 +17,11 @@
 .hero h1{letter-spacing:.01em}
 .rz-hl{order:5;position:relative;z-index:2;max-width:600px;margin-top:22px;text-align:center;font:700 clamp(21px,5.8vw,30px)/1.3 var(--f-body);color:var(--cream)}
 .rz-hl em{font-style:normal;color:var(--red-d)}
-.rz-feats{order:6;position:relative;z-index:2;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:18px}
-.rz-feats li{padding:9px 14px 8px;border:1px solid rgba(240,231,219,.28);border-radius:999px;background:rgba(14,10,11,.35);font:700 13.5px/1.2 var(--f-body);color:var(--cream)}
+.rz-feats{order:6;position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;width:100%;max-width:520px;margin-top:22px}
+.rz-feats li{display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px 8px 14px;border:1px solid rgba(240,231,219,.2);border-radius:20px;background:rgba(14,10,11,.4);text-align:center;font:600 13px/1.3 var(--f-body);color:var(--on-d)}
+.rz-feats b{display:block;font-weight:800;color:var(--cream)}
+.rz-feats i{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:linear-gradient(180deg,#B8243A,#7A1425);box-shadow:0 8px 18px -8px rgba(221,59,80,.9)}
+.rz-feats svg{width:20px;height:20px;fill:none;stroke:#FFF8EE;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .hero .btn--big{order:7}
 .rz-seats{order:8;position:relative;z-index:2;width:100%;max-width:460px;margin-top:16px}
 .rz-seats__txt{display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center;font:700 13px/1.3 var(--f-body);color:var(--on-d)}
@@ -92,7 +95,7 @@
 .bar{justify-content:center}
 @media (min-width:980px){
   .rz-seats__txt{align-items:flex-start;text-align:left}.rz-price__col + .rz-price__col > .label{margin-top:0}
-  .rz-hl,.rz-feats{text-align:left;justify-content:flex-start;margin-left:0}
+  .rz-hl{text-align:left;margin-left:0}.rz-feats{margin-left:0}.rz-feats li{padding:18px 12px 16px;font-size:14px}
   .rz-seats{margin-left:0}
   .rz-days{grid-template-columns:1fr 1fr}
   .rz-price{display:grid;grid-template-columns:1fr 1fr;column-gap:44px;padding:36px 40px}
@@ -107,8 +110,8 @@
 <header class="hero" id="top">
   <div class="wrap">
     <ul class="pills">
-      <li><span>kerry.catt</span><b>765 тысяч в Instagram</b></li>
-      <li><span>3–6 ноября</span><b>4 дня онлайн</b></li>
+      <li><span>Даты</span><b>3–6 ноября</b></li>
+      <li><span>Формат</span><b>4 дня онлайн</b></li>
     </ul>
     <div class="hero__stage">
       <h1>Разминка</h1>
@@ -116,7 +119,7 @@
       <p class="hand hero__sign">Kerry Catt</p>
     </div>
     <p class="rz-hl">За 4 дня снимешь <em>свой первый рилс</em>, даже если не знаешь, о чём рассказывать</p>
-    <ul class="rz-feats"><li>Снимаешь с первого дня</li><li>Эксперты разбирают твои ролики</li><li>В финале эфир со мной</li></ul>
+    <ul class="rz-feats"><li><i><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="3"/><path d="M16 10.5l5-3v9l-5-3z"/></svg></i><span>Снимаешь <b>с первого дня</b></span></li><li><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></i><span><b>Эксперты разбирают</b> твои ролики</span></li><li><i><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M7.8 7.8a6 6 0 000 8.4M16.2 7.8a6 6 0 010 8.4M5 5a10 10 0 000 14M19 5a10 10 0 010 14"/></svg></i><span>В финале <b>эфир со мной</b></span></li></ul>
     <a class="btn btn--big" href="#price">Занять место за <span data-rz-price>490</span> ₽</a>
     <div class="rz-seats" data-rz-leftline>
       <p class="rz-seats__txt"><span>Цена растёт каждые 50 участниц</span><span>по <b><span data-rz-price>490</span> ₽</b> осталось <b data-rz-left>50</b> мест</span></p>
