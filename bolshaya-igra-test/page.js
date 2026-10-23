@@ -25,7 +25,7 @@
     if (applied === w) return;
     applied = w;
     if (w.first) return;
-    // цену таймер не трогает: на сайте 24.990 из разметки, меняет её только команда (решение Ильи 23.10)
+    set("[data-price]", w.price);     // цена «В команде»; остальные тарифы по окнам не заданы
     set("[data-due]", "");
     set("[data-dl-top]", w.top);
     set("[data-dl-date]", w.date);
