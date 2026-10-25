@@ -80,7 +80,8 @@
     body.innerHTML = '<div class="bgl-done"><h2 class="bgl-title">Остался один шаг</h2><p class="bgl-sub">Разминка · 3–6 ноября</p>' +
       '<div class="bgl-field" data-f="offer"><label class="bgl-chk"><input type="checkbox" name="offer"><span>Принимаю <a href="../offer/" target="_blank" rel="noopener">оферту</a> и <a href="../offer-prilozhenie-2/" target="_blank" rel="noopener">Приложение № 2</a>, мне есть 18 лет</span></label></div>' +
       (link ? '<a class="bgl-btn bgl-pay off" href="' + link + '" target="_blank" rel="noopener">' + (method === "rub" ? "Оплатить " + fmt(step.rub) + " ₽" : "Оплатить $" + step.usd + " зарубежной картой") + "</a>"
-            : '<p class="bgl-note">Ссылка на оплату появится здесь к старту продаж. Заявку мы сохранили.</p>') + "</div>";
+            : '<p class="bgl-note">Ссылка на оплату появится здесь к старту продаж. Заявку мы сохранили.</p>') +
+      (link ? '<p class="bgl-note">Оплатила? <a href="../razminka-anketa/">Ответь на шесть вопросов</a>, и откроется канал Разминки</p>' : "") + "</div>";
   }
   function mark(f, m) { var b = body.querySelector('[data-f="' + f + '"]'); if (!b) return null; var el = b.querySelector(".bgl-input"); if (el) el.classList.add("bad"); if (!b.querySelector(".bgl-err")) b.insertAdjacentHTML("beforeend", '<p class="bgl-err">' + m + "</p>"); return b; }
   function post(b) { return fetch(EP, { method: "POST", body: b }).then(function (r) { return r.json(); }).then(function (j) { return !!(j && j.ok); }).catch(function () { return false; }); }
@@ -97,6 +98,7 @@
     if (!f.consent_pd.checked) bad.push(mark("consent", "Без согласия на обработку данных заявку не отправить"));
     bad = bad.filter(Boolean); if (bad.length) { bad[0].scrollIntoView({ behavior: "smooth", block: "center" }); return; }
     if (!/^@/.test(tg) && !/t\.me\//.test(tg)) tg = "@" + tg;
+    try { localStorage.setItem("rz_me", JSON.stringify({ name: name, phone: phone, tg: tg })); } catch (e) {}  // для анкеты после оплаты
     var price = method === "rub" ? step.rub + " ₽" : "$" + step.usd;
     var payload = JSON.stringify({ kind: "bi", source: "razminka", lead: { tariff: "Разминка", type: "Разминка · " + price + " · " + (method === "rub" ? "рубли" : "зарубежная карта"),
       name: name, phone: phone, tgNick: tg, email: email, consent_pd: true, consent_ads: f.consent_ads.checked, consent_ts: new Date().toISOString(), consent_rev: REV, utm: "email=" + email + (marks() ? "; " + marks() : "") },
