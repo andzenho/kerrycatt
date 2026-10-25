@@ -34,6 +34,10 @@ body{background:var(--ink)}
 .hero h1{letter-spacing:.01em}
 .rz-hl{order:5;position:relative;z-index:2;max-width:600px;margin-top:22px;text-align:center;font:700 clamp(21px,5.8vw,30px)/1.3 var(--f-body);color:var(--cream)}
 .rz-hl em{font-style:normal;color:var(--red-d)}
+.rz-with{order:5;position:relative;z-index:2;margin-top:18px;font:800 13px/1.2 var(--f-body);letter-spacing:.2em;text-transform:uppercase;color:rgba(240,231,219,.72)}
+.hero .rz-hl{margin-top:12px}
+.rz-lead{order:5;position:relative;z-index:2;max-width:560px;margin-top:14px;text-align:center;font:500 17px/1.5 var(--f-body);color:var(--on-d)}
+.rz-even{order:5;position:relative;z-index:2;max-width:520px;margin-top:10px;text-align:center;font:600 15.5px/1.45 var(--f-body);color:rgba(240,231,219,.66)}
 .rz-feats{order:6;position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;width:100%;max-width:520px;margin-top:22px}
 .rz-feats li{display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px 8px 14px;border:1px solid rgba(240,231,219,.2);border-radius:20px;background:rgba(14,10,11,.4);text-align:center;font:600 13px/1.3 var(--f-body);color:var(--on-d)}
 .rz-feats b{display:block;font-weight:800;color:var(--cream)}
@@ -85,6 +89,10 @@ h2 em{white-space:normal}.rz-thesis{max-width:560px;margin:20px auto 0;text-alig
 .rz-day--live{background:radial-gradient(130% 120% at 80% 0%,#8C1829 0%,#5C0F1C 60%,#46091A 100%);border-color:rgba(240,231,219,.3)}
 .rz-day--live .rz-day__n{background:var(--red-d);color:#FFF8EE}
 .rz-day--live small{color:var(--cream)}
+.rz-res{margin-top:12px;padding:12px 14px;border-radius:16px;background:rgba(240,231,219,.08);border:1px solid rgba(240,231,219,.14);font:500 15px/1.45 var(--f-body);color:var(--on-d)}
+.rz-res b{display:block;margin-bottom:2px;font:800 11.5px/1.3 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--red-d)}
+.rz-day--live .rz-res{background:rgba(14,10,11,.28);border-color:rgba(240,231,219,.22)}.rz-day--live .rz-res b{color:var(--cream)}
+.rz-note{max-width:640px;margin:24px auto 0;text-align:center;font:600 16.5px/1.5 var(--f-body);color:var(--cream)}
 .rz-live{display:inline-block;margin-top:10px;padding:6px 11px 5px;border-radius:999px;background:var(--cream);color:var(--ink);font:800 11px/1.2 var(--f-body);letter-spacing:.1em;text-transform:uppercase}
 /* цена */
 .rz-price{margin-top:30px;padding:26px 22px 24px;border-radius:30px;background:var(--cream);color:var(--ink);text-align:left}
@@ -128,7 +136,7 @@ h2 em{white-space:normal}.rz-thesis{max-width:560px;margin:20px auto 0;text-alig
 .bar{justify-content:center}
 @media (min-width:980px){
   .rz-price__col + .rz-price__col > .label{margin-top:0}
-  .rz-hl{text-align:left;margin-left:0}.rz-feats{margin-left:0}.rz-feats li{padding:18px 12px 16px;font-size:14px}
+  .rz-hl,.rz-with,.rz-lead,.rz-even{text-align:left;margin-left:0}.rz-feats{margin-left:0}.rz-feats li{padding:18px 12px 16px;font-size:14px}
   .rz-seats{margin-left:0}
   .rz-days{grid-template-columns:1fr 1fr}
   .rz-price{display:grid;grid-template-columns:1fr 1fr;column-gap:44px;padding:36px 40px}
@@ -152,8 +160,11 @@ h2 em{white-space:normal}.rz-thesis{max-width:560px;margin:20px auto 0;text-alig
       <div class="hero__photo"><img src="../assets/razminka-hero.webp" alt="Карина" width="1024" height="1535" fetchpriority="high"><ul class="rz-socials" aria-label="Подписчики Карины"><li><i><svg viewBox="0 0 24 24" aria-hidden="true"><defs><radialGradient id="rzig" cx="30%" cy="107%" r="150%"><stop offset="0" stop-color="#FDF497"/><stop offset=".05" stop-color="#FDF497"/><stop offset=".45" stop-color="#FD5949"/><stop offset=".6" stop-color="#D6249F"/><stop offset=".9" stop-color="#285AEB"/></radialGradient></defs><rect x="1.5" y="1.5" width="21" height="21" rx="6" fill="url(#rzig)"/><rect x="6" y="6" width="12" height="12" rx="3.6" fill="none" stroke="#fff" stroke-width="1.6"/><circle cx="12" cy="12" r="2.9" fill="none" stroke="#fff" stroke-width="1.6"/><circle cx="15.6" cy="8.4" r=".9" fill="#fff"/></svg></i><b>762<small>тыс</small></b></li><li><i><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#25F4EE" transform="translate(-.8 -.6)" d="M16.6 2h-3.3v13.3a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9.1a6.3 6.3 0 1 0 5.3 6.2V8.6a8 8 0 0 0 4.4 1.3V6.6a4.5 4.5 0 0 1-4.4-4.6z"/><path fill="#FE2C55" transform="translate(.8 .6)" d="M16.6 2h-3.3v13.3a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9.1a6.3 6.3 0 1 0 5.3 6.2V8.6a8 8 0 0 0 4.4 1.3V6.6a4.5 4.5 0 0 1-4.4-4.6z"/><path fill="#fff" d="M16.6 2h-3.3v13.3a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9.1a6.3 6.3 0 1 0 5.3 6.2V8.6a8 8 0 0 0 4.4 1.3V6.6a4.5 4.5 0 0 1-4.4-4.6z"/></svg></i><b>602<small>тыс</small></b></li><li><i><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="4.5" width="22" height="15" rx="4.5" fill="#FF0000"/><path fill="#fff" d="M10 8.6v6.8l5.6-3.4z"/></svg></i><b>829<small>тыс</small></b></li></ul></div>
       <p class="hand hero__sign">Kerry Catt</p>
     </div>
-    <p class="rz-hl">За 4 дня снимешь <em>свой первый рилс</em>, даже если не знаешь, о чём рассказывать</p>
-    <ul class="rz-feats"><li><i><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="3"/><path d="M16 10.5l5-3v9l-5-3z"/></svg></i><span>Снимаешь <b>с первого дня</b></span></li><li><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></i><span><b>Эксперты разбирают</b> твои ролики</span></li><li><i><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M7.8 7.8a6 6 0 000 8.4M16.2 7.8a6 6 0 010 8.4M5 5a10 10 0 000 14M19 5a10 10 0 010 14"/></svg></i><span>В финале <b>эфир со мной</b></span></li></ul>
+    <p class="rz-with">с Кариной Кэтт</p>
+    <p class="rz-hl">За 4 дня сними <em>свой первый разговорный рилс</em></p>
+    <p class="rz-lead">Найдёшь темы для следующих роликов и разберёшься, как снимать так, чтобы тебя хотелось смотреть</p>
+    <p class="rz-even">Даже если ты никогда не снимала видео и теряешься, как только включаешь камеру</p>
+    <ul class="rz-feats"><li><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M3.5 6l1.2 1.2L7 5M3.5 12l1.2 1.2L7 11M3.5 18l1.2 1.2L7 17"/></svg></i><span><b>Пошаговые</b> задания</span></li><li><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></i><span><b>Разбор роликов</b> от экспертов</span></li><li><i><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M7.8 7.8a6 6 0 000 8.4M16.2 7.8a6 6 0 010 8.4M5 5a10 10 0 000 14M19 5a10 10 0 010 14"/></svg></i><span><b>Финальный эфир</b> с Кариной</span></li></ul>
     <a class="btn btn--big" href="#price">Занять место за <span data-rz-price>490</span> ₽</a>
     <div class="rz-seats" data-rz-leftline>
       <p class="rz-seats__top"><span>Осталось <b><span data-rz-left>50</span> из 50</b> мест</span><span>по <b><span data-rz-price>490</span> ₽</b></span></p>
@@ -181,7 +192,7 @@ h2 em{white-space:normal}.rz-thesis{max-width:560px;margin:20px auto 0;text-alig
 <!-- ───────── 3. Кейсы ───────── -->
 <section class="sec sec--line cases">
   <div class="wrap col">
-    <h2>Что получилось <em>у моих учениц</em></h2>
+    <h2>Что получилось <em>у моих участниц</em></h2>
     <div class="cases__car" data-car>
       <div class="cases__nav">
         <button type="button" class="arrow arrow--prev" data-car-go="-1" aria-label="Предыдущий кейс"></button>
@@ -348,11 +359,12 @@ h2 em{white-space:normal}.rz-thesis{max-width:560px;margin:20px auto 0;text-alig
   <div class="wrap col col--wide">
     <h2>Как проходят <em>4 дня</em></h2>
     <div class="rz-days">
-      <div class="rz-day"><div class="rz-day__n"><span>день</span><b>1</b></div><div><small>3 ноября</small><h3>Первый ролик</h3><p>Формула разговорного рилса и твой первый ролик в тот же вечер</p></div></div>
-      <div class="rz-day"><div class="rz-day__n"><span>день</span><b>2</b></div><div><small>4 ноября</small><h3>Тема</h3><p>Где в обычной жизни спрятаны темы, которые смотрят</p></div></div>
-      <div class="rz-day"><div class="rz-day__n"><span>день</span><b>3</b></div><div><small>5 ноября</small><h3>Разбор</h3><p>Эксперты разбирают твой ролик, и ты видишь, почему его пролистывают на первых секундах</p></div></div>
-      <div class="rz-day rz-day--live"><div class="rz-day__n"><span>день</span><b>4</b></div><div><small>6 ноября</small><h3>Эфир со мной</h3><p>Работаем с головой и разбираем, почему ты боишься кадра и чужого мнения и как это перестать</p><span class="rz-live">Эфир со мной в 21:00 по Москве</span></div></div>
+      <div class="rz-day"><div class="rz-day__n"><span>день</span><b>1</b></div><div><small>3 ноября</small><h3>Научиться снимать разговорные рилсы</h3><p>Разбираешь формулу Карины и на её примере видишь, как она выбирает тему, как говорит в камеру и как снимает ролик. В конце дня снимаешь пробный дубль на заданную тему только для себя, никуда его не выкладывая.</p><p class="rz-res"><b>Результат</b>Ты понимаешь, как устроен рилс, который досматривают, и уже один раз включила камеру и поговорила в неё.</p></div></div>
+      <div class="rz-day"><div class="rz-day__n"><span>день</span><b>2</b></div><div><small>4 ноября</small><h3>Найти темы в собственной жизни</h3><p>Учишься превращать свой опыт, мнения и обычные события дня в темы для роликов.</p><p class="rz-res"><b>Результат</b>Список из 10–15 своих тем, и больше не нужно мучиться перед каждой съёмкой, о чём говорить.</p></div></div>
+      <div class="rz-day"><div class="rz-day__n"><span>день</span><b>3</b></div><div><small>5 ноября</small><h3>Снять и выложить первый ролик</h3><p>Берёшь тему из своего списка, снимаешь ролик по формуле, выкладываешь его в пробные рилсы и отправляешь экспертам на разбор.</p><p class="rz-res"><b>Результат</b>Твой первый разговорный ролик выложен в пробные рилсы, а их показывают только тем, кто на тебя не подписан.</p></div></div>
+      <div class="rz-day rz-day--live"><div class="rz-day__n"><span>день</span><b>4</b></div><div><small>6 ноября · 21:00 мск</small><h3>Разобрать свой ролик и перестать зажиматься перед камерой</h3><p>Днём получаешь разбор своего ролика от экспертов, а вечером эфир с Кариной про страх камеры и чужого мнения. В конце составляешь план публикаций на ближайшие недели.</p><p class="rz-res"><b>Результат</b>Ты знаешь, что исправить в следующем ролике, у тебя есть план, что снимать дальше, и условия на Большую Игру только для участниц Разминки.</p></div></div>
     </div>
+    <p class="rz-note">После оплаты ты ответишь на четыре коротких вопроса и выберешь свою главную задачу на Разминку, а эксперты будут смотреть твой ролик именно под неё.</p>
     <a class="btn btn--big" href="#price">Занять место за <span data-rz-price>490</span> ₽</a>
   </div>
 </section>
@@ -378,7 +390,9 @@ h2 em{white-space:normal}.rz-thesis{max-width:560px;margin:20px auto 0;text-alig
           <li><b>4 дня заданий</b> и чат участниц</li>
           <li><b>Разбор роликов</b> от экспертов</li>
           <li><b>Эфир со мной</b></li>
-          <li class="rz-gift"><b>В подарок</b> 50 идей рилсов, 100 хуков и промпты для нейросетей</li>
+          <li class="rz-gift"><b>В подарок</b> 50 идей рилсов и 100 хуков</li>
+          <li class="rz-gift"><b>В подарок</b> промт, который подскажет темы для твоего блога</li>
+          <li class="rz-gift"><b>В подарок</b> конструктор разговорного рилса, шаблон, куда подставляешь свою тему и получаешь структуру ролика</li>
           <li><b>Скидка на Большую Игру</b> для участниц Разминки</li>
         </ul>
         <div class="rz-pay" data-rz-pay>
@@ -401,7 +415,7 @@ h2 em{white-space:normal}.rz-thesis{max-width:560px;margin:20px auto 0;text-alig
       <p class="rz-me__txt">Меня называют смелой, потому что я говорю то, что думаю, и на Разминке мы будем <b>жёстко работать с головой</b>, чтобы ты перестала бояться камеры и чужого мнения.</p>
       <p class="hand rz-me__sign">Kerry Catt</p>
     </div>
-    <div class="rz-tg"><small>моя ученица после своего первого рилса</small><p>«Для меня кажется, что рилс кринж, но мне уже пофиг»</p></div>
+    <div class="rz-tg"><small>моя участница после своего первого рилса</small><p>«Для меня кажется, что рилс кринж, но мне уже пофиг»</p></div>
     <p class="rz-tip"><i>!</i><span>Первый ролик можно выложить в пробные рилсы. Их показывают тем, кто на тебя не подписан, так что знакомые его почти не увидят.</span></p>
     <div class="rz-punch"><p>Не бойся.</p><p>Всегда будут осуждать</p></div>
     <a class="btn btn--big" href="#price">Занять место за <span data-rz-price>490</span> ₽</a>
