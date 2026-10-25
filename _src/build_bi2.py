@@ -17,11 +17,11 @@ import shutil
 RL = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(RL, 'bolshaya-igra-test')
 SHARED = os.path.join(RL, 'assets', 'bi2')
-FORMS_VER = '20261013b'
+FORMS_VER = '20261025a'
 
 TITLE = '<title>Большая Игра 2.0 — Kerry Catt · тест дизайна</title>'
 STEP3 = ('<span data-step3><b>Оплачиваешь</b>, сразу открываешь первый модуль и сохраняешь уроки навсегда</span>')
-BANK = '    <p class="fine">Рассрочка до 12 месяцев, для России и СНГ</p>\n'
+BANK = '    <p class="fine">Можно оплатить в рассрочку через банк-партнёр. Срок, условия и одобрение определяет банк</p>\n'
 CARDS_OPEN = '    <div class="tcards">\n'
 PRICE = re.compile(r'<p class="price"><b[^>]*>[\d.]+</b><span class="rub">₽</span>(?:<s>[^<]*</s>)?</p>')
 ALT = re.compile(r'<b>\$\d+</b>')
@@ -35,8 +35,8 @@ BUTTON = '>Принять участие</a>'
 TEAM_AFTER = 'Доступ к урокам 45 дней после Игры'
 CARDS = {
     'self': dict(cls='tc tc--dark', half=('7.495', '$90'), full_price='<b>14.990 ₽</b>',
-                 access=dict(half='<p class="tc__access">Доступ к урокам 2 месяца</p>',
-                             bron='<p class="tc__access">Доступ к урокам 2 месяца</p>')),
+                 access=dict(half='<p class="tc__access">Доступ к урокам 2 месяца после Игры</p>',
+                             bron='<p class="tc__access">Доступ к урокам 2 месяца после Игры</p>')),
     'team': dict(cls='tc tc--wine', half=('12.485', '$150'), full_price='<b><span data-price>24.990</span> ₽</b>',
                  access=dict(
                      half='<p class="tc__access">' + TEAM_AFTER + '<small data-after-first="">Навсегда, если оплатишь всю сумму до 19 октября</small></p>',
@@ -52,11 +52,11 @@ PAGES = {
         mode='full', title='Большая Игра 2.0: тарифы — Kerry Catt'),
     'bolshaya-igra-tarify-rassrochka': dict(
         mode='half', title='Большая Игра 2.0: тарифы, оплата частями — Kerry Catt',
-        note='Оплата делится на два платежа. Сумму и дату второго платежа подтвердит менеджер.',
+        note='Оплата делится на два платежа: половина сейчас, вторая половина по той же цене не позднее 16 ноября. Если первый платёж после 9 ноября, вторая половина в течение 7 дней, но не позднее 22 ноября. Ссылку на второй платёж пришлёт менеджер.',
         step3='<span><b>Оплачиваешь первый платёж</b> и сразу открываешь первый модуль</span>'),
     'bolshaya-igra-bron': dict(
         mode='bron', title='Большая Игра 2.0: бронь места — Kerry Catt',
-        note='Бронь 2.000 ₽ на любой тариф. Она входит в стоимость участия и фиксирует для тебя цену.',
+        note='Бронь 2.000 ₽ на любой тариф. Она входит в стоимость участия и фиксирует для тебя цену до даты повышения, которая указана на таймере. Не доплатишь до этой даты: доплата по новой цене, перенос или возврат брони по оферте.',
         step3='<span><b>Вносишь бронь 2.000 ₽.</b> Она фиксирует цену и входит в стоимость участия</span>'),
 }
 

@@ -2,7 +2,7 @@
    Цена зависит от числа оплат: каждые 50 оплат +100 ₽. PAID пока вписывается руками, когда будет счётчик из платёжки, подставим его.
    Ссылки оплаты у каждой ступени свои (rub и intl). Пока ссылки не даны, кнопки оплаты на последнем шаге неактивны. */
 (function () {
-  var EP = "https://script.google.com/macros/s/AKfycbyHbXYMZMWX1belQqULpMz84rfmhP2LXmcIMzroqhr4PKjvNOxIR4lump3OfY04ZC4x/exec", STORE = "bg_lead_q", REV = "2026-10-04";
+  var EP = "https://script.google.com/macros/s/AKfycbyHbXYMZMWX1belQqULpMz84rfmhP2LXmcIMzroqhr4PKjvNOxIR4lump3OfY04ZC4x/exec", STORE = "bg_lead_q", REV = "2026-10-25";
   var PAID = 0;                                     // сколько участниц уже оплатили
   var OPEN = "2026-10-26T10:00:00+03:00", CLOSE = "2026-11-03T23:59:59+03:00";
   var STEPS = [                                      // по 50 мест на ступень, последняя без потолка

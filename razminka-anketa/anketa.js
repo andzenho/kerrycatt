@@ -32,6 +32,7 @@
       '<div class="f" data-f="ig"><input class="in" name="ig" inputmode="url" autocomplete="off" placeholder="instagram.com/твой_ник" maxlength="200" value="' + esc(ans.instagram || "") + '"></div>' +
       (me.tg ? "" : '<div class="f" data-f="tg"><label for="rz-tg">Ник в Телеграме, как в заявке на Разминку</label><input class="in" id="rz-tg" name="tg" autocomplete="off" placeholder="@nickname" maxlength="60"></div>') +
       '<div class="hp" aria-hidden="true"><input name="company" tabindex="-1" autocomplete="off"></div>' +
+      '<p class="note">Отправляя ответы, соглашаюсь на обработку персональных данных по <a href="../consent/" target="_blank" rel="noopener">Согласию</a> и <a href="../privacy/" target="_blank" rel="noopener">Политике</a>. Мне есть 18 лет</p>' +
       '<button class="btn" type="submit">Отправить ответы</button></form>';
   }
   function bad(f, m) {

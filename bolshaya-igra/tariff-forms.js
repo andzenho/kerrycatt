@@ -13,7 +13,7 @@
     // URL веб-приложения Apps Script (yapping-test/backend/Code.js), тот же, что у мини-аппа теста.
     endpoint: "https://script.google.com/macros/s/AKfycbyHbXYMZMWX1belQqULpMz84rfmhP2LXmcIMzroqhr4PKjvNOxIR4lump3OfY04ZC4x/exec",
     docs: "../",
-    docsRev: "2026-10-04",
+    docsRev: "2026-10-25",
     helper: "https://t.me/kerryhelper",
     pay: { team: true }
   };
@@ -360,6 +360,7 @@
   /* клик по кнопке — в фазе перехвата, чтобы перебить скролл/переход бандла */
   document.addEventListener("click", function (e) {
     var a = e.target.closest ? e.target.closest("[data-bg-tariff]") : null;
+    if (a && document.documentElement.classList.contains("sold-out")) { e.preventDefault(); return; }  // продажи закрыты
     if (a) {
       e.preventDefault();
       if (e.stopImmediatePropagation) e.stopImmediatePropagation(); else e.stopPropagation();

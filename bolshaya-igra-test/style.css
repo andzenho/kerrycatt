@@ -526,3 +526,9 @@ body .bgl-chk input { accent-color: var(--cta); }
 body .bgl-btn { padding: 21px 18px; border: 1px solid rgba(255, 255, 255, .22); border-radius: 18px; background: linear-gradient(180deg, #B8243A 0%, #961B2E 50%, #7A1425 100%); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3), 0 18px 34px -14px rgba(184, 36, 58, .7); font: 800 15px/1.2 var(--f-body); letter-spacing: .06em; text-transform: uppercase; }
 body .bgl-btn:hover { filter: brightness(1.1); }
 body .bgl-btn2 { background: var(--ink); border-color: var(--ink); box-shadow: none; }
+
+/* подпись под кейсами */
+.cases__note { margin: -8px auto 22px; max-width: 620px; text-align: center; font: 600 13px/1.45 var(--f-body); color: rgba(240,231,219,.55); }
+
+/* после закрытия продаж кнопки оплаты не показываем */
+.sold-out .tc .btn, .sold-out .bar .btn, .sold-out [data-bg-tariff] { display: none !important; }
