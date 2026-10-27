@@ -6,7 +6,7 @@
   var PAID = 0;                                     // сколько участниц уже оплатили
   var OPEN = "2026-10-26T10:00:00+03:00", CLOSE = "2026-11-03T23:59:59+03:00";
   var STEPS = [                                      // по 50 мест на ступень, последняя без потолка
-    { rub: 490, usd: 7 }, { rub: 590, usd: 9 }, { rub: 690, usd: 10 }, { rub: 790, usd: 12 }, { rub: 890, usd: 13 }, { rub: 990, usd: 15 },
+    { rub: 490, usd: 7, payRub: "https://anny-nizh.getplatinum.ru/payment/RUSbvAp", payIntl: "https://app.lava.top/products/25c4e1bb-4ecb-4cd3-8e9f-2dcc2d3fff6d" }, { rub: 590, usd: 9 }, { rub: 690, usd: 10 }, { rub: 790, usd: 12 }, { rub: 890, usd: 13 }, { rub: 990, usd: 15 },
     { rub: 1090, usd: 17 }, { rub: 1190, usd: 18 }, { rub: 1290, usd: 20 }, { rub: 1390, usd: 21 }, { rub: 1490, usd: 23, last: true }
   ];
   // ссылки ступеней: STEPS[i].payRub / STEPS[i].payIntl
