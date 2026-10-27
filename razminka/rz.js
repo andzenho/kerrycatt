@@ -9,7 +9,8 @@
     { rub: 490, usd: 7, payRub: "https://anny-nizh.getplatinum.ru/payment/RUSbvAp", payIntl: "https://app.lava.top/products/25c4e1bb-4ecb-4cd3-8e9f-2dcc2d3fff6d" }, { rub: 590, usd: 9 }, { rub: 690, usd: 10 }, { rub: 790, usd: 12 }, { rub: 890, usd: 13 }, { rub: 990, usd: 15 },
     { rub: 1090, usd: 17 }, { rub: 1190, usd: 18 }, { rub: 1290, usd: 20 }, { rub: 1390, usd: 21 }, { rub: 1490, usd: 23, last: true }
   ];
-  // ссылки ступеней: STEPS[i].payRub / STEPS[i].payIntl
+  // ссылки ступеней: STEPS[i].payRub / STEPS[i].payIntl; у ступеней без своих ссылок те же, что у первой
+  STEPS.forEach(function (s) { s.payRub = s.payRub || STEPS[0].payRub; s.payIntl = s.payIntl || STEPS[0].payIntl; });
   function $$(s) { return [].slice.call(document.querySelectorAll(s)); }
   function fmt(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
   var i = Math.min(Math.floor(PAID / 50), STEPS.length - 1), step = STEPS[i], left = step.last ? 0 : 50 * (i + 1) - PAID;
