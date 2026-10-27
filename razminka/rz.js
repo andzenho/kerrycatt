@@ -71,17 +71,14 @@
       '<div class="bgl-field" data-f="email"><label class="bgl-label" for="rz-email">Почта</label><input class="bgl-input" id="rz-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="name@mail.ru" maxlength="120"><p class="bgl-hint">Сюда продублируем приглашение в канал</p></div>' +
       '<div class="bgl-field" data-f="tg"><label class="bgl-label" for="rz-tg">Ник в Телеграме</label><input class="bgl-input" id="rz-tg" name="tg" autocomplete="off" placeholder="@nickname" maxlength="60"></div>' +
       '<div class="bgl-hp" aria-hidden="true"><input name="company" tabindex="-1" autocomplete="off"></div>' +
+      '<div class="bgl-field" data-f="offer"><label class="bgl-chk"><input type="checkbox" name="offer"><span>Принимаю <a href="../offer/" target="_blank" rel="noopener">оферту</a> с <a href="../offer-prilozhenie-2/" target="_blank" rel="noopener">Приложением № 2</a>, мне есть 18 лет</span></label></div>' +
       '<div class="bgl-field" data-f="consent"><label class="bgl-chk"><input type="checkbox" name="consent_pd"><span>Даю <a href="../consent/" target="_blank" rel="noopener">согласие на обработку персональных данных</a> и принимаю <a href="../privacy/" target="_blank" rel="noopener">Политику</a></span></label>' +
       '<label class="bgl-chk"><input type="checkbox" name="consent_ads"><span>Согласна получать <a href="../consent-ads/" target="_blank" rel="noopener">рекламные и информационные сообщения</a>. Необязательно</span></label></div>' +
-      '<button class="bgl-btn" type="submit">Перейти к оплате</button></form>';
+      '<button class="bgl-btn" type="submit">' + (step.payRub ? "Оплатить" : "Перейти к оплате") + '</button></form>';
   }
-  function pay() {
-    var link = method === "rub" ? step.payRub : step.payIntl;
-    body.innerHTML = '<div class="bgl-done"><h2 class="bgl-title">Остался один шаг</h2><p class="bgl-sub">Разминка · 3–6 ноября</p>' +
-      '<div class="bgl-field" data-f="offer"><label class="bgl-chk"><input type="checkbox" name="offer"><span>Принимаю <a href="../offer/" target="_blank" rel="noopener">оферту</a> и <a href="../offer-prilozhenie-2/" target="_blank" rel="noopener">Приложение № 2</a>, мне есть 18 лет</span></label></div>' +
-      (link ? '<a class="bgl-btn bgl-pay off" href="' + link + '" target="_blank" rel="noopener">' + (method === "rub" ? "Оплатить " + fmt(step.rub) + " ₽" : "Оплатить $" + step.usd + " зарубежной картой") + "</a>"
-            : '<p class="bgl-note">Ссылка на оплату появится здесь к старту продаж. Заявку мы сохранили.</p>') +
-      (link ? '<p class="bgl-note">Оплатила? <a href="../razminka-anketa/">Ответь на шесть вопросов</a>, и откроется канал Разминки</p>' : "") + "</div>";
+  function pay() {  // запасной экран, если у ступени ещё нет ссылки
+    body.innerHTML = '<div class="bgl-done"><h2 class="bgl-title">Заявка принята</h2><p class="bgl-sub">Разминка · 3–6 ноября</p>' +
+      '<p class="bgl-note">Ссылку на оплату пришлём в Телеграм. Заявку мы сохранили.</p></div>';
   }
   function mark(f, m) { var b = body.querySelector('[data-f="' + f + '"]'); if (!b) return null; var el = b.querySelector(".bgl-input"); if (el) el.classList.add("bad"); if (!b.querySelector(".bgl-err")) b.insertAdjacentHTML("beforeend", '<p class="bgl-err">' + m + "</p>"); return b; }
   function post(b) { return fetch(EP, { method: "POST", body: b }).then(function (r) { return r.json(); }).then(function (j) { return !!(j && j.ok); }).catch(function () { return false; }); }
@@ -95,24 +92,23 @@
     var email = f.email.value.trim();
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) bad.push(mark("email", "Проверь почту, на неё придёт приглашение"));
     if (tg.replace("@", "").length < 2) bad.push(mark("tg", "Укажи ник в Телеграме"));
+    if (!f.offer.checked) bad.push(mark("offer", "Отметь, что принимаешь оферту"));
     if (!f.consent_pd.checked) bad.push(mark("consent", "Без согласия на обработку данных заявку не отправить"));
     bad = bad.filter(Boolean); if (bad.length) { bad[0].scrollIntoView({ behavior: "smooth", block: "center" }); return; }
     if (!/^@/.test(tg) && !/t\.me\//.test(tg)) tg = "@" + tg;
-    try { localStorage.setItem("rz_me", JSON.stringify({ name: name, phone: phone, tg: tg })); } catch (e) {}  // для анкеты после оплаты
     var price = method === "rub" ? step.rub + " ₽" : "$" + step.usd;
     var payload = JSON.stringify({ kind: "bi", source: "razminka", lead: { tariff: "Разминка", type: "Разминка · " + price + " · " + (method === "rub" ? "рубли" : "зарубежная карта"),
-      name: name, phone: phone, tgNick: tg, email: email, consent_pd: true, consent_ads: f.consent_ads.checked, consent_ts: new Date().toISOString(), consent_rev: REV, utm: "email=" + email + (marks() ? "; " + marks() : "") },
+      name: name, phone: phone, tgNick: tg, email: email, offer: true, consent_pd: true, consent_ads: f.consent_ads.checked, consent_ts: new Date().toISOString(), consent_rev: REV, utm: "email=" + email + (marks() ? "; " + marks() : "") },
       hp: f.company.value || (Date.now() - openedAt < 2500 ? "fast" : ""), page: location.href.split("#")[0].slice(0, 300), ua: navigator.userAgent.slice(0, 160) });
     sending = true; var btn = f.querySelector(".bgl-btn"); btn.disabled = true; btn.textContent = "Отправляю…";
-    post(payload).then(function (ok) { sending = false; if (!ok) queue(payload); pay(); });
+    var link = method === "rub" ? step.payRub : step.payIntl;
+    post(payload).then(function (ok) { sending = false; if (!ok) queue(payload); if (link) location.href = link; else pay(); });
   }
   function open(m) { method = m; openedAt = Date.now(); form(); overlay.classList.add("open"); document.body.style.overflow = "hidden"; }
   function close() { overlay.classList.remove("open"); document.body.style.overflow = ""; }
   overlay.addEventListener("click", function (e) {
     if (e.target === overlay || e.target.closest(".bgl-close")) { close(); return; }
-    var a = e.target.closest(".bgl-pay"); if (a) { var c = body.querySelector('[name="offer"]'); if (!c || !c.checked) { e.preventDefault(); mark("offer", "Отметь, что принимаешь оферту"); } }
   });
-  overlay.addEventListener("change", function (e) { if (e.target.name === "offer") [].forEach.call(body.querySelectorAll(".bgl-pay"), function (a) { a.classList.toggle("off", !e.target.checked); }); });
   overlay.addEventListener("input", function (e) { var b = e.target.closest(".bgl-field"); if (b) { var er = b.querySelector(".bgl-err"); if (er) er.remove(); var x = b.querySelector(".bad"); if (x) x.classList.remove("bad"); } });
   overlay.addEventListener("submit", function (e) { e.preventDefault(); submit(e.target); });
   document.addEventListener("click", function (e) { var a = e.target.closest && e.target.closest("[data-rz-open]"); if (a) { e.preventDefault(); open(a.getAttribute("data-rz-open")); } }, true);
