@@ -1,9 +1,13 @@
 /* Анкета после оплаты Разминки: пять вопросов кнопками и ссылка на Инстаграм.
-   Ответы уходят на лист «Анкета Разминки» (kind: rz_anketa), потом переход в канал Разминки.
+   Ответы уходят на лист «Анкета Разминки» (kind: rz_anketa), потом переход в чат с Дашей (@kerryhelper)
+   с готовым сообщением «Привет с Разминки, хочу получить бонусы»: по нему Даша выдаёт подарки
+   (50 идей рилсов и 100 хуков, решение Ильи 28.10). Кнопка канала Разминки остаётся второй.
    Имя, телефон и ник берём из заявки на странице Разминки (rz.js кладёт их в rz_me). Нет заявки, спрашиваем ник. */
 (function () {
   var EP = "https://script.google.com/macros/s/AKfycbyHbXYMZMWX1belQqULpMz84rfmhP2LXmcIMzroqhr4PKjvNOxIR4lump3OfY04ZC4x/exec";
   var CHANNEL = "https://t.me/+ZxE16oI_O7QzNTM6", STORE = "rz_anketa_q";
+  var HELLO = "Привет с Разминки, хочу получить бонусы";
+  var DASHA = "https://t.me/kerryhelper?text=" + encodeURIComponent(HELLO);
   var QS = [
     { k: "goal", q: "Какую главную задачу ты хочешь решить на Разминке?", o: ["Перестать бояться камеры", "Найти, о чём снимать", "Сделать ролики интереснее", "Начать выкладывать регулярно"] },
     { k: "reels", q: "Ты уже снимала рилсы?", o: ["Ни разу", "Пробовала и бросила", "Снимаю, но мало просмотров"] },
@@ -43,11 +47,12 @@
   function post(b) { return fetch(EP, { method: "POST", body: b }).then(function (r) { return r.json(); }).then(function (j) { return !!(j && j.ok); }).catch(function () { return false; }); }
   function done() {
     card.innerHTML = '<div class="done"><p class="kick">Готово</p><p class="q">Ответы у экспертов</p>' +
-      "<p>Теперь заходи в канал Разминки, там будут все задания</p>" +
-      '<div class="sub"><i>!</i><span>В канале нажми <b>«Подписаться»</b>, чтобы не потерять его</span></div>' +
-      '<a class="btn" href="' + CHANNEL + '">Перейти в канал Разминки</a>' +
-      '<p class="note" data-auto>Через несколько секунд откроем канал сами</p></div>';
-    setTimeout(function () { location.href = CHANNEL; }, 6000);
+      "<p>Теперь забери подарки. Открой чат с&nbsp;Дашей, помощницей Карины, сообщение для неё уже будет написано, и&nbsp;она пришлёт 50&nbsp;идей рилсов и&nbsp;100&nbsp;хуков</p>" +
+      '<div class="sub"><i>!</i><span>В чате просто нажми <b>«Отправить»</b>. Если сообщения нет, напиши «' + HELLO.replace(" с ", " с&nbsp;") + '»</span></div>' +
+      '<a class="btn" href="' + DASHA + '">Забрать подарки</a>' +
+      '<a class="btn btn2" href="' + CHANNEL + '">Перейти в канал Разминки</a>' +
+      '<p class="note" data-auto>Через несколько секунд откроем чат с&nbsp;Дашей сами</p></div>';
+    setTimeout(function () { location.href = DASHA; }, 6000);
   }
   function submit(f) {
     if (sending) return;
