@@ -3,7 +3,7 @@
    Ссылки оплаты у каждой ступени свои (rub и intl). Пока ссылки не даны, кнопки оплаты на последнем шаге неактивны. */
 (function () {
   var EP = "https://script.google.com/macros/s/AKfycbyHbXYMZMWX1belQqULpMz84rfmhP2LXmcIMzroqhr4PKjvNOxIR4lump3OfY04ZC4x/exec", STORE = "bg_lead_q", REV = "2026-10-25";
-  var PAID = 73;                                    // сколько участниц уже оплатили
+  var PAID = 107;                                    // сколько участниц уже оплатили
   var OPEN = "2026-10-26T10:00:00+03:00", CLOSE = "2026-11-03T23:59:59+03:00";
   var STEPS = [                                      // по 50 мест на ступень, последняя без потолка
     { rub: 490, usd: 7, payRub: "https://anny-nizh.getplatinum.ru/payment/RUSbvAp", payIntl: "https://app.lava.top/products/25c4e1bb-4ecb-4cd3-8e9f-2dcc2d3fff6d" }, { rub: 590, usd: 9 }, { rub: 690, usd: 10 }, { rub: 790, usd: 12 }, { rub: 890, usd: 13 }, { rub: 990, usd: 15 },
