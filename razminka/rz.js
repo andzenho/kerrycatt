@@ -3,14 +3,15 @@
    Ссылки оплаты у каждой ступени свои (rub и intl). Пока ссылки не даны, кнопки оплаты на последнем шаге неактивны. */
 (function () {
   var EP = "https://script.google.com/macros/s/AKfycbyHbXYMZMWX1belQqULpMz84rfmhP2LXmcIMzroqhr4PKjvNOxIR4lump3OfY04ZC4x/exec", STORE = "bg_lead_q", REV = "2026-10-25";
-  var PAID = 107;                                    // сколько участниц уже оплатили
+  var PAID = 157;                                    // сколько участниц уже оплатили
   var OPEN = "2026-10-26T10:00:00+03:00", CLOSE = "2026-11-03T23:59:59+03:00";
   var STEPS = [                                      // по 50 мест на ступень, последняя без потолка
-    { rub: 490, usd: 7, payRub: "https://anny-nizh.getplatinum.ru/payment/RUSbvAp", payIntl: "https://app.lava.top/products/25c4e1bb-4ecb-4cd3-8e9f-2dcc2d3fff6d" }, { rub: 590, usd: 9 }, { rub: 690, usd: 10 }, { rub: 790, usd: 12 }, { rub: 890, usd: 13 }, { rub: 990, usd: 15 },
+    { rub: 490, usd: 7, payRub: "https://anny-nizh.getplatinum.ru/payment/RUSbvAp", payIntl: "https://app.lava.top/products/25c4e1bb-4ecb-4cd3-8e9f-2dcc2d3fff6d" }, { rub: 590, usd: 9 }, { rub: 690, usd: 10 }, { rub: 790, usd: 10, eur: 9 }, { rub: 890, usd: 13 }, { rub: 990, usd: 15 },
     { rub: 1090, usd: 17 }, { rub: 1190, usd: 18 }, { rub: 1290, usd: 20 }, { rub: 1390, usd: 21 }, { rub: 1490, usd: 23, last: true }
   ];
   // ссылки ступеней: STEPS[i].payRub / STEPS[i].payIntl; у ступеней без своих ссылок те же, что у первой
   STEPS.forEach(function (s) { s.payRub = s.payRub || STEPS[0].payRub; s.payIntl = s.payIntl || STEPS[0].payIntl; });
+  function intl() { return "$" + step.usd + (step.eur ? " / " + step.eur + " €" : ""); }
   function $$(s) { return [].slice.call(document.querySelectorAll(s)); }
   function fmt(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
   var i = Math.min(Math.floor(PAID / 50), STEPS.length - 1), step = STEPS[i], left = step.last ? 0 : 50 * (i + 1) - PAID;
@@ -64,7 +65,7 @@
   overlay.innerHTML = '<div class="bgl-box"><button class="bgl-close" type="button" aria-label="Закрыть">✕</button><div class="bgl-body"></div></div>';
   var body = overlay.querySelector(".bgl-body"), method = "rub", openedAt = 0, sending = false;
   function form() {
-    body.innerHTML = '<h2 class="bgl-title">Занять место</h2><p class="bgl-sub">Разминка · 3–6 ноября · ' + (method === "rub" ? fmt(step.rub) + " ₽" : "$" + step.usd) + "</p>" +
+    body.innerHTML = '<h2 class="bgl-title">Занять место</h2><p class="bgl-sub">Разминка · 3–6 ноября · ' + (method === "rub" ? fmt(step.rub) + " ₽" : intl()) + "</p>" +
       '<p class="bgl-lead">Оставь контакты, и откроется оплата. После оплаты ты сразу получишь доступ в Телеграм-канал Разминки, а приглашение продублируем на указанную почту.</p>' +
       '<form class="bgl-form" novalidate>' +
       '<div class="bgl-field" data-f="name"><label class="bgl-label" for="rz-name">Имя</label><input class="bgl-input" id="rz-name" name="name" autocomplete="given-name" maxlength="80"></div>' +
@@ -97,7 +98,7 @@
     if (!f.consent_pd.checked) bad.push(mark("consent", "Без согласия на обработку данных заявку не отправить"));
     bad = bad.filter(Boolean); if (bad.length) { bad[0].scrollIntoView({ behavior: "smooth", block: "center" }); return; }
     if (!/^@/.test(tg) && !/t\.me\//.test(tg)) tg = "@" + tg;
-    var price = method === "rub" ? step.rub + " ₽" : "$" + step.usd;
+    var price = method === "rub" ? step.rub + " ₽" : intl();
     var payload = JSON.stringify({ kind: "bi", source: "razminka", lead: { tariff: "Разминка", type: "Разминка · " + price + " · " + (method === "rub" ? "рубли" : "зарубежная карта"),
       name: name, phone: phone, tgNick: tg, email: email, offer: true, consent_pd: true, consent_ads: f.consent_ads.checked, consent_ts: new Date().toISOString(), consent_rev: REV, utm: "email=" + email + (marks() ? "; " + marks() : "") },
       hp: f.company.value || (Date.now() - openedAt < 2500 ? "fast" : ""), page: location.href.split("#")[0].slice(0, 300), ua: navigator.userAgent.slice(0, 160) });
