@@ -18,7 +18,7 @@
   var WINDOWS = [
     { until: "2026-10-19T23:59:59+03:00", first: true },
     { until: "2026-11-13T23:59:59+03:00", price: "29.990", top: "Цена вырастет", date: "14 ноября", label: "До повышения цены" },
-    { until: "2026-11-22T23:59:59+03:00", price: "29.990", top: "Продажи закрываются", date: "22 ноября", label: "До закрытия продаж" }
+    { until: "2026-11-15T23:59:59+03:00", price: "29.990", top: "Продажи закрываются", date: "16 ноября", label: "До закрытия продаж" }
   ];
   var applied = null;
   function apply(w) {
@@ -36,24 +36,19 @@
     $$("[data-after-first]").forEach(function (el) { var t = el.getAttribute("data-after-first"); el.textContent = t; el.hidden = !t; });
   }
 
+  // 16 ноября продажи закрываются, но кнопки заявки и оплаты остаются: прячем только таймеры
   var isClosed = false;
   function closed() {
     if (isClosed) return;
     isClosed = true;
-    document.documentElement.classList.add("sold-out");
-    set("[data-dl-top]", "Продажи закрыты");
-    set("[data-dl-date]", "");
-    set("[data-timer-label]", "Продажи Большой Игры 2.0 закрыты");
-    set("[data-bar-label]", "Продажи закрыты");
-    set("[data-due]", "");
-    $$("[data-timer], [data-bar-timer]").forEach(function (el) { el.hidden = true; });
+    $$(".dl, .bar__info, [data-timer], [data-bar-timer]").forEach(function (el) { el.hidden = true; el.style.display = "none"; });
   }
 
   function tick() {
     var now = Date.now(), w = WINDOWS[WINDOWS.length - 1], i;
     for (i = 0; i < WINDOWS.length; i++) if (new Date(WINDOWS[i].until).getTime() > now) { w = WINDOWS[i]; break; }
     apply(w);
-    // после последнего окна продажи закрыты (Приложение № 1: 22 ноября, 23:59): кнопки оплаты прячем
+    // после последнего окна (с 16 ноября) таймеров нет
     if (now > new Date(WINDOWS[WINDOWS.length - 1].until).getTime()) { closed(); return; }
     var ms = Math.max(0, new Date(w.until).getTime() - now);
     var d = Math.floor(ms / 864e5), h = Math.floor(ms / 36e5) % 24, m = Math.floor(ms / 6e4) % 60, s = Math.floor(ms / 1e3) % 60;
